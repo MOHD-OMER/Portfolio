@@ -10,8 +10,6 @@ export default function Hero() {
   const [isMobile, setIsMobile] = useState(false);
   const [mounted, setMounted] = useState(false);
   const containerRef = useRef(null);
-  const buttonRef = useRef(null);
-  const exploreButtonRef = useRef(null);
 
   // Initialize all motion values unconditionally
   const mouseX = useMotionValue(0);
@@ -130,19 +128,6 @@ export default function Hero() {
     },
   };
 
-  const handleButtonHover = (e, ref) => {
-    if (!ref.current || isMobile) return;
-    const rect = ref.current.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    ref.current.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
-  };
-
-  const handleButtonLeave = (ref) => {
-    if (!ref.current) return;
-    ref.current.style.transform = "translate(0px, 0px)";
-  };
-
   // Show loading skeleton until mounted
   if (!mounted) {
     return (
@@ -152,7 +137,6 @@ export default function Hero() {
       >
         <div className="relative z-10 w-full flex flex-col items-center">
           <div className="animate-pulse flex flex-col items-center gap-6">
-            <div className="w-[180px] h-[180px] rounded-full bg-gray-800" />
             <div className="h-12 w-96 max-w-full bg-gray-800 rounded" />
             <div className="h-8 w-64 max-w-full bg-gray-800 rounded" />
           </div>
@@ -168,11 +152,11 @@ export default function Hero() {
       className="relative min-h-screen pt-20 sm:pt-24 md:pt-28 flex flex-col items-center justify-center text-center overflow-hidden px-4"
     >
       {/* Layered Animated Background - Optimized for Mobile */}
-      <div className="absolute inset-0 opacity-50 md:opacity-60 overflow-hidden">
+      <div className="absolute inset-0 opacity-20 md:opacity-25 overflow-hidden">
         <motion.div
-          className="absolute top-0 left-1/4 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] md:w-[800px] md:h-[800px] rounded-full blur-[60px] sm:blur-[100px] md:blur-[140px]"
+          className="absolute top-0 left-1/4 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[80px] sm:blur-[120px] md:blur-[160px]"
           style={{
-            background: "radial-gradient(circle, rgba(59, 130, 246, 0.25) 0%, rgba(147, 51, 234, 0.15) 50%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, rgba(79, 70, 229, 0.1) 50%, transparent 70%)",
           }}
           animate={isMobile ? {
             x: [0, 50, 0],
@@ -190,9 +174,9 @@ export default function Hero() {
           }}
         />
         <motion.div
-          className="absolute bottom-0 right-1/4 w-[280px] h-[280px] sm:w-[450px] sm:h-[450px] md:w-[700px] md:h-[700px] rounded-full blur-[50px] sm:blur-[90px] md:blur-[120px]"
+          className="absolute bottom-0 right-1/4 w-[280px] h-[280px] sm:w-[450px] sm:h-[450px] md:w-[650px] md:h-[650px] rounded-full blur-[70px] sm:blur-[110px] md:blur-[140px]"
           style={{
-            background: "radial-gradient(circle, rgba(168, 85, 247, 0.2) 0%, rgba(236, 72, 153, 0.15) 50%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.1) 50%, transparent 70%)",
           }}
           animate={isMobile ? {
             x: [0, -40, 0],
@@ -210,37 +194,16 @@ export default function Hero() {
             delay: 1.5,
           }}
         />
-        <motion.div
-          className="absolute top-1/2 left-1/2 w-[250px] h-[250px] sm:w-[400px] sm:h-[400px] md:w-[600px] md:h-[600px] rounded-full blur-[45px] sm:blur-[80px] md:blur-[110px]"
-          style={{
-            background: "radial-gradient(circle, rgba(34, 211, 238, 0.18) 0%, rgba(59, 130, 246, 0.12) 50%, transparent 70%)",
-          }}
-          animate={isMobile ? {
-            x: [0, 35, 0],
-            y: [0, -35, 0],
-            scale: [1, 1.15, 1],
-          } : {
-            x: [0, 50, -40, 0],
-            y: [0, -50, 40, 0],
-            scale: [1, 1.2, 1.1, 1],
-          }}
-          transition={{
-            duration: isMobile ? 18 : 22,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 3,
-          }}
-        />
       </div>
 
       {/* Dynamic Grid Pattern - Desktop Only */}
       {!isMobile && (
         <motion.div 
-          className="absolute inset-0 opacity-[0.06]"
+          className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: `linear-gradient(rgba(100,200,255,0.2) 1px, transparent 1px),
-                             linear-gradient(90deg, rgba(100,200,255,0.2) 1px, transparent 1px)`,
-            backgroundSize: '50px 50px',
+            backgroundImage: `linear-gradient(rgba(100,150,255,0.15) 1px, transparent 1px),
+                             linear-gradient(90deg, rgba(100,150,255,0.15) 1px, transparent 1px)`,
+            backgroundSize: '60px 60px',
             x: gridX,
             y: gridY,
           }}
@@ -251,13 +214,13 @@ export default function Hero() {
       <motion.div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "radial-gradient(circle 400px at 50% 40%, rgba(100, 200, 255, 0.08), transparent 70%)",
+          background: "radial-gradient(circle 500px at 50% 40%, rgba(59, 130, 246, 0.05), transparent 70%)",
         }}
         animate={{
-          opacity: [0.3, 0.6, 0.3],
+          opacity: [0.2, 0.4, 0.2],
         }}
         transition={{
-          duration: 4,
+          duration: 5,
           repeat: Infinity,
           ease: "easeInOut",
         }}
@@ -274,31 +237,10 @@ export default function Hero() {
           viewport={{ once: true }}
           className="w-full flex flex-col items-center max-w-7xl mx-auto"
         >
-          {/* Enhanced Profile Image */}
-          <div className="w-full flex justify-center items-center mb-6 sm:mb-7 md:mb-8">
-            <motion.div className="relative">
-              <motion.div
-                className="relative w-[140px] h-[140px] sm:w-[180px] sm:h-[180px] md:w-[200px] md:h-[200px] rounded-full p-[3px] md:p-[4px]
-                bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 shadow-[0_0_40px_rgba(100,150,255,0.3)] md:shadow-[0_0_80px_rgba(100,150,255,0.5)]"
-                whileHover={{ scale: isMobile ? 1 : 1.1 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
-              >
-                <div className="relative w-full h-full rounded-full overflow-hidden bg-gray-900 border-[3px] md:border-[4px] border-gray-900/90">
-                  {/* Profile Image */}
-                  <img
-                    src="/profile.png"
-                    alt="Mohammed Abdul Omer"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </motion.div>
-            </motion.div>
-          </div>
-
           {/* Name with Enhanced Typing - Better Mobile Sizing */}
           <motion.h1
             variants={itemVariants}
-            className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold mb-3 sm:mb-4 relative text-center tracking-tight w-full"
+            className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold mb-2 sm:mb-3 md:mb-4 relative text-center tracking-tight w-full leading-tight px-4"
             style={{
               transform: isMobile ? 'none' : `translate(${mousePosition.x * 0.01}px, ${mousePosition.y * 0.01}px)`
             }}
@@ -309,7 +251,7 @@ export default function Hero() {
               animate={{ opacity: 1 }}
               transition={{ duration: 1 }}
             >
-              <span className="relative inline-block font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-50 to-purple-100">
+              <span className="relative inline-block font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-blue-400 to-purple-400">
                 {scrambledName}
               </span>
 
@@ -325,11 +267,11 @@ export default function Hero() {
               </motion.span>
             </motion.span>
             
-            {/* Multi-layer Neon Glow - Optimized for mobile */}
+            {/* Multi-layer Glow */}
             <motion.span
-              className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent blur-lg md:blur-xl pointer-events-none opacity-50 md:opacity-60"
-              animate={{ opacity: [0.3, 0.7, 0.3] }}
-              transition={{ duration: 2.5, repeat: Infinity }}
+              className="absolute inset-0 bg-gradient-to-r from-blue-400 via-blue-300 to-purple-400 bg-clip-text text-transparent blur-xl pointer-events-none opacity-40"
+              animate={{ opacity: [0.2, 0.5, 0.2] }}
+              transition={{ duration: 3, repeat: Infinity }}
             >
               Mohammed Abdul Omer
             </motion.span>
@@ -338,7 +280,7 @@ export default function Hero() {
           {/* Enhanced Title Transition - Better Mobile Layout */}
           <motion.div
             variants={itemVariants}
-            className="mt-4 sm:mt-5 md:mt-6 relative h-10 sm:h-12 md:h-14 flex items-center justify-center w-full"
+            className="mt-1 sm:mt-2 md:mt-3 relative h-8 sm:h-10 md:h-12 flex items-center justify-center w-full"
           >
             <motion.div
               key={currentTitleIndex}
@@ -346,7 +288,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
               exit={{ opacity: 0, y: -25, filter: "blur(12px)", scale: 0.95 }}
               transition={{ duration: 0.7, ease: [0.19, 1, 0.22, 1] }}
-              className="absolute text-base xs:text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-extrabold text-center px-4"
+              className="absolute text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-center px-4"
             >
               <motion.span
                 className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
@@ -367,137 +309,58 @@ export default function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Enhanced Description - Better Mobile Typography */}
-          <motion.p
-            variants={itemVariants}
-            className="text-gray-300 mt-6 sm:mt-8 md:mt-10 max-w-4xl px-4 sm:px-6 text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed font-light text-center"
-          >
-            Architecting intelligent systems at the intersection of{" "}
-            <motion.span 
-              className="text-blue-400 font-bold inline-block relative cursor-pointer"
-              whileHover={!isMobile ? { 
-                scale: 1.08,
-                color: "#60a5fa",
-              } : {}}
-              transition={{ duration: 0.2 }}
-            >
-              deep learning
-              <motion.span
-                className="absolute -bottom-1 left-0 right-0 h-[2px] bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"
-                initial={{ scaleX: 0 }}
-                whileHover={{ scaleX: 1 }}
-                transition={{ duration: 0.3 }}
-              />
-            </motion.span>,{" "}
-            <motion.span 
-              className="text-purple-400 font-bold inline-block relative cursor-pointer"
-              whileHover={!isMobile ? { 
-                scale: 1.08,
-                color: "#c084fc",
-              } : {}}
-              transition={{ duration: 0.2 }}
-            >
-              automation
-              <motion.span
-                className="absolute -bottom-1 left-0 right-0 h-[2px] bg-gradient-to-r from-purple-400 to-pink-400 rounded-full"
-                initial={{ scaleX: 0 }}
-                whileHover={{ scaleX: 1 }}
-                transition={{ duration: 0.3 }}
-              />
-            </motion.span>, and{" "}
-            <motion.span 
-              className="text-pink-400 font-bold inline-block relative cursor-pointer"
-              whileHover={!isMobile ? { 
-                scale: 1.08,
-                color: "#f472b6",
-              } : {}}
-              transition={{ duration: 0.2 }}
-            >
-              innovation
-              <motion.span
-                className="absolute -bottom-1 left-0 right-0 h-[2px] bg-gradient-to-r from-pink-400 to-cyan-400 rounded-full"
-                initial={{ scaleX: 0 }}
-                whileHover={{ scaleX: 1 }}
-                transition={{ duration: 0.3 }}
-              />
-            </motion.span>
-            {" "}to transform complex challenges into elegant solutions.
-          </motion.p>
-
-          {/* Premium CTA Buttons - Mobile First Design */}
+          {/* Social Links - New Section */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 mt-6 sm:mt-8 md:mt-12 justify-center w-full max-w-2xl"
+            className="flex flex-wrap gap-4 sm:gap-5 md:gap-6 mt-12 sm:mt-16 md:mt-20 justify-center"
+          >
+            {[
+              { icon: "M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z", label: "GitHub", href: "https://github.com/MOHD-OMER" },
+              { icon: "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z", label: "LinkedIn", href: "https://www.linkedin.com/in/mohammad-abdul-omer/" },
+              { icon: "M0 4a2 2 0 012-2h20a2 2 0 012 2v16a2 2 0 01-2 2H2a2 2 0 01-2-2V4zm2-1a1 1 0 00-1 1v.217l10 5.455 10-5.455V4a1 1 0 00-1-1H2zm0 2.434V20a1 1 0 001 1h18a1 1 0 001-1V5.434l-9.668 5.275a.5.5 0 01-.464 0L2 5.434z", label: "Email", href: "mailto:mohammedabdulomer99@gmail.com" },
+              { icon: "M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z", label: "WhatsApp", href: "https://wa.me/919652159548" },
+              { icon: "M9 4h6v16H9V4zm-4 4h3v12H5V8zm14-2h3v14h-3V6z", label: "Resume", href: "/resume.pdf" }
+            ].map((social, index) => (
+              <motion.a
+                key={index}
+                href={social.href}
+                target={social.label === "Email" ? undefined : "_blank"}
+                rel="noopener noreferrer"
+                className="group flex flex-col items-center gap-2 p-4 rounded-xl bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 hover:border-blue-500/50 transition-all duration-300"
+                whileHover={!isMobile ? { 
+                  scale: 1.05,
+                  y: -5,
+                  boxShadow: "0 10px 30px rgba(59, 130, 246, 0.3)"
+                } : {}}
+                whileTap={{ scale: 0.95 }}
+              >
+                <svg className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 fill-gray-400 group-hover:fill-blue-400 transition-colors duration-300" viewBox="0 0 24 24">
+                  <path d={social.icon} />
+                </svg>
+                <span className="text-xs sm:text-sm text-gray-400 group-hover:text-blue-400 transition-colors duration-300 font-medium">
+                  {social.label}
+                </span>
+              </motion.a>
+            ))}
+          </motion.div>
+
+          {/* Get in Touch Button */}
+          <motion.div
+            variants={itemVariants}
+            className="mt-8 sm:mt-10 md:mt-12"
           >
             <motion.a
-              ref={buttonRef}
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative px-6 sm:px-8 md:px-12 py-3.5 sm:py-4 md:py-6 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 text-white rounded-xl sm:rounded-2xl font-bold overflow-hidden shadow-[0_10px_30px_rgba(100,150,255,0.3)] transition-all duration-300 w-full sm:w-auto"
-              whileHover={!isMobile ? { 
-                scale: 1.05,
-                boxShadow: "0 20px 60px rgba(100, 150, 255, 0.6)",
-              } : {}}
-              whileTap={{ scale: 0.95 }}
-              onMouseMove={(e) => handleButtonHover(e, buttonRef)}
-              onMouseLeave={() => handleButtonLeave(buttonRef)}
-              style={{ transition: "transform 0.2s ease-out" }}
-            >
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-100"
-                transition={{ duration: 0.4 }}
-              />
-              
-              <motion.div
-                className="absolute inset-0"
-                animate={{
-                  backgroundPosition: ["0%", "200%"],
-                }}
-                transition={{
-                  duration: 2.5,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-                style={{
-                  backgroundImage: "linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)",
-                  backgroundSize: "200% 200%",
-                }}
-              />
-              
-              <span className="relative z-10 flex items-center justify-center gap-2 text-sm sm:text-base md:text-lg font-semibold">
-                <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                Download Resume
-              </span>
-            </motion.a>
-
-            <motion.a
-              ref={exploreButtonRef}
-              href="#projects"
-              className="group relative px-6 sm:px-8 md:px-12 py-3.5 sm:py-4 md:py-6 border-2 border-blue-400/70 text-blue-400 rounded-xl sm:rounded-2xl font-bold overflow-hidden backdrop-blur-xl bg-blue-500/10 shadow-[0_10px_30px_rgba(100,150,255,0.15)] transition-all duration-300 w-full sm:w-auto"
+              href="#contact"
+              className="group relative px-8 sm:px-10 md:px-12 py-3 sm:py-3.5 md:py-4 border border-blue-500/50 text-blue-400 rounded-full font-medium overflow-hidden backdrop-blur-xl bg-blue-500/5 hover:bg-blue-500/10 transition-all duration-300 inline-block"
               whileHover={!isMobile ? { 
                 scale: 1.05,
                 borderColor: "#60a5fa",
-                backgroundColor: "rgba(59, 130, 246, 0.2)",
-                boxShadow: "0 20px 60px rgba(100, 150, 255, 0.4)"
+                boxShadow: "0 10px 30px rgba(59, 130, 246, 0.3)"
               } : {}}
               whileTap={{ scale: 0.95 }}
-              onMouseMove={(e) => handleButtonHover(e, exploreButtonRef)}
-              onMouseLeave={() => handleButtonLeave(exploreButtonRef)}
-              style={{ transition: "transform 0.2s ease-out" }}
             >
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-blue-400/20 via-purple-400/20 to-pink-400/20 opacity-0 group-hover:opacity-100"
-                transition={{ duration: 0.5 }}
-              />
-              
-              <span className="relative z-10 flex items-center justify-center gap-2 text-sm sm:text-base md:text-lg font-semibold">
-                <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                </svg>
-                Explore Projects
+              <span className="relative z-10 text-sm sm:text-base md:text-lg">
+                Get in Touch
               </span>
             </motion.a>
           </motion.div>
@@ -505,7 +368,7 @@ export default function Hero() {
           {/* Modern Scroll Indicator - Optimized for Mobile */}
           <motion.div
             variants={itemVariants}
-            className="mt-10 sm:mt-14 md:mt-20 flex flex-col items-center gap-2 sm:gap-3 md:gap-5 pb-8"
+            className="mt-12 sm:mt-16 md:mt-20 flex flex-col items-center gap-2 sm:gap-3 md:gap-5 pb-8"
           >
             <motion.span 
               className="text-gray-400 text-[10px] xs:text-xs md:text-sm font-semibold tracking-[0.15em] sm:tracking-[0.2em] md:tracking-[0.25em] uppercase"
@@ -531,39 +394,92 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Floating Particles - Desktop Only */}
+        {/* Floating Particles - Enhanced with Mouse Tracking */}
         {!isMobile && (
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            {[...Array(12)].map((_, i) => {
-              const colors = [
-                "rgba(59,130,246,0.7)",
-                "rgba(168,85,247,0.6)",
-                "rgba(236,72,153,0.6)",
-                "rgba(34,211,238,0.5)",
-              ];
+            {[...Array(50)].map((_, i) => {
+              const size = Math.random() * 3 + 1;
+              const initialX = Math.random() * 100;
+              const initialY = Math.random() * 100;
+              const duration = Math.random() * 10 + 15;
+              const delay = Math.random() * 5;
+              
               return (
                 <motion.div
                   key={i}
                   className="absolute rounded-full"
                   style={{
-                    width: `${2.5 + (i % 4)}px`,
-                    height: `${2.5 + (i % 4)}px`,
-                    background: `radial-gradient(circle, ${colors[i % 4]} 0%, transparent 70%)`,
-                    left: `${(i * 8) + 5}%`,
-                    top: `${(i * 6) + 10}%`,
-                    filter: "blur(0.5px)",
-                    boxShadow: `0 0 15px ${colors[i % 4]}`,
+                    width: `${size}px`,
+                    height: `${size}px`,
+                    background: i % 3 === 0 
+                      ? "rgba(59, 130, 246, 0.6)" 
+                      : i % 3 === 1 
+                      ? "rgba(139, 92, 246, 0.5)" 
+                      : "rgba(236, 72, 153, 0.4)",
+                    left: `${initialX}%`,
+                    top: `${initialY}%`,
+                    boxShadow: `0 0 ${size * 3}px ${
+                      i % 3 === 0 
+                        ? "rgba(59, 130, 246, 0.8)" 
+                        : i % 3 === 1 
+                        ? "rgba(139, 92, 246, 0.7)" 
+                        : "rgba(236, 72, 153, 0.6)"
+                    }`,
                   }}
                   animate={{
-                    y: [0, -180, 0],
-                    opacity: [0, 1, 0],
-                    scale: [0.3, 2, 0.3],
+                    y: [0, -100, 0],
+                    x: [0, Math.sin(i) * 50, 0],
+                    opacity: [0.2, 0.8, 0.2],
+                    scale: [1, 1.5, 1],
                   }}
                   transition={{
-                    duration: 7 + i * 0.6,
+                    duration: duration,
                     repeat: Infinity,
                     ease: "easeInOut",
-                    delay: i * 0.4,
+                    delay: delay,
+                  }}
+                />
+              );
+            })}
+          </div>
+        )}
+
+        {/* Mouse Follower Particles - Desktop Only */}
+        {!isMobile && (
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            {[...Array(20)].map((_, i) => {
+              const angle = (i / 20) * Math.PI * 2;
+              const radius = 100 + (i * 15);
+              
+              return (
+                <motion.div
+                  key={`mouse-${i}`}
+                  className="absolute rounded-full"
+                  style={{
+                    width: "4px",
+                    height: "4px",
+                    background: i % 2 === 0 
+                      ? "rgba(59, 130, 246, 0.7)" 
+                      : "rgba(139, 92, 246, 0.6)",
+                    boxShadow: `0 0 10px ${
+                      i % 2 === 0 
+                        ? "rgba(59, 130, 246, 0.9)" 
+                        : "rgba(139, 92, 246, 0.8)"
+                    }`,
+                    left: "50%",
+                    top: "50%",
+                    x: mousePosition.x * (radius / 100) * Math.cos(angle),
+                    y: mousePosition.y * (radius / 100) * Math.sin(angle),
+                  }}
+                  animate={{
+                    scale: [1, 1.3, 1],
+                    opacity: [0.4, 0.7, 0.4],
+                  }}
+                  transition={{
+                    duration: 2 + (i * 0.1),
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: i * 0.05,
                   }}
                 />
               );
