@@ -51,30 +51,24 @@ export default function Hero() {
     mouseY.set((clientY / window.innerHeight - 0.5) * 40);
   }, [mouseX, mouseY, isMobile]);
 
-  // Hacker typing scramble effect
+  // Professional name reveal effect
   useEffect(() => {
     const fullName = "Mohammed Abdul Omer";
     let frame = 0;
-    const chars = "!<>-_\\/[]{}—=+*^?#________";
-    let output = "";
 
     const interval = setInterval(() => {
       frame++;
-
-      output = fullName
-        .split("")
-        .map((char, i) => {
-          if (frame / 3 > i) {
-            return char;
-          }
-          return chars[Math.floor(Math.random() * chars.length)];
-        })
-        .join("");
-
-      setScrambledName(output);
-
-      if (frame / 3 > fullName.length) clearInterval(interval);
-    }, 45);
+      
+      // Smooth character-by-character reveal
+      const revealedChars = Math.floor(frame / 2);
+      
+      if (revealedChars <= fullName.length) {
+        setScrambledName(fullName.substring(0, revealedChars));
+      } else {
+        setScrambledName(fullName);
+        clearInterval(interval);
+      }
+    }, 50);
 
     return () => clearInterval(interval);
   }, []);
