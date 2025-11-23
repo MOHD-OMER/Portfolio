@@ -8,15 +8,6 @@ export default function Projects() {
 
   const projects = [
     {
-      title: "Autonomous Vehicle Lane Detection",
-      desc: "Real-time computer vision system for detecting and tracking road lanes using deep learning.",
-      category: "Computer Vision",
-      tags: ["OpenCV", "CNNs", "Python", "Real-time"],
-      icon: "🚗",
-      color: "from-blue-500 to-cyan-500",
-      details: "Implemented advanced lane detection algorithms with 95% accuracy in varying weather conditions."
-    },
-    {
       title: "Brain Tumor Classification System",
       desc: "Neural network-based medical imaging system for automated MRI tumor classification.",
       category: "Computer Vision",
