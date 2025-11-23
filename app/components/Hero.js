@@ -151,12 +151,12 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen pt-20 sm:pt-24 md:pt-28 flex flex-col items-center justify-center text-center overflow-hidden px-4"
     >
-      {/* Layered Animated Background - Optimized for Mobile */}
-      <div className="absolute inset-0 opacity-20 md:opacity-25 overflow-hidden">
+      {/* Layered Animated Background - Enhanced Brightness */}
+      <div className="absolute inset-0 opacity-25 md:opacity-30 overflow-hidden">
         <motion.div
           className="absolute top-0 left-1/4 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[80px] sm:blur-[120px] md:blur-[160px]"
           style={{
-            background: "radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, rgba(79, 70, 229, 0.1) 50%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(59, 130, 246, 0.25) 0%, rgba(79, 70, 229, 0.15) 50%, transparent 70%)",
           }}
           animate={isMobile ? {
             x: [0, 50, 0],
@@ -176,7 +176,7 @@ export default function Hero() {
         <motion.div
           className="absolute bottom-0 right-1/4 w-[280px] h-[280px] sm:w-[450px] sm:h-[450px] md:w-[650px] md:h-[650px] rounded-full blur-[70px] sm:blur-[110px] md:blur-[140px]"
           style={{
-            background: "radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.1) 50%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.15) 50%, transparent 70%)",
           }}
           animate={isMobile ? {
             x: [0, -40, 0],
@@ -199,10 +199,10 @@ export default function Hero() {
       {/* Dynamic Grid Pattern - Desktop Only */}
       {!isMobile && (
         <motion.div 
-          className="absolute inset-0 opacity-[0.03]"
+          className="absolute inset-0 opacity-[0.04]"
           style={{
-            backgroundImage: `linear-gradient(rgba(100,150,255,0.15) 1px, transparent 1px),
-                             linear-gradient(90deg, rgba(100,150,255,0.15) 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(rgba(100,150,255,0.2) 1px, transparent 1px),
+                             linear-gradient(90deg, rgba(100,150,255,0.2) 1px, transparent 1px)`,
             backgroundSize: '60px 60px',
             x: gridX,
             y: gridY,
@@ -210,14 +210,14 @@ export default function Hero() {
         />
       )}
 
-      {/* Radial Spotlight Effect */}
+      {/* Enhanced Radial Spotlight Effect */}
       <motion.div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "radial-gradient(circle 500px at 50% 40%, rgba(59, 130, 246, 0.05), transparent 70%)",
+          background: "radial-gradient(circle 600px at 50% 40%, rgba(59, 130, 246, 0.08), transparent 70%)",
         }}
         animate={{
-          opacity: [0.2, 0.4, 0.2],
+          opacity: [0.3, 0.5, 0.3],
         }}
         transition={{
           duration: 5,
@@ -237,10 +237,10 @@ export default function Hero() {
           viewport={{ once: true }}
           className="w-full flex flex-col items-center max-w-7xl mx-auto"
         >
-          {/* Name with Enhanced Typing - Better Mobile Sizing */}
+          {/* Name with Enhanced Typing - Single Line Layout */}
           <motion.h1
             variants={itemVariants}
-            className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold mb-2 sm:mb-3 md:mb-4 relative text-center tracking-tight w-full leading-tight px-4"
+            className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold mb-2 sm:mb-3 md:mb-4 relative text-center tracking-tight max-w-[95%] sm:max-w-full mx-auto leading-tight px-4 sm:px-6 md:px-8 whitespace-nowrap"
             style={{
               transform: isMobile ? 'none' : `translate(${mousePosition.x * 0.01}px, ${mousePosition.y * 0.01}px)`
             }}
@@ -250,10 +250,29 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1 }}
+              whileHover={!isMobile ? { 
+                scale: 1.01,
+                transition: { duration: 0.3, ease: "easeOut" }
+              } : {}}
             >
-              <span className="relative inline-block font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-blue-400 to-purple-400">
+              <motion.span 
+                className="relative inline-block font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-blue-400 to-purple-400"
+                style={{
+                  backgroundSize: "200% auto",
+                  WebkitTextStroke: "0.5px rgba(59, 130, 246, 0.3)",
+                  textShadow: "0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(139, 92, 246, 0.3)",
+                }}
+                animate={{
+                  backgroundPosition: ["0% center", "100% center", "0% center"],
+                }}
+                transition={{
+                  duration: 8,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+              >
                 {scrambledName}
-              </span>
+              </motion.span>
 
               <motion.span
                 animate={{ opacity: typingComplete ? [1, 0, 1] : 1 }}
@@ -267,17 +286,17 @@ export default function Hero() {
               </motion.span>
             </motion.span>
             
-            {/* Multi-layer Glow */}
+            {/* Enhanced Multi-layer Glow - Further Reduced Intensity */}
             <motion.span
               className="absolute inset-0 bg-gradient-to-r from-blue-400 via-blue-300 to-purple-400 bg-clip-text text-transparent blur-xl pointer-events-none opacity-40"
-              animate={{ opacity: [0.2, 0.5, 0.2] }}
+              animate={{ opacity: [0.20, 0.50, 0.20] }}
               transition={{ duration: 3, repeat: Infinity }}
             >
               Mohammed Abdul Omer
             </motion.span>
           </motion.h1>
 
-          {/* Enhanced Title Transition - Better Mobile Layout */}
+          {/* Enhanced Title Transition with Improved Glow */}
           <motion.div
             variants={itemVariants}
             className="mt-1 sm:mt-2 md:mt-3 relative h-8 sm:h-10 md:h-12 flex items-center justify-center w-full"
@@ -291,7 +310,7 @@ export default function Hero() {
               className="absolute text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-center px-4"
             >
               <motion.span
-                className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
+                className="relative inline-block bg-gradient-to-r from-blue-400 via-purple-400 to-pink-300 bg-clip-text text-transparent"
                 style={{
                   backgroundSize: "200% auto",
                 }}
@@ -305,11 +324,28 @@ export default function Hero() {
                 }}
               >
                 {titles[currentTitleIndex]}
+                
+                {/* Enhanced Glow Behind Title */}
+                <motion.span
+                  className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-300 bg-clip-text text-transparent blur-xl pointer-events-none opacity-40"
+                  animate={{ opacity: [0.25, 0.5, 0.25] }}
+                  transition={{ duration: 2.5, repeat: Infinity }}
+                >
+                  {titles[currentTitleIndex]}
+                </motion.span>
               </motion.span>
             </motion.div>
           </motion.div>
 
-          {/* Social Links - New Section */}
+          {/* NEW: Tagline - Enhanced Contrast */}
+          <motion.p
+            variants={itemVariants}
+            className="mt-6 sm:mt-8 md:mt-10 text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 max-w-2xl px-4 font-light tracking-wide"
+          >
+            Designing intelligent systems through code, data, and creativity
+          </motion.p>
+
+          {/* Social Links */}
           <motion.div
             variants={itemVariants}
             className="flex flex-wrap gap-4 sm:gap-5 md:gap-6 mt-12 sm:mt-16 md:mt-20 justify-center"
@@ -365,7 +401,7 @@ export default function Hero() {
             </motion.a>
           </motion.div>
 
-          {/* Modern Scroll Indicator - Optimized for Mobile */}
+          {/* Modern Scroll Indicator */}
           <motion.div
             variants={itemVariants}
             className="mt-12 sm:mt-16 md:mt-20 flex flex-col items-center gap-2 sm:gap-3 md:gap-5 pb-8"
@@ -394,15 +430,17 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Floating Particles - Enhanced with Mouse Tracking */}
+        {/* Floating Particles Behind Name - Enhanced with Movement */}
         {!isMobile && (
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            {[...Array(50)].map((_, i) => {
-              const size = Math.random() * 3 + 1;
+            {[...Array(60)].map((_, i) => {
+              const size = Math.random() * 4 + 1;
               const initialX = Math.random() * 100;
               const initialY = Math.random() * 100;
-              const duration = Math.random() * 10 + 15;
+              const duration = Math.random() * 12 + 18;
               const delay = Math.random() * 5;
+              const xMovement = (Math.random() - 0.5) * 80;
+              const yMovement = -120 - Math.random() * 40;
               
               return (
                 <motion.div
@@ -412,25 +450,26 @@ export default function Hero() {
                     width: `${size}px`,
                     height: `${size}px`,
                     background: i % 3 === 0 
-                      ? "rgba(59, 130, 246, 0.6)" 
+                      ? "rgba(59, 130, 246, 0.7)" 
                       : i % 3 === 1 
-                      ? "rgba(139, 92, 246, 0.5)" 
-                      : "rgba(236, 72, 153, 0.4)",
+                      ? "rgba(139, 92, 246, 0.6)" 
+                      : "rgba(236, 72, 153, 0.5)",
                     left: `${initialX}%`,
                     top: `${initialY}%`,
-                    boxShadow: `0 0 ${size * 3}px ${
+                    boxShadow: `0 0 ${size * 4}px ${
                       i % 3 === 0 
-                        ? "rgba(59, 130, 246, 0.8)" 
+                        ? "rgba(59, 130, 246, 0.9)" 
                         : i % 3 === 1 
-                        ? "rgba(139, 92, 246, 0.7)" 
-                        : "rgba(236, 72, 153, 0.6)"
+                        ? "rgba(139, 92, 246, 0.8)" 
+                        : "rgba(236, 72, 153, 0.7)"
                     }`,
+                    filter: "blur(1px)",
                   }}
                   animate={{
-                    y: [0, -100, 0],
-                    x: [0, Math.sin(i) * 50, 0],
-                    opacity: [0.2, 0.8, 0.2],
-                    scale: [1, 1.5, 1],
+                    y: [0, yMovement, 0],
+                    x: [0, xMovement, 0],
+                    opacity: [0.3, 0.9, 0.3],
+                    scale: [1, 1.6, 1],
                   }}
                   transition={{
                     duration: duration,
@@ -447,24 +486,24 @@ export default function Hero() {
         {/* Mouse Follower Particles - Desktop Only */}
         {!isMobile && (
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            {[...Array(20)].map((_, i) => {
-              const angle = (i / 20) * Math.PI * 2;
-              const radius = 100 + (i * 15);
+            {[...Array(25)].map((_, i) => {
+              const angle = (i / 25) * Math.PI * 2;
+              const radius = 120 + (i * 12);
               
               return (
                 <motion.div
                   key={`mouse-${i}`}
                   className="absolute rounded-full"
                   style={{
-                    width: "4px",
-                    height: "4px",
+                    width: "5px",
+                    height: "5px",
                     background: i % 2 === 0 
-                      ? "rgba(59, 130, 246, 0.7)" 
-                      : "rgba(139, 92, 246, 0.6)",
-                    boxShadow: `0 0 10px ${
+                      ? "rgba(59, 130, 246, 0.8)" 
+                      : "rgba(139, 92, 246, 0.7)",
+                    boxShadow: `0 0 12px ${
                       i % 2 === 0 
-                        ? "rgba(59, 130, 246, 0.9)" 
-                        : "rgba(139, 92, 246, 0.8)"
+                        ? "rgba(59, 130, 246, 1)" 
+                        : "rgba(139, 92, 246, 0.9)"
                     }`,
                     left: "50%",
                     top: "50%",
@@ -472,8 +511,8 @@ export default function Hero() {
                     y: mousePosition.y * (radius / 100) * Math.sin(angle),
                   }}
                   animate={{
-                    scale: [1, 1.3, 1],
-                    opacity: [0.4, 0.7, 0.4],
+                    scale: [1, 1.4, 1],
+                    opacity: [0.5, 0.8, 0.5],
                   }}
                   transition={{
                     duration: 2 + (i * 0.1),
