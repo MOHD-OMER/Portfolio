@@ -477,46 +477,98 @@ export default function Hero() {
           </div>
         )}
 
-        {/* Mouse Follower Particles - Desktop Only */}
+        {/* Professional Tech Grid Followers - Desktop Only */}
         {!isMobile && (
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            {[...Array(25)].map((_, i) => {
-              const angle = (i / 25) * Math.PI * 2;
-              const radius = 120 + (i * 12);
+            {[...Array(12)].map((_, i) => {
+              const size = 60 + (i * 40);
+              const delay = i * 0.03;
               
               return (
                 <motion.div
-                  key={`mouse-${i}`}
-                  className="absolute rounded-full"
+                  key={`grid-${i}`}
+                  className="absolute border border-blue-400/20 rounded-lg"
                   style={{
-                    width: "5px",
-                    height: "5px",
-                    background: i % 2 === 0 
-                      ? "rgba(59, 130, 246, 0.8)" 
-                      : "rgba(139, 92, 246, 0.7)",
-                    boxShadow: `0 0 12px ${
-                      i % 2 === 0 
-                        ? "rgba(59, 130, 246, 1)" 
-                        : "rgba(139, 92, 246, 0.9)"
-                    }`,
+                    width: `${size}px`,
+                    height: `${size}px`,
                     left: "50%",
                     top: "50%",
-                    x: mousePosition.x * (radius / 100) * Math.cos(angle),
-                    y: mousePosition.y * (radius / 100) * Math.sin(angle),
+                    marginLeft: `-${size / 2}px`,
+                    marginTop: `-${size / 2}px`,
+                    x: mousePosition.x * (i * 0.15),
+                    y: mousePosition.y * (i * 0.15),
                   }}
                   animate={{
-                    scale: [1, 1.4, 1],
-                    opacity: [0.5, 0.8, 0.5],
+                    rotate: [0, 180, 360],
+                    borderColor: [
+                      "rgba(59, 130, 246, 0.2)",
+                      "rgba(139, 92, 246, 0.15)",
+                      "rgba(59, 130, 246, 0.2)"
+                    ],
                   }}
                   transition={{
-                    duration: 2 + (i * 0.1),
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: i * 0.05,
+                    rotate: {
+                      duration: 20 + (i * 2),
+                      repeat: Infinity,
+                      ease: "linear",
+                    },
+                    borderColor: {
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: delay,
+                    },
                   }}
                 />
               );
             })}
+            
+            {/* Tech Corner Accents */}
+            {[...Array(4)].map((_, i) => {
+              const angle = (i / 4) * Math.PI * 2;
+              const radius = 200;
+              
+              return (
+                <motion.div
+                  key={`corner-${i}`}
+                  className="absolute"
+                  style={{
+                    width: "40px",
+                    height: "40px",
+                    left: "50%",
+                    top: "50%",
+                    x: mousePosition.x * 0.8 + Math.cos(angle) * radius,
+                    y: mousePosition.y * 0.8 + Math.sin(angle) * radius,
+                  }}
+                >
+                  <div className="relative w-full h-full">
+                    <div className="absolute top-0 left-0 w-2 h-8 bg-gradient-to-b from-blue-400/40 to-transparent" />
+                    <div className="absolute top-0 left-0 w-8 h-2 bg-gradient-to-r from-blue-400/40 to-transparent" />
+                  </div>
+                </motion.div>
+              );
+            })}
+            
+            {/* Scanning Lines */}
+            {[...Array(3)].map((_, i) => (
+              <motion.div
+                key={`scan-${i}`}
+                className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-400/30 to-transparent"
+                style={{
+                  top: `${30 + i * 20}%`,
+                }}
+                animate={{
+                  x: ["-100%", "100%"],
+                  opacity: [0, 0.6, 0],
+                }}
+                transition={{
+                  duration: 4 + i,
+                  repeat: Infinity,
+                  ease: "linear",
+                  delay: i * 1.3,
+                }}
+              />
+            ))}
           </div>
         )}
       </motion.div>
