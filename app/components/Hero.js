@@ -91,7 +91,9 @@ export default function Hero() {
     "Machine Learning Engineer",
     "Generative AI Engineer", 
     "AI Researcher",
-    "Deep Learner"
+    "AI/ML Developer",
+    "LLM Engineer",
+    "Deep Learning Engineer"
   ], []);
 
   useEffect(() => {
