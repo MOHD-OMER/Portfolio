@@ -8,13 +8,26 @@ export default function Projects() {
 
   const projects = [
     {
+      title: "PulmoScan AI – Tuberculosis Detection System",
+      desc: "Deep-learning powered chest X-ray TB detection with heatmap visualization deployed on HuggingFace Spaces.",
+      category: "Medical AI",
+      tags: ["PyTorch", "FastAPI", "Docker", "HuggingFace", "Computer Vision", "CNN"],
+      icon: "🫁",
+      color: "from-blue-500 to-cyan-500",
+      details: "End-to-end AI diagnostic tool using a CNN model (TBNet) with Grad-CAM heatmap support, PDF reports, and full Docker deployment.",
+      github: "https://github.com/MOHD-OMER/PulmoScanAI",
+      demo: "https://mohdomer-pulmoscanai.hf.space/"
+    },
+    {
       title: "Brain Tumor Classification System",
       desc: "Neural network-based medical imaging system for automated MRI tumor classification.",
       category: "Computer Vision",
       tags: ["TensorFlow", "Medical AI", "CNNs", "Transfer Learning"],
       icon: "🧠",
       color: "from-purple-500 to-pink-500",
-      details: "Achieved 92% classification accuracy across multiple tumor types using ResNet architecture."
+      details: "Achieved 92% classification accuracy across multiple tumor types using ResNet architecture.",
+      github: "https://github.com/yourusername/brain-tumor-classification",
+      demo: "https://brain-tumor-demo.vercel.app"
     },
     {
       title: "Generative AI Content Automation",
@@ -23,7 +36,9 @@ export default function Projects() {
       tags: ["LLMs", "GPT", "Langchain", "RAG"],
       icon: "✨",
       color: "from-green-500 to-emerald-500",
-      details: "Reduced content creation time by 70% while maintaining high quality standards."
+      details: "Reduced content creation time by 70% while maintaining high quality standards.",
+      github: "https://github.com/yourusername/content-automation",
+      demo: "https://content-ai-demo.vercel.app"
     },
     {
       title: "Smart Document Q&A System",
@@ -32,7 +47,9 @@ export default function Projects() {
       tags: ["RAG", "Vector DB", "LangChain", "FastAPI"],
       icon: "📚",
       color: "from-orange-500 to-red-500",
-      details: "Processes 1000+ pages with semantic search and context-aware responses."
+      details: "Processes 1000+ pages with semantic search and context-aware responses.",
+      github: "https://github.com/yourusername/document-qa",
+      demo: "https://doc-qa-demo.vercel.app"
     },
     {
       title: "Real-time Sentiment Analysis API",
@@ -41,7 +58,9 @@ export default function Projects() {
       tags: ["BERT", "FastAPI", "Docker", "AWS"],
       icon: "💬",
       color: "from-yellow-500 to-amber-500",
-      details: "Handles 10K+ requests/hour with sub-200ms latency and 88% accuracy."
+      details: "Handles 10K+ requests/hour with sub-200ms latency and 88% accuracy.",
+      github: "https://github.com/yourusername/sentiment-api",
+      demo: "https://sentiment-api-demo.vercel.app"
     },
     {
       title: "Predictive Maintenance System",
@@ -50,7 +69,9 @@ export default function Projects() {
       tags: ["Time Series", "MLOps", "Prophet", "Kubernetes"],
       icon: "⚙️",
       color: "from-indigo-500 to-violet-500",
-      details: "Reduced downtime by 40% with early warning system and automated alerts."
+      details: "Reduced downtime by 40% with early warning system and automated alerts.",
+      github: "https://github.com/yourusername/predictive-maintenance",
+      demo: "https://maintenance-demo.vercel.app"
     }
   ];
 
@@ -194,16 +215,36 @@ export default function Projects() {
                 ))}
               </div>
 
-              {/* View Project Link */}
-              <motion.button
-                whileHover={{ x: 5 }}
-                className={`relative inline-flex items-center gap-2 text-sm font-semibold text-transparent bg-clip-text bg-gradient-to-r ${project.color} group-hover:gap-3 transition-all`}
-              >
-                View Details
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </motion.button>
+              {/* GitHub & Demo Buttons */}
+              <div className="relative mt-4 flex items-center gap-4">
+                {/* GitHub Button */}
+                <motion.a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ x: 5 }}
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-gray-300 hover:text-white transition-all"
+                >
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+                  </svg>
+                  GitHub
+                </motion.a>
+
+                {/* Demo Button */}
+                <motion.a
+                  href={project.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ x: 5 }}
+                  className={`inline-flex items-center gap-2 text-sm font-semibold text-transparent bg-clip-text bg-gradient-to-r ${project.color}`}
+                >
+                  Live Demo
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </motion.a>
+              </div>
 
               {/* Decorative corner element */}
               <div className={`absolute -bottom-4 -right-4 w-24 h-24 bg-gradient-to-br ${project.color} opacity-5 rounded-full blur-2xl group-hover:opacity-10 transition-opacity`} />
