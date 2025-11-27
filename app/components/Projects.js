@@ -16,7 +16,7 @@ export default function Projects() {
       color: "from-blue-500 to-cyan-500",
       details: "End-to-end AI diagnostic tool using a CNN model (TBNet) with Grad-CAM heatmap support, PDF reports, and full Docker deployment.",
       github: "https://github.com/MOHD-OMER/PulmoScanAI",
-      demo: "https://mohdomer-pulmoscanai.hf.space/"
+      demo: "https://pulmoscanai-app.hf.space"
     },
     {
       title: "Brain Tumor Classification System",
