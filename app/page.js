@@ -1,11 +1,40 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Hero from "./components/Hero";
+import { useEffect, useState } from "react";
+import { motion, LazyMotion, domAnimation } from "framer-motion";
 import Projects from "./components/Projects";
 import Skills from "./components/Skills";
 import Experience from "./components/Experience";
 import Contact from "./components/Contact";
+
+// Client-only wrapper for Hero
+function ClientOnlyHero() {
+  const [Hero, setHero] = useState(null);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+    
+    // Small delay to ensure DOM is ready
+    const timer = setTimeout(() => {
+      import("./components/Hero").then((mod) => {
+        setHero(() => mod.default);
+      });
+    }, 50);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!isClient || !Hero) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-900">
+        <div className="text-gray-400 animate-pulse">Loading...</div>
+      </div>
+    );
+  }
+
+  return <Hero />;
+}
 
 function About() {
   return (
@@ -130,25 +159,27 @@ function About() {
 
 export default function Page() {
   return (
-    <>
-      <Hero />
-      <About />
-      {/* SKILLS */}
-      <section id="skills" className="section main-container">
-        <Skills />
-      </section>
-      {/* PROJECTS */}
-      <section id="projects" className="section main-container">
-        <Projects />
-      </section>
-      {/* EXPERIENCE */}
-      <section id="experience" className="section main-container">
-        <Experience />
-      </section>
-      {/* CONTACT */}
-      <section id="contact" className="section main-container">
-        <Contact />
-      </section>
-    </>
+    <LazyMotion features={domAnimation}>
+      <div>
+        <ClientOnlyHero />
+        <About />
+        {/* SKILLS */}
+        <section id="skills" className="section main-container">
+          <Skills />
+        </section>
+        {/* PROJECTS */}
+        <section id="projects" className="section main-container">
+          <Projects />
+        </section>
+        {/* EXPERIENCE */}
+        <section id="experience" className="section main-container">
+          <Experience />
+        </section>
+        {/* CONTACT */}
+        <section id="contact" className="section main-container">
+          <Contact />
+        </section>
+      </div>
+    </LazyMotion>
   );
 }
