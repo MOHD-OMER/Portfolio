@@ -19,15 +19,15 @@ export default function Projects() {
       demo: "https://pulmoscanai-app.hf.space"
     },
     {
-      title: "Brain Tumor Classification System",
-      desc: "Neural network-based medical imaging system for automated MRI tumor classification.",
-      category: "Computer Vision",
-      tags: ["TensorFlow", "Medical AI", "CNNs", "Transfer Learning"],
-      icon: "🧠",
-      color: "from-purple-500 to-pink-500",
-      details: "Achieved 92% classification accuracy across multiple tumor types using ResNet architecture.",
-      github: "https://github.com/yourusername/brain-tumor-classification",
-      demo: "https://brain-tumor-demo.vercel.app"
+      title: "Doubt Tutor – AI Study Assistant",
+      desc: "Interactive AI-powered study assistant with multi-model support, file uploads, PDF & image understanding, and real-time doubt solving.",
+      category: "AI Applications",
+      tags: ["Streamlit", "Groq API", "HuggingFace", "Qwen-VL", "Python"],
+      icon: "🤖",
+      color: "from-indigo-500 to-violet-500",
+      details: "Built a fully functional AI tutor capable of analyzing images, PDFs, and text files using Llama 3, Qwen-VL (vision), and Groq models. Includes chat history export, file previews, secure secret handling, and custom UI components.",
+      github: "https://github.com/MOHD-OMER/doubt-tutor",
+      demo: "https://doubt-tutor-app.streamlit.app/"
     },
     {
       title: "Generative AI Content Automation",
