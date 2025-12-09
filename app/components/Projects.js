@@ -30,16 +30,17 @@ export default function Projects() {
       demo: "https://doubt-tutor-app.streamlit.app/"
     },
     {
-      title: "Generative AI Content Automation",
-      desc: "Intelligent AI agent for automated content generation, summarization, and text processing.",
-      category: "Generative AI",
-      tags: ["LLMs", "GPT", "Langchain", "RAG"],
-      icon: "✨",
-      color: "from-green-500 to-emerald-500",
-      details: "Reduced content creation time by 70% while maintaining high quality standards.",
-      github: "https://github.com/yourusername/content-automation",
-      demo: "https://content-ai-demo.vercel.app"
-    },
+      title: "PTEra – AI-Powered PTE Mock Assessment",
+      desc: "A full-scale PTE mock test platform with adaptive difficulty, real-time scoring, section timers, and professional exam-style UI.",
+      category: "AI Applications",
+      tags: ["Gradio", "Groq API", "Google Gemini", "HuggingFace Spaces", "Python"],
+      icon: "🎓",
+      color: "from-blue-500 to-purple-600",
+      details: "Developed an advanced PTE Academic mock assessment system with Aptitude, Listening, and Reading modules. Features include automated question generation using Groq & Gemini models, strict time tracking, dynamic content validation, analytics-driven scoring, and a premium custom UI using modern CSS. Deployed on HuggingFace Spaces with organization-level domain setup, secure API handling, and modular code architecture.",
+      github: "https://github.com/MOHD-OMER/PTEra",
+      demo: "https://pteclub-Mock-app.hf.space/"
+    }
+,
     {
       title: "Smart Document Q&A System",
       desc: "RAG-powered system enabling natural language queries over large document collections.",
