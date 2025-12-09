@@ -20,7 +20,7 @@ export default function Projects() {
     },
     {
       title: "Doubt Tutor – AI Study Assistant",
-      desc: "Interactive AI-powered study assistant with multi-model support, file uploads, PDF & image understanding, and real-time doubt solving.",
+      desc: "A fully interactive, AI-powered study assistant that supports multiple AI models, allows uploading of files including PDFs, images, and documents, provides deep content understanding, generates summaries and explanations, and offers real-time doubt-solving with contextual memory, personalized learning paths, and multi-modal reasoning capabilities.",
       category: "AI Applications",
       tags: ["Streamlit", "Groq API", "HuggingFace", "Qwen-VL", "Python"],
       icon: "🤖",
@@ -39,8 +39,7 @@ export default function Projects() {
       details: "Developed an advanced PTE Academic mock assessment system with Aptitude, Listening, and Reading modules. Features include automated question generation using Groq & Gemini models, strict time tracking, dynamic content validation, analytics-driven scoring, and a premium custom UI using modern CSS. Deployed on HuggingFace Spaces with organization-level domain setup, secure API handling, and modular code architecture.",
       github: "https://github.com/MOHD-OMER/PTEra",
       demo: "https://pteclub-Mock-app.hf.space/"
-    }
-,
+    },
     {
       title: "Smart Document Q&A System",
       desc: "RAG-powered system enabling natural language queries over large document collections.",
