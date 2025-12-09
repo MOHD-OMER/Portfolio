@@ -9,12 +9,12 @@ export default function Projects() {
   const projects = [
     {
       title: "PulmoScan AI – Tuberculosis Detection System",
-      desc: "Deep-learning powered chest X-ray TB detection with heatmap visualization deployed on HuggingFace Spaces.",
+      desc: "An advanced deep-learning system for automated tuberculosis detection from chest X-rays, featuring real-time Grad-CAM heatmap visualizations and seamless deployment on HuggingFace Spaces.",
       category: "Medical AI",
       tags: ["PyTorch", "FastAPI", "Docker", "HuggingFace", "Computer Vision", "CNN"],
       icon: "🫁",
       color: "from-blue-500 to-cyan-500",
-      details: "End-to-end AI diagnostic tool using a CNN model (TBNet) with Grad-CAM heatmap support, PDF reports, and full Docker deployment.",
+      details: "PulmoScan AI is a complete end-to-end diagnostic pipeline built for early and accurate TB screening. It uses a custom-trained CNN architecture (TBNet) to analyze chest X-rays, highlights infected regions through Grad-CAM heatmaps, and generates professional PDF diagnostic reports. The system features a FastAPI backend, optimized inference pipeline, Dockerized deployment, and an intuitive web interface hosted on HuggingFace Spaces.",
       github: "https://github.com/MOHD-OMER/PulmoScanAI",
       demo: "https://pulmoscanai-app.hf.space"
     },
