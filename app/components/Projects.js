@@ -41,15 +41,15 @@ export default function Projects() {
       demo: "https://pteclub-Mock-app.hf.space/"
     },
     {
-      title: "Smart Document Q&A System",
-      desc: "RAG-powered system enabling natural language queries over large document collections.",
-      category: "Generative AI",
-      tags: ["RAG", "Vector DB", "LangChain", "FastAPI"],
-      icon: "📚",
-      color: "from-orange-500 to-red-500",
-      details: "Processes 1000+ pages with semantic search and context-aware responses.",
-      github: "https://github.com/yourusername/document-qa",
-      demo: "https://doc-qa-demo.vercel.app"
+  title: "TruthLens — Fake News Detector",
+  desc: "Dual-AI system combining CNN-LSTM deep learning with Gemini API to detect fake news with 94.2% accuracy.",
+  category: "Machine Learning",
+  tags: ["CNN-LSTM", "Flask", "Gemini AI", "SQLite", "REST API"],
+  icon: "🔍",
+  color: "from-yellow-400 to-red-500",
+  details: "Trained on 40,000+ news articles. Features real-time predictions, analytics dashboard, prediction history, and dual-model verification using both a custom neural network and Gemini AI.",
+  github: "https://github.com/MOHD-OMER/TruthLens",
+  demo: "https://truthlens-uqo4.onrender.com"
     },
     {
       title: "Real-time Sentiment Analysis API",

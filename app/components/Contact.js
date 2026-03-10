@@ -40,7 +40,7 @@ export default function Contact() {
     {
       icon: "💼",
       label: 'LinkedIn',
-      value: 'mohammad-abdul-omer',
+      value: 'Mohammed-Abdul-Omer',
       href: 'https://www.linkedin.com/in/mohammad-abdul-omer',
       copyable: false,
       gradient: 'from-blue-400 to-purple-400'
