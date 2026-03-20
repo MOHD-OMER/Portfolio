@@ -48,11 +48,19 @@ export default function Projects() {
       icon: "🔍",
       color: "from-yellow-400 to-red-500",
       details: "Trained on 40,000+ news articles. Features real-time predictions, analytics dashboard, prediction history, and dual-model verification using both a custom neural network and Gemini AI.",
+      highlights: [
+        { icon: "🧠", label: "CNN-LSTM Hybrid", sub: "Custom NLP architecture" },
+        { icon: "📊", label: "Analytics Dashboard", sub: "Chart.js real-time stats" },
+        { icon: "🔌", label: "REST API", sub: "POST /api/predict endpoint" },
+        { icon: "🔐", label: "Admin Auth", sub: "Session-based login" },
+        { icon: "🗄️", label: "SQLite + ORM", sub: "Persistent prediction logs" },
+        { icon: "📈", label: "94.2% Accuracy", sub: "40,000+ article dataset" },
+      ],
       github: "https://github.com/MOHD-OMER/TruthLens",
       demo: "https://truthlens-uqo4.onrender.com"
     },
     {
-      title: "Building Safety Smoke Detection [C169]",
+      title: "Building Safety Smoke Detection ",
       desc: "Major college project — dual-module intelligent fire and smoke detection system combining 7 ML classifiers on 62,630 IoT sensor readings (AUC-ROC > 0.999) with MobileNetV2 CNN (96.98% accuracy) and YOLOv8 bounding-box detection, all deployed as a Django web application.",
       category: "Machine Learning",
       tags: ["Django", "TensorFlow", "YOLOv8", "Scikit-Learn", "MobileNetV2", "OpenCV", "Railway"],
@@ -74,9 +82,7 @@ export default function Projects() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
+      transition: { staggerChildren: 0.1 }
     }
   };
 
@@ -179,14 +185,35 @@ export default function Projects() {
               </h3>
 
               {/* Description */}
-              <p className="relative text-gray-300 text-sm leading-relaxed mb-4 flex-grow">
+              <p className="relative text-gray-300 text-sm leading-relaxed mb-4">
                 {project.desc}
               </p>
 
-              {/* Details - shows on hover */}
+              {/* ── TruthLens: Feature Highlights Grid (fills the empty space) ── */}
+              {project.highlights && (
+                <div className="relative mb-4 grid grid-cols-2 gap-2">
+                  {project.highlights.map((h, i) => (
+                    <div
+                      key={i}
+                      className="flex items-start gap-2 rounded-lg px-3 py-2 bg-white/[0.04] border border-white/[0.07] hover:border-yellow-400/30 transition-colors duration-200"
+                    >
+                      <span className="text-base mt-0.5 shrink-0">{h.icon}</span>
+                      <div className="min-w-0">
+                        <p className="text-xs font-semibold text-gray-200 truncate">{h.label}</p>
+                        <p className="text-[10px] text-gray-500 truncate">{h.sub}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Details - shows on hover (for non-highlights cards keep flex-grow) */}
+              {!project.highlights && (
+                <div className="flex-grow" />
+              )}
+
+              {/* Details blockquote (hover reveal) */}
               <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                whileInView={{ opacity: 1, height: "auto" }}
                 className="relative text-gray-400 text-xs italic mb-4 border-l-2 border-white/20 pl-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               >
                 {project.details}
@@ -205,8 +232,7 @@ export default function Projects() {
               </div>
 
               {/* GitHub & Demo Buttons */}
-              <div className="relative mt-4 flex items-center gap-4">
-                {/* GitHub Button */}
+              <div className="relative mt-auto flex items-center gap-4">
                 <motion.a
                   href={project.github}
                   target="_blank"
@@ -220,7 +246,6 @@ export default function Projects() {
                   GitHub
                 </motion.a>
 
-                {/* Demo Button */}
                 <motion.a
                   href={project.demo}
                   target="_blank"
