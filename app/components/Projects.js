@@ -41,44 +41,33 @@ export default function Projects() {
       demo: "https://pteclub-Mock-app.hf.space/"
     },
     {
-  title: "TruthLens — Fake News Detector",
-  desc: "Dual-AI system combining CNN-LSTM deep learning with Gemini API to detect fake news with 94.2% accuracy.",
-  category: "Machine Learning",
-  tags: ["CNN-LSTM", "Flask", "Gemini AI", "SQLite", "REST API"],
-  icon: "🔍",
-  color: "from-yellow-400 to-red-500",
-  details: "Trained on 40,000+ news articles. Features real-time predictions, analytics dashboard, prediction history, and dual-model verification using both a custom neural network and Gemini AI.",
-  github: "https://github.com/MOHD-OMER/TruthLens",
-  demo: "https://truthlens-uqo4.onrender.com"
+      title: "TruthLens — Fake News Detector",
+      desc: "Dual-AI system combining CNN-LSTM deep learning with Gemini API to detect fake news with 94.2% accuracy.",
+      category: "Machine Learning",
+      tags: ["CNN-LSTM", "Flask", "Gemini AI", "SQLite", "REST API"],
+      icon: "🔍",
+      color: "from-yellow-400 to-red-500",
+      details: "Trained on 40,000+ news articles. Features real-time predictions, analytics dashboard, prediction history, and dual-model verification using both a custom neural network and Gemini AI.",
+      github: "https://github.com/MOHD-OMER/TruthLens",
+      demo: "https://truthlens-uqo4.onrender.com"
     },
     {
-      title: "Real-time Sentiment Analysis API",
-      desc: "Production-grade NLP API for analyzing customer sentiment across multiple channels.",
-      category: "NLP",
-      tags: ["BERT", "FastAPI", "Docker", "AWS"],
-      icon: "💬",
-      color: "from-yellow-500 to-amber-500",
-      details: "Handles 10K+ requests/hour with sub-200ms latency and 88% accuracy.",
-      github: "https://github.com/yourusername/sentiment-api",
-      demo: "https://sentiment-api-demo.vercel.app"
+      title: "Building Safety Smoke Detection [C169]",
+      desc: "Major college project — dual-module intelligent fire and smoke detection system combining 7 ML classifiers on 62,630 IoT sensor readings (AUC-ROC > 0.999) with MobileNetV2 CNN (96.98% accuracy) and YOLOv8 bounding-box detection, all deployed as a Django web application.",
+      category: "Machine Learning",
+      tags: ["Django", "TensorFlow", "YOLOv8", "Scikit-Learn", "MobileNetV2", "OpenCV", "Railway"],
+      icon: "🔥",
+      color: "from-orange-500 to-red-600",
+      details: "B.E. Major Project at Lords Institute of Engineering & Technology, Hyderabad. Trains 7 classifiers (Random Forest, SVM, Gradient Boosting, AdaBoost, Logistic Regression, Decision Tree, KNN) on real IoT sensor data. MobileNetV2 CNN fine-tuned via transfer learning achieves 96.98% validation accuracy. YOLOv8 draws real-time bounding boxes around fire and smoke regions on uploaded images. Full-stack Django app with role-based user management, live ML training, sensor prediction, and CNN+YOLO inference — deployed on Railway.",
+      github: "https://github.com/MOHD-OMER/Building-Safety-Smoke-Detection",
+      demo: "https://building-safety-smoke-detection-production.up.railway.app"
     },
-    {
-      title: "Predictive Maintenance System",
-      desc: "Machine learning pipeline predicting equipment failures before they occur.",
-      category: "ML Engineering",
-      tags: ["Time Series", "MLOps", "Prophet", "Kubernetes"],
-      icon: "⚙️",
-      color: "from-indigo-500 to-violet-500",
-      details: "Reduced downtime by 40% with early warning system and automated alerts.",
-      github: "https://github.com/yourusername/predictive-maintenance",
-      demo: "https://maintenance-demo.vercel.app"
-    }
   ];
 
-  const categories = ["All", "Computer Vision", "Generative AI", "NLP", "ML Engineering"];
+  const categories = ["All", "Medical AI", "AI Applications", "Machine Learning"];
 
-  const filteredProjects = activeFilter === "All" 
-    ? projects 
+  const filteredProjects = activeFilter === "All"
+    ? projects
     : projects.filter(p => p.category === activeFilter);
 
   const containerVariants = {
@@ -117,7 +106,7 @@ export default function Projects() {
         <h2 className="text-5xl md:text-6xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 inline-block">
           Featured Projects
         </h2>
-        <motion.div 
+        <motion.div
           className="h-1.5 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mx-auto"
           initial={{ width: 0 }}
           whileInView={{ width: "120px" }}
@@ -170,10 +159,10 @@ export default function Projects() {
           >
             {/* Card */}
             <div className="relative h-full rounded-2xl p-6 bg-gradient-to-br from-white/[0.07] to-white/[0.03] backdrop-blur-xl border border-white/10 shadow-lg hover:shadow-2xl hover:border-white/20 transition-all duration-300 overflow-hidden flex flex-col">
-              
+
               {/* Animated background gradient */}
               <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
-              
+
               {/* Icon and Category */}
               <div className="relative flex items-center justify-between mb-4">
                 <div className={`text-4xl p-3 rounded-xl bg-gradient-to-br ${project.color} bg-opacity-10`}>
