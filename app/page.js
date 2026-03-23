@@ -96,32 +96,32 @@ function About() {
             className="relative space-y-6 text-gray-300 text-lg md:text-xl leading-relaxed"
           >
             <p>
-              I am a dedicated{" "}
+              I build{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 font-bold">
-                Machine Learning Engineer
+                AI systems that ship
               </span>{" "}
-              and{" "}
+              — not just experiments in notebooks. I design and deploy production-grade GenAI applications end-to-end, from model architecture to deployed API.
+            </p>
+
+            <p>
+              I&apos;ve built{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 font-bold">
-                Generative AI Specialist
-              </span>{" "}
-              with deep expertise in architecting intelligent systems that transform complex data into actionable insights. My technical foundation spans advanced neural network architectures, natural language processing, retrieval-augmented generation systems, and end-to-end AI application development.
+                LLM-powered assistants
+              </span>
+              , automated assessment systems with AI-based scoring, RAG pipelines backed by vector databases, and computer vision systems for real-world safety applications — all served through FastAPI and integrated into live workflows.
             </p>
 
             <p>
-              With a proven track record in building production-ready AI solutions, I specialize in designing scalable machine learning pipelines, implementing state-of-the-art generative models, and optimizing model performance for real-world deployment. My approach combines rigorous technical methodology with strategic problem-solving to deliver measurable business impact.
-            </p>
-
-            <p>
-              I have successfully developed and deployed multiple AI-powered applications across educational technology and enterprise productivity domains, demonstrating proficiency in:
+              I specialize at the intersection of:
             </p>
 
             {/* Skills highlight boxes */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
               {[
-                { title: "Deep Learning", desc: "Neural networks, CNNs, RNNs, Transformers" },
-                { title: "Generative AI", desc: "LLMs, RAG systems, prompt engineering" },
-                { title: "MLOps", desc: "Model deployment, monitoring, CI/CD" },
-                { title: "Data Engineering", desc: "Pipeline optimization, feature engineering" }
+                { title: "NLP & Generative AI", desc: "LLMs, RAG systems, LangChain, prompt engineering" },
+                { title: "Computer Vision", desc: "CNNs, transfer learning, OpenCV, object detection" },
+                { title: "ML Engineering", desc: "Model training, evaluation pipelines, FastAPI deployment" },
+                { title: "Agentic AI", desc: "LangChain agents, Ollama, Groq, multimodal systems" },
               ].map((skill, index) => (
                 <motion.div
                   key={skill.title}
@@ -140,11 +140,11 @@ function About() {
             </div>
 
             <p>
-              My commitment to excellence extends beyond technical implementation—I maintain a continuous learning mindset, staying current with emerging research in machine learning, computer vision, and AI safety. I thrive in collaborative, innovation-driven environments where cutting-edge technology meets practical application.
+              Currently in my final year of B.E. Computer Science (AI &amp; ML) at Lords Institute of Engineering &amp; Technology, Hyderabad. I stay current with emerging research in machine learning, computer vision, and large language models — and I build things to understand them, not just read about them.
             </p>
 
             <p className="text-gray-400 italic border-l-4 border-blue-400/50 pl-6 py-2 bg-blue-500/5 rounded-r-lg">
-              I am actively seeking opportunities to contribute to impactful AI initiatives where I can leverage my expertise to drive innovation, optimize intelligent systems, and push the boundaries of what's possible with artificial intelligence.
+              Open to AI Engineer, ML Engineer, and Computer Vision Engineer roles where I can work on production systems that solve real problems.
             </p>
           </motion.div>
 
