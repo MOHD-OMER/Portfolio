@@ -5,28 +5,49 @@ import { motion } from "framer-motion";
 export default function Experience() {
   const experiences = [
     {
-      role: "AI Research Intern",
-      company: "Techzone Academy for Training & Research",
+      role: "Artificial Intelligence Intern",
+      company: "TechZone Software Academy for Training & Research",
       location: "Hyderabad, India",
-      period: "March 2025 - July 2025",
-      duration: "5 months",
+      period: "March 2025 - June 2025",
+      duration: "4 months",
       type: "Internship",
-      icon: "🔬",
+      icon: "🤖",
       color: "from-blue-500 to-cyan-500",
       achievements: [
-        "Conducted applied research under the mentorship of senior AI researchers, focusing on educational technology applications",
-        "Developed AI-powered educational tools including an intelligent Doubt Tutor and adaptive PTE/GRE Mock Test applications",
-        "Applied Machine Learning and Natural Language Processing techniques to enhance user engagement and create adaptive learning experiences",
-        "Collaborated on integrating AI modules into existing digital education platforms, improving accessibility for 10K+ students",
-        "Implemented RAG-based question answering systems with contextual understanding for personalized learning paths"
+        "Architected and deployed 4 production-grade AI systems for a live ed-tech platform serving students and educators across Hyderabad",
+        "Engineered a RAG-powered AI tutoring system using LangChain and vector databases, delivering contextual real-time academic support",
+        "Designed and shipped an automated PTE mock-test engine with LLM-based scoring across reading, writing, and listening modules",
+        "Built an MCQ generation and attendance automation system, eliminating manual academic tracking across departments",
+        "Delivered all systems as production-ready FastAPI services with REST-based orchestration and continuous prompt optimization",
       ],
-      technologies: ["Python", "NLP", "Machine Learning", "LLMs", "RAG Systems", "FastAPI", "TensorFlow"],
+      technologies: ["Python", "FastAPI", "LangChain", "OpenAI API", "RAG", "Vector Databases", "Prompt Engineering"],
       highlights: [
-        { metric: "10K+", label: "Students Impacted" },
-        { metric: "3", label: "AI Tools Deployed" },
-        { metric: "40%", label: "Engagement Increase" }
-      ]
-    }
+        { metric: "4", label: "AI Systems Deployed" },
+        { metric: "3", label: "LLM Applications" },
+        { metric: "1", label: "RAG Pipeline Built" },
+      ],
+    },
+    {
+      role: "AI/ML Intern",
+      company: "RAM Innovative Infotech",
+      location: "Hyderabad, India",
+      period: "November 2024",
+      duration: "1 month",
+      type: "College Training Program",
+      icon: "🎓",
+      color: "from-purple-500 to-pink-500",
+      achievements: [
+        "Completed an intensive AI/ML training program organized in collaboration with Lords Institute CSE-AIML department",
+        "Developed a disease prediction ML model using Python and Scikit-learn, applying supervised learning classification on medical datasets",
+        "Gained hands-on exposure to Django for web-based AI integration and data preprocessing pipeline design",
+      ],
+      technologies: ["Python", "Scikit-learn", "Django", "Machine Learning", "Data Preprocessing"],
+      highlights: [
+        { metric: "1", label: "ML Model Built" },
+        { metric: "5", label: "Algorithms Explored" },
+        { metric: "1", label: "Web App Integrated" },
+      ],
+    },
   ];
 
   const containerVariants = {
@@ -34,9 +55,9 @@ export default function Experience() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
-      }
-    }
+        staggerChildren: 0.1,
+      },
+    },
   };
 
   const itemVariants = {
@@ -44,8 +65,8 @@ export default function Experience() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5 }
-    }
+      transition: { duration: 0.5 },
+    },
   };
 
   return (
@@ -65,7 +86,7 @@ export default function Experience() {
         <h2 className="text-5xl md:text-6xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 inline-block">
           Experience
         </h2>
-        <motion.div 
+        <motion.div
           className="h-1.5 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mx-auto"
           initial={{ width: 0 }}
           whileInView={{ width: "120px" }}
@@ -73,7 +94,7 @@ export default function Experience() {
           viewport={{ once: true }}
         />
         <p className="mt-4 text-gray-400 text-lg max-w-2xl mx-auto">
-          Building impactful AI solutions in educational technology
+          Building and shipping production AI systems
         </p>
       </motion.div>
 
@@ -104,28 +125,49 @@ export default function Experience() {
                 className="relative rounded-2xl p-8 bg-gradient-to-br from-white/[0.07] to-white/[0.03] backdrop-blur-xl border border-white/10 shadow-lg hover:shadow-2xl hover:border-white/20 transition-all duration-300 overflow-hidden"
               >
                 {/* Animated background gradient */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${exp.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${exp.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}
+                />
 
                 {/* Header Section */}
                 <div className="relative flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
                   <div className="flex items-start gap-4">
                     {/* Icon */}
-                    <div className={`text-4xl p-3 rounded-xl bg-gradient-to-br ${exp.color} bg-opacity-10 flex-shrink-0`}>
+                    <div
+                      className={`text-4xl p-3 rounded-xl bg-gradient-to-br ${exp.color} bg-opacity-10 flex-shrink-0`}
+                    >
                       {exp.icon}
                     </div>
-                    
+
                     {/* Title and Company */}
                     <div>
-                      <h3 className={`text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${exp.color} mb-1`}>
+                      <h3
+                        className={`text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${exp.color} mb-1`}
+                      >
                         {exp.role}
                       </h3>
                       <p className="text-lg text-gray-300 font-semibold mb-1">
                         {exp.company}
                       </p>
                       <p className="text-sm text-gray-400 flex items-center gap-2">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                          />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                          />
                         </svg>
                         {exp.location}
                       </p>
@@ -135,15 +177,27 @@ export default function Experience() {
                   {/* Period and Type */}
                   <div className="flex flex-col items-end gap-2">
                     <div className="flex items-center gap-2 text-sm text-gray-400">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                        />
                       </svg>
                       {exp.period}
                     </div>
                     <span className="text-xs px-3 py-1 rounded-full bg-white/5 text-gray-400 border border-white/10">
                       {exp.duration}
                     </span>
-                    <span className={`text-xs px-3 py-1 rounded-full bg-gradient-to-r ${exp.color} bg-opacity-10 text-transparent bg-clip-text font-semibold border border-white/10`}>
+                    <span
+                      className={`text-xs px-3 py-1 rounded-full bg-gradient-to-r ${exp.color} bg-opacity-10 text-transparent bg-clip-text font-semibold border border-white/10`}
+                    >
                       {exp.type}
                     </span>
                   </div>
@@ -164,7 +218,9 @@ export default function Experience() {
                         viewport={{ once: true }}
                         className="flex items-start gap-3 group/item"
                       >
-                        <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${exp.color} mt-2 flex-shrink-0 group-hover/item:scale-150 transition-transform`} />
+                        <div
+                          className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${exp.color} mt-2 flex-shrink-0 group-hover/item:scale-150 transition-transform`}
+                        />
                         <span className="text-gray-300 text-sm leading-relaxed group-hover/item:text-white transition-colors">
                           {achievement}
                         </span>
@@ -195,7 +251,9 @@ export default function Experience() {
                   <div className="grid grid-cols-3 gap-4">
                     {exp.highlights.map((highlight, hIdx) => (
                       <div key={hIdx} className="text-center">
-                        <div className={`text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${exp.color}`}>
+                        <div
+                          className={`text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${exp.color}`}
+                        >
                           {highlight.metric}
                         </div>
                         <div className="text-xs text-gray-400 mt-1">
@@ -207,7 +265,9 @@ export default function Experience() {
                 </div>
 
                 {/* Decorative corner element */}
-                <div className={`absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br ${exp.color} opacity-5 rounded-full blur-2xl group-hover:opacity-10 transition-opacity`} />
+                <div
+                  className={`absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br ${exp.color} opacity-5 rounded-full blur-2xl group-hover:opacity-10 transition-opacity`}
+                />
               </motion.div>
             </div>
           </motion.div>
@@ -221,8 +281,7 @@ export default function Experience() {
         transition={{ delay: 0.5, duration: 0.6 }}
         viewport={{ once: true }}
         className="mt-16 text-center"
-      >
-      </motion.div>
+      />
     </div>
   );
 }
