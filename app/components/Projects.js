@@ -11,18 +11,18 @@ export default function Projects() {
       title: "PulmoScan AI – Tuberculosis Detection System",
       desc: "An advanced deep-learning system for automated tuberculosis detection from chest X-rays, featuring real-time Grad-CAM heatmap visualizations and seamless deployment on HuggingFace Spaces.",
       category: "Medical AI",
-      tags: ["PyTorch", "FastAPI", "Docker", "HuggingFace", "Computer Vision", "CNN"],
+      tags: ["PyTorch", "FastAPI", "HuggingFace", "Computer Vision", "CNN", "Grad-CAM"],
       icon: "🫁",
       color: "from-blue-500 to-cyan-500",
-      details: "PulmoScan AI is a complete end-to-end diagnostic pipeline built for early and accurate TB screening. It uses a custom-trained CNN architecture (TBNet) to analyze chest X-rays, highlights infected regions through Grad-CAM heatmaps, and generates professional PDF diagnostic reports. The system features a FastAPI backend, optimized inference pipeline, Dockerized deployment, and an intuitive web interface hosted on HuggingFace Spaces.",
+      details: "PulmoScan AI is a complete end-to-end diagnostic pipeline built for early and accurate TB screening. It uses a custom-trained CNN architecture (TBNet) to analyze chest X-rays, highlights infected regions through Grad-CAM heatmaps, and generates professional PDF diagnostic reports. The system features a FastAPI backend, optimized inference pipeline, and an intuitive web interface hosted on HuggingFace Spaces.",
       github: "https://github.com/MOHD-OMER/PulmoScanAI",
       demo: "https://pulmoscanai-app.hf.space"
     },
     {
       title: "Doubt Tutor – AI Study Assistant",
-      desc: "A fully interactive, AI-powered study assistant that supports multiple AI models, allows uploading of files including PDFs, images, and documents, provides deep content understanding, generates summaries and explanations, and offers real-time doubt-solving with contextual memory, personalized learning paths, and multi-modal reasoning capabilities.",
+      desc: "A fully interactive, AI-powered study assistant supporting multiple AI models with PDF, image, and document uploads — offering real-time doubt-solving with contextual memory and multi-modal reasoning.",
       category: "AI Applications",
-      tags: ["Streamlit", "Groq API", "HuggingFace", "Qwen-VL", "Python"],
+      tags: ["Streamlit", "Groq API", "HuggingFace", "Qwen-VL", "LangChain", "Python"],
       icon: "🤖",
       color: "from-indigo-500 to-violet-500",
       details: "Built a fully functional AI tutor capable of analyzing images, PDFs, and text files using Llama 3, Qwen-VL (vision), and Groq models. Includes chat history export, file previews, secure secret handling, and custom UI components.",
@@ -36,7 +36,7 @@ export default function Projects() {
       tags: ["Gradio", "Groq API", "Google Gemini", "HuggingFace Spaces", "Python"],
       icon: "🎓",
       color: "from-blue-500 to-purple-600",
-      details: "Developed an advanced PTE Academic mock assessment system with Aptitude, Listening, and Reading modules. Features include automated question generation using Groq & Gemini models, strict time tracking, dynamic content validation, analytics-driven scoring, and a premium custom UI using modern CSS. Deployed on HuggingFace Spaces with organization-level domain setup, secure API handling, and modular code architecture.",
+      details: "Developed an advanced PTE Academic mock assessment system with Aptitude, Listening, and Reading modules. Features include automated question generation using Groq & Gemini models, strict time tracking, dynamic content validation, analytics-driven scoring, and a premium custom UI. Deployed on HuggingFace Spaces with secure API handling and modular code architecture.",
       github: "https://github.com/MOHD-OMER/PTEra",
       demo: "https://pteclub-Mock-app.hf.space/"
     },
@@ -60,8 +60,8 @@ export default function Projects() {
       demo: "https://truthlens-uqo4.onrender.com"
     },
     {
-      title: "Building Safety Smoke Detection ",
-      desc: "Major college project — dual-module intelligent fire and smoke detection system combining 7 ML classifiers on 62,630 IoT sensor readings (AUC-ROC > 0.999) with MobileNetV2 CNN (96.98% accuracy) and YOLOv8 bounding-box detection, all deployed as a Django web application.",
+      title: "Building Safety Smoke Detection",
+      desc: "Major college project — dual-module intelligent fire and smoke detection system combining 7 ML classifiers on 62,630 IoT sensor readings (AUC-ROC > 0.999) with MobileNetV2 CNN (96.98% accuracy) and YOLOv8 bounding-box detection, deployed as a Django web application.",
       category: "Machine Learning",
       tags: ["Django", "TensorFlow", "YOLOv8", "Scikit-Learn", "MobileNetV2", "OpenCV", "Railway"],
       icon: "🔥",
@@ -120,7 +120,7 @@ export default function Projects() {
           viewport={{ once: true }}
         />
         <p className="mt-4 text-gray-400 text-lg max-w-2xl mx-auto">
-          Production-ready AI solutions delivering real-world impact
+          AI systems built end-to-end and deployed to production
         </p>
       </motion.div>
 
@@ -189,7 +189,7 @@ export default function Projects() {
                 {project.desc}
               </p>
 
-              {/* ── TruthLens: Feature Highlights Grid (fills the empty space) ── */}
+              {/* TruthLens: Feature Highlights Grid */}
               {project.highlights && (
                 <div className="relative mb-4 grid grid-cols-2 gap-2">
                   {project.highlights.map((h, i) => (
@@ -207,15 +207,12 @@ export default function Projects() {
                 </div>
               )}
 
-              {/* Details - shows on hover (for non-highlights cards keep flex-grow) */}
               {!project.highlights && (
                 <div className="flex-grow" />
               )}
 
               {/* Details blockquote (hover reveal) */}
-              <motion.div
-                className="relative text-gray-400 text-xs italic mb-4 border-l-2 border-white/20 pl-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              >
+              <motion.div className="relative text-gray-400 text-xs italic mb-4 border-l-2 border-white/20 pl-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 {project.details}
               </motion.div>
 
@@ -292,9 +289,9 @@ export default function Projects() {
           <div className="w-px h-12 bg-white/10" />
           <div className="text-center">
             <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400">
-              100%
+              5
             </div>
-            <div className="text-sm text-gray-400 mt-1">Production Ready</div>
+            <div className="text-sm text-gray-400 mt-1">Live Demos</div>
           </div>
         </div>
       </motion.div>
