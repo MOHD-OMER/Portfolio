@@ -15,7 +15,7 @@ export default function Projects() {
       icon: "🤝",
       color: "from-violet-500 to-purple-600",
       details: "Agents are assigned distinct roles and collaborate through a shared task planning loop. Each agent uses tool-use to fetch live data, reason over it, and pass structured output to the next stage — resulting in a fully autonomous research-to-report pipeline.",
-      github: "https://github.com/MOHD-OMER/multi-agent-research",
+      github: "https://github.com/MOHD-OMER/multi-agent-researcher",
       demo: null,
     },
     {
