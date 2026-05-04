@@ -8,15 +8,60 @@ export default function Projects() {
 
   const projects = [
     {
+      title: "Multi-Agent Research System",
+      desc: "Autonomous multi-agent pipeline where specialised agents — researcher, analyst, writer — coordinate via CrewAI and Tavily to perform web research, synthesise findings, and generate structured reports with zero human intervention.",
+      category: "Agentic AI",
+      tags: ["CrewAI", "Tavily", "LangChain", "Groq", "Python"],
+      icon: "🤝",
+      color: "from-violet-500 to-purple-600",
+      details: "Agents are assigned distinct roles and collaborate through a shared task planning loop. Each agent uses tool-use to fetch live data, reason over it, and pass structured output to the next stage — resulting in a fully autonomous research-to-report pipeline.",
+      github: "https://github.com/MOHD-OMER/multi-agent-research",
+      demo: null,
+    },
+    {
+      title: "LLM Fine-tuning — Mistral-7B Medical QA",
+      desc: "QLoRA fine-tuning of Mistral-7B-Instruct-v0.2 on a medical Q&A dataset using PEFT. Trained on Kaggle T4 GPU with full environment compatibility handling. Model and Gradio demo fully deployed to HuggingFace Hub.",
+      category: "LLM Engineering",
+      tags: ["QLoRA", "PEFT", "Mistral-7B", "HuggingFace", "Gradio", "W&B", "PyTorch"],
+      icon: "🧬",
+      color: "from-pink-500 to-rose-600",
+      details: "Resolved real-world environment compatibility challenges across bitsandbytes, tokenizers, and transformers versioning. Training tracked with Weights & Biases. The fine-tuned adapter and base model are published to HuggingFace Hub with a live Gradio inference demo.",
+      github: "https://github.com/MOHD-OMER/llm-finetuning",
+      demo: "https://huggingface.co/spaces/mohdomer/mistral-medical-qa-demo",
+      model: "https://huggingface.co/mohdomer/mistral-7b-medical-qa-qlora",
+    },
+    {
+      title: "Multi-Document RAG Chatbot",
+      desc: "Production-grade RAG chatbot using a LangGraph ReAct agent with hybrid retrieval — ChromaDB vector search, BM25, and FlashRank re-ranking. Streaming SSE responses via FastAPI async backend with dual Streamlit and Gradio frontends.",
+      category: "Agentic AI",
+      tags: ["LangGraph", "FastAPI", "ChromaDB", "BM25", "FlashRank", "Groq", "HuggingFace"],
+      icon: "🗂️",
+      color: "from-cyan-500 to-blue-600",
+      details: "Solved key production challenges including async event loop conflicts in FastAPI, streaming SSE via LangGraph ReAct, and ChromaDB/BM25/FlashRank hybrid retrieval tuning. Powered by Groq's llama-3.1-8b-instant with HuggingFace embeddings.",
+      github: "https://github.com/MOHD-OMER/rag-agent",
+      demo: null,
+    },
+    {
+      title: "MLOps Pipeline with Drift Monitoring",
+      desc: "End-to-end MLOps pipeline integrating MLflow for experiment tracking and model registry, Weights & Biases for training visualisation, and Evidently AI for data drift and model performance monitoring.",
+      category: "MLOps",
+      tags: ["MLflow", "W&B", "Evidently AI", "Scikit-Learn", "Docker", "Python"],
+      icon: "⚙️",
+      color: "from-emerald-500 to-teal-600",
+      details: "Structured as a reproducible, production-mimicking workflow with modular stages for data ingestion, training, evaluation, and monitoring. Evidently AI generates drift reports automatically on new data batches, with all runs logged and versioned in MLflow.",
+      github: "https://github.com/MOHD-OMER/mlops-pipeline",
+      demo: null,
+    },
+    {
       title: "PulmoScan AI – Tuberculosis Detection System",
       desc: "An advanced deep-learning system for automated tuberculosis detection from chest X-rays, featuring real-time Grad-CAM heatmap visualizations and seamless deployment on HuggingFace Spaces.",
       category: "Medical AI",
       tags: ["PyTorch", "FastAPI", "HuggingFace", "Computer Vision", "CNN", "Grad-CAM"],
       icon: "🫁",
       color: "from-blue-500 to-cyan-500",
-      details: "PulmoScan AI is a complete end-to-end diagnostic pipeline built for early and accurate TB screening. It uses a custom-trained CNN architecture (TBNet) to analyze chest X-rays, highlights infected regions through Grad-CAM heatmaps, and generates professional PDF diagnostic reports. The system features a FastAPI backend, optimized inference pipeline, and an intuitive web interface hosted on HuggingFace Spaces.",
+      details: "PulmoScan AI is a complete end-to-end diagnostic pipeline built for early and accurate TB screening. It uses a custom-trained CNN architecture (TBNet) to analyse chest X-rays, highlights infected regions through Grad-CAM heatmaps, and generates professional PDF diagnostic reports. The system features a FastAPI backend, optimized inference pipeline, and an intuitive web interface hosted on HuggingFace Spaces.",
       github: "https://github.com/MOHD-OMER/PulmoScanAI",
-      demo: "https://pulmoscanai-app.hf.space"
+      demo: "https://pulmoscanai-app.hf.space",
     },
     {
       title: "Doubt Tutor – AI Study Assistant",
@@ -25,24 +70,24 @@ export default function Projects() {
       tags: ["Streamlit", "Groq API", "HuggingFace", "Qwen-VL", "LangChain", "Python"],
       icon: "🤖",
       color: "from-indigo-500 to-violet-500",
-      details: "Built a fully functional AI tutor capable of analyzing images, PDFs, and text files using Llama 3, Qwen-VL (vision), and Groq models. Includes chat history export, file previews, secure secret handling, and custom UI components.",
+      details: "Built a fully functional AI tutor capable of analysing images, PDFs, and text files using Llama 3, Qwen-VL (vision), and Groq models. Includes chat history export, file previews, secure secret handling, and custom UI components.",
       github: "https://github.com/MOHD-OMER/doubt-tutor",
-      demo: "https://doubt-tutor-app.streamlit.app/"
+      demo: "https://doubt-tutor-app.streamlit.app/",
     },
     {
       title: "PTEra – AI-Powered PTE Mock Assessment",
-      desc: "A full-scale PTE mock test platform with adaptive difficulty, real-time scoring, section timers, and professional exam-style UI.",
+      desc: "A full-scale PTE mock test platform with adaptive difficulty, real-time scoring, section timers, and professional exam-style UI — powered by Groq and Gemini models.",
       category: "AI Applications",
       tags: ["Gradio", "Groq API", "Google Gemini", "HuggingFace Spaces", "Python"],
       icon: "🎓",
       color: "from-blue-500 to-purple-600",
       details: "Developed an advanced PTE Academic mock assessment system with Aptitude, Listening, and Reading modules. Features include automated question generation using Groq & Gemini models, strict time tracking, dynamic content validation, analytics-driven scoring, and a premium custom UI. Deployed on HuggingFace Spaces with secure API handling and modular code architecture.",
       github: "https://github.com/MOHD-OMER/PTEra",
-      demo: "https://pteclub-Mock-app.hf.space/"
+      demo: "https://pteclub-Mock-app.hf.space/",
     },
     {
       title: "TruthLens — Fake News Detector",
-      desc: "Dual-AI system combining CNN-LSTM deep learning with Gemini API to detect fake news with 94.2% accuracy.",
+      desc: "Dual-AI system combining CNN-LSTM deep learning with Gemini API to detect fake news with 94.2% accuracy across 40,000+ articles.",
       category: "Machine Learning",
       tags: ["CNN-LSTM", "Flask", "Gemini AI", "SQLite", "REST API"],
       icon: "🔍",
@@ -57,22 +102,22 @@ export default function Projects() {
         { icon: "📈", label: "94.2% Accuracy", sub: "40,000+ article dataset" },
       ],
       github: "https://github.com/MOHD-OMER/TruthLens",
-      demo: "https://truthlens-uqo4.onrender.com"
+      demo: "https://truthlens-uqo4.onrender.com",
     },
     {
       title: "Building Safety Smoke Detection",
-      desc: "Major college project — dual-module intelligent fire and smoke detection system combining 7 ML classifiers on 62,630 IoT sensor readings (AUC-ROC > 0.999) with MobileNetV2 CNN (96.98% accuracy) and YOLOv8 bounding-box detection, deployed as a Django web application.",
+      desc: "Dual-module intelligent fire and smoke detection system combining 7 ML classifiers on 62,630 IoT sensor readings (AUC-ROC > 0.999) with MobileNetV2 CNN (96.98% accuracy) and YOLOv8 real-time detection.",
       category: "Machine Learning",
       tags: ["Django", "TensorFlow", "YOLOv8", "Scikit-Learn", "MobileNetV2", "OpenCV", "Railway"],
       icon: "🔥",
       color: "from-orange-500 to-red-600",
-      details: "B.E. Major Project at Lords Institute of Engineering & Technology, Hyderabad. Trains 7 classifiers (Random Forest, SVM, Gradient Boosting, AdaBoost, Logistic Regression, Decision Tree, KNN) on real IoT sensor data. MobileNetV2 CNN fine-tuned via transfer learning achieves 96.98% validation accuracy. YOLOv8 draws real-time bounding boxes around fire and smoke regions on uploaded images. Full-stack Django app with role-based user management, live ML training, sensor prediction, and CNN+YOLO inference — deployed on Railway.",
+      details: "B.E. Major Project at Lords Institute of Engineering & Technology. Trains 7 classifiers on real IoT sensor data. MobileNetV2 fine-tuned via transfer learning achieves 96.98% validation accuracy. YOLOv8 draws real-time bounding boxes on uploaded images. Full-stack Django app with role-based user management, live ML training, sensor prediction, and CNN+YOLO inference — deployed on Railway.",
       github: "https://github.com/MOHD-OMER/Building-Safety-Smoke-Detection",
-      demo: "https://building-safety-smoke-detection-production.up.railway.app"
+      demo: "https://building-safety-smoke-detection-production.up.railway.app",
     },
   ];
 
-  const categories = ["All", "Medical AI", "AI Applications", "Machine Learning"];
+  const categories = ["All", "Agentic AI", "LLM Engineering", "MLOps", "Medical AI", "AI Applications", "Machine Learning"];
 
   const filteredProjects = activeFilter === "All"
     ? projects
@@ -94,6 +139,8 @@ export default function Projects() {
       transition: { duration: 0.5 }
     }
   };
+
+  const liveCount = projects.filter(p => p.demo).length;
 
   return (
     <div className="relative">
@@ -228,8 +275,8 @@ export default function Projects() {
                 ))}
               </div>
 
-              {/* GitHub & Demo Buttons */}
-              <div className="relative mt-auto flex items-center gap-4">
+              {/* Buttons */}
+              <div className="relative mt-auto flex items-center gap-4 flex-wrap">
                 <motion.a
                   href={project.github}
                   target="_blank"
@@ -243,18 +290,32 @@ export default function Projects() {
                   GitHub
                 </motion.a>
 
-                <motion.a
-                  href={project.demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ x: 5 }}
-                  className={`inline-flex items-center gap-2 text-sm font-semibold text-transparent bg-clip-text bg-gradient-to-r ${project.color}`}
-                >
-                  Live Demo
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </motion.a>
+                {project.demo && (
+                  <motion.a
+                    href={project.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ x: 5 }}
+                    className={`inline-flex items-center gap-2 text-sm font-semibold text-transparent bg-clip-text bg-gradient-to-r ${project.color}`}
+                  >
+                    Live Demo
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </motion.a>
+                )}
+
+                {project.model && (
+                  <motion.a
+                    href={project.model}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ x: 5 }}
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-yellow-400 hover:text-yellow-300 transition-all"
+                  >
+                    🤗 Model
+                  </motion.a>
+                )}
               </div>
 
               {/* Decorative corner element */}
@@ -289,7 +350,7 @@ export default function Projects() {
           <div className="w-px h-12 bg-white/10" />
           <div className="text-center">
             <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400">
-              5
+              {liveCount}
             </div>
             <div className="text-sm text-gray-400 mt-1">Live Demos</div>
           </div>
