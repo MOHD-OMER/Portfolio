@@ -2,51 +2,60 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
+// Static — defined outside component to avoid stale closure in useEffect
+const navItems = [
+  { id: "home",       label: "Home",       number: "00_" },
+  { id: "about",      label: "About",      number: "01_" },
+  { id: "skills",     label: "Skills",     number: "02_" },
+  { id: "projects",   label: "Projects",   number: "03_" },
+  { id: "experience", label: "Experience", number: "04_" },
+  { id: "contact",    label: "Contact",    number: "05_" }, // was 06_ — fixed
+];
+
 export default function NavBar() {
   const [activeSection, setActiveSection] = useState("home");
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolled, setScrolled]           = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const navItems = [
-    { id: "home", label: "Home", number: "00_" },
-    { id: "about", label: "About", number: "01_" },
-    { id: "skills", label: "Skills", number: "02_" },
-    { id: "projects", label: "Projects", number: "03_" },
-    { id: "experience", label: "Experience", number: "04_" },
-    { id: "contact", label: "Contact", number: "06_" },
-  ];
-
+  // Scroll tracking + active section detection
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
 
       const scrollPosition = window.scrollY + 200;
-
       navItems.forEach((item) => {
         const section = document.getElementById(item.id);
-        if (section) {
-          if (scrollPosition >= section.offsetTop) {
-            setActiveSection(item.id);
-          }
+        if (section && scrollPosition >= section.offsetTop) {
+          setActiveSection(item.id);
         }
       });
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []); // navItems is module-level, no closure risk
+
+  // Close mobile menu when viewport widens past md breakpoint
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) setMobileMenuOpen(false);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled 
-          ? "backdrop-blur-xl bg-gray-900/80 shadow-[0_8px_32px_rgba(0,0,0,0.4)] border-b border-gray-800/50" 
+        scrolled
+          ? "backdrop-blur-xl bg-gray-900/80 shadow-[0_8px_32px_rgba(0,0,0,0.4)] border-b border-gray-800/50"
           : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between py-4 sm:py-5">
-          {/* Logo with Icon */}
+
+          {/* Logo — personalised: "M." in blue + "Omer" in white-to-purple */}
           <motion.a
             href="#home"
             className="flex items-center gap-2 group"
@@ -54,17 +63,17 @@ export default function NavBar() {
             whileTap={{ scale: 0.95 }}
           >
             <div className="relative">
-              <svg 
-                className="w-7 h-7 sm:w-8 sm:h-8 text-blue-400 group-hover:text-blue-300 transition-colors duration-300" 
-                viewBox="0 0 24 24" 
-                fill="none" 
+              <svg
+                className="w-7 h-7 sm:w-8 sm:h-8 text-blue-400 group-hover:text-blue-300 transition-colors duration-300"
+                viewBox="0 0 24 24"
+                fill="none"
                 stroke="currentColor"
               >
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth={2} 
-                  d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" 
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"
                 />
               </svg>
               <motion.div
@@ -73,14 +82,17 @@ export default function NavBar() {
                 transition={{ duration: 2, repeat: Infinity }}
               />
             </div>
-            <span className="text-lg sm:text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              Portfolio
+            <span className="text-lg sm:text-xl font-bold tracking-tight">
+              <span className="text-blue-400">M.</span>
+              <span className="bg-gradient-to-r from-white to-purple-300 bg-clip-text text-transparent">
+                Omer
+              </span>
             </span>
           </motion.a>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1 lg:gap-2">
-            {navItems.map((item, index) => (
+            {navItems.map((item) => (
               <motion.a
                 key={item.id}
                 href={`#${item.id}`}
@@ -98,8 +110,7 @@ export default function NavBar() {
                   <span className="text-blue-400 text-xs mr-1">{item.number}</span>
                   {item.label}
                 </div>
-                
-                {/* Active indicator */}
+
                 {activeSection === item.id && (
                   <motion.div
                     layoutId="activeSection"
@@ -113,33 +124,23 @@ export default function NavBar() {
 
           {/* Mobile Menu Toggle */}
           <motion.button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            onClick={() => setMobileMenuOpen((prev) => !prev)}
             className="md:hidden p-2 rounded-lg bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 hover:bg-gray-700/50 hover:border-blue-500/50 transition-all duration-300"
             whileTap={{ scale: 0.95 }}
+            aria-label="Toggle navigation menu"
+            aria-expanded={mobileMenuOpen}
           >
             <div className="space-y-1.5 w-5 h-5 flex flex-col justify-center">
               <motion.span
-                animate={
-                  mobileMenuOpen
-                    ? { rotate: 45, y: 6 }
-                    : { rotate: 0, y: 0 }
-                }
+                animate={mobileMenuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
                 className="block w-full h-0.5 bg-blue-400 rounded-full"
               />
               <motion.span
-                animate={
-                  mobileMenuOpen
-                    ? { opacity: 0, x: -10 }
-                    : { opacity: 1, x: 0 }
-                }
+                animate={mobileMenuOpen ? { opacity: 0, x: -10 } : { opacity: 1, x: 0 }}
                 className="block w-full h-0.5 bg-blue-400 rounded-full"
               />
               <motion.span
-                animate={
-                  mobileMenuOpen
-                    ? { rotate: -45, y: -6 }
-                    : { rotate: 0, y: 0 }
-                }
+                animate={mobileMenuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
                 className="block w-full h-0.5 bg-blue-400 rounded-full"
               />
             </div>
@@ -178,7 +179,7 @@ export default function NavBar() {
               >
                 <span className="text-blue-400 text-xs mr-2">{item.number}</span>
                 {item.label}
-                
+
                 {activeSection === item.id && (
                   <motion.div
                     className="absolute right-3 top-1/2 -translate-y-1/2 w-2 h-2 bg-blue-400 rounded-full"
