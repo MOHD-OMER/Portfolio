@@ -105,6 +105,14 @@ export default function Projects() {
       icon: "🔍",
       color: "from-yellow-400 to-red-500",
       details: "Trained on 40,000+ news articles. Features real-time predictions, analytics dashboard, prediction history, and dual-model verification using both a custom neural network and Gemini AI.",
+      highlights: [
+        { icon: "🧠", label: "CNN-LSTM Hybrid",      sub: "Custom NLP architecture" },
+        { icon: "📊", label: "Analytics Dashboard",  sub: "Chart.js real-time stats" },
+        { icon: "🔌", label: "REST API",              sub: "POST /api/predict" },
+        { icon: "🔐", label: "Admin Auth",            sub: "Session-based login" },
+        { icon: "🗄️", label: "SQLite + ORM",         sub: "Persistent prediction logs" },
+        { icon: "📈", label: "94.2% Accuracy",        sub: "40,000+ article dataset" },
+      ],
       github: "https://github.com/MOHD-OMER/TruthLens",
       demo: "https://truthlens-uqo4.onrender.com",
     },
@@ -205,9 +213,9 @@ export default function Projects() {
             variants={itemVariants}
             layout
             whileHover={{ y: -8, transition: { duration: 0.3 } }}
-            className="relative group"
+            className="relative group h-full"
           >
-            <div className="relative rounded-2xl p-6 bg-gradient-to-br from-white/[0.07] to-white/[0.03] backdrop-blur-xl border border-white/10 shadow-lg hover:shadow-2xl hover:border-white/20 transition-all duration-300 overflow-hidden flex flex-col">
+            <div className="relative h-full rounded-2xl p-6 bg-gradient-to-br from-white/[0.07] to-white/[0.03] backdrop-blur-xl border border-white/10 shadow-lg hover:shadow-2xl hover:border-white/20 transition-all duration-300 overflow-hidden flex flex-col">
 
               {/* Hover glow */}
               <div
@@ -274,7 +282,7 @@ export default function Projects() {
               </div>
 
               {/* Action buttons */}
-              <div className="relative mt-4 flex items-center gap-4 flex-wrap">
+              <div className="relative mt-auto pt-4 flex items-center gap-4 flex-wrap">
                 <motion.a
                   href={project.github}
                   target="_blank"
