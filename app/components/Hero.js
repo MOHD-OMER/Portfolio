@@ -374,8 +374,9 @@ export default function Hero() {
             variants={itemVariants}
             className="mt-6 sm:mt-8 md:mt-10 text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 max-w-2xl px-4 font-light tracking-wide"
           >
-            Building production AI systems — from fine-tuned LLMs and RAG pipelines to MLOps
-            workflows — and shipping them end-to-end.
+            I design and deploy production-grade AI systems — fine-tuned models, agentic
+            pipelines, and end-to-end ML workflows — engineered to solve real problems at every
+            layer of the stack.
           </motion.p>
 
           {/* Social Links */}
