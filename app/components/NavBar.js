@@ -19,7 +19,7 @@ export default function NavBar() {
 
   // FIX: Smooth scroll + close menu; prevents URL hash jump
   const scrollToSection = useCallback(
-    (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    (e, id) => {
       e.preventDefault();
       document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
       setMobileMenuOpen(false);
