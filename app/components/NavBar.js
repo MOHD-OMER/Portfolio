@@ -83,7 +83,7 @@ export default function NavBar() {
           >
             <div className="relative flex items-center justify-center w-8 h-8 shrink-0">
               <svg
-                className="w-7 h-7 text-cyan-400 transition-colors duration-300 group-hover:text-cyan-300"
+                className="w-7 h-7 text-blue-400 transition-colors duration-300 group-hover:text-blue-300"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -96,11 +96,11 @@ export default function NavBar() {
                 <path d="M9 9h6v6H9V9z" />
               </svg>
               {/* Soft ambient glow on hover */}
-              <span className="absolute inset-0 rounded-full bg-cyan-400/15 blur-md scale-150 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              <span className="absolute inset-0 rounded-full bg-blue-400/15 blur-md scale-150 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
             </div>
 
             <span className="text-lg font-bold tracking-tight leading-none">
-              <span className="text-cyan-400 font-mono">M.A </span>
+              <span className="text-blue-400 font-mono">M.A </span>
               <span className="bg-gradient-to-br from-gray-100 to-gray-400 bg-clip-text text-transparent">
                 Omer
               </span>
@@ -131,7 +131,7 @@ export default function NavBar() {
                   {isActive && (
                     <motion.span
                       layoutId="nav-pill"
-                      className="absolute inset-0 rounded-lg bg-cyan-500/10 border border-cyan-500/25"
+                      className="absolute inset-0 rounded-lg bg-blue-500/10 border border-blue-500/25"
                       transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
                       // Must be below text in z-order
                       style={{ zIndex: 0 }}
@@ -142,7 +142,7 @@ export default function NavBar() {
                     <span
                       className={`text-[10px] font-mono tabular-nums transition-colors duration-200 ${
                         isActive
-                          ? "text-cyan-400"
+                          ? "text-blue-400"
                           : "text-gray-600 group-hover:text-gray-400"
                       }`}
                     >
@@ -170,7 +170,7 @@ export default function NavBar() {
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden md:flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-medium text-cyan-400 border border-cyan-500/35 hover:bg-cyan-500/10 hover:border-cyan-500/60 transition-all duration-200"
+              className="hidden md:flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-medium text-blue-400 border border-blue-500/35 hover:bg-blue-500/10 hover:border-blue-500/60 transition-all duration-200"
             >
               Resume
               <svg
@@ -197,7 +197,7 @@ export default function NavBar() {
              */}
             <motion.button
               onClick={() => setMobileMenuOpen((prev) => !prev)}
-              className="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[5px] rounded-lg bg-gray-800/60 border border-gray-700/50 hover:border-cyan-500/40 hover:bg-gray-800/80 transition-all duration-200"
+              className="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[5px] rounded-lg bg-gray-800/60 border border-gray-700/50 hover:border-blue-500/40 hover:bg-gray-800/80 transition-all duration-200"
               whileTap={{ scale: 0.93 }}
               aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
               aria-expanded={mobileMenuOpen}
@@ -260,13 +260,13 @@ export default function NavBar() {
                     transition={{ delay: i * 0.04, duration: 0.18 }}
                     className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors duration-200 ${
                       isActive
-                        ? "text-white bg-cyan-500/10 border border-cyan-500/25"
+                        ? "text-white bg-blue-500/10 border border-blue-500/25"
                         : "text-gray-400 hover:text-white hover:bg-gray-800/60 border border-transparent"
                     }`}
                   >
                     <span
                       className={`text-[10px] font-mono tabular-nums ${
-                        isActive ? "text-cyan-400" : "text-gray-600"
+                        isActive ? "text-blue-400" : "text-gray-600"
                       }`}
                     >
                       {item.number}_
@@ -275,7 +275,7 @@ export default function NavBar() {
 
                     {isActive && (
                       <motion.span
-                        className="ml-auto w-1.5 h-1.5 rounded-full bg-cyan-400"
+                        className="ml-auto w-1.5 h-1.5 rounded-full bg-blue-400"
                         animate={{ opacity: [1, 0.35, 1] }}
                         transition={{ duration: 2, repeat: Infinity }}
                       />
@@ -290,7 +290,7 @@ export default function NavBar() {
                   href="/resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-medium text-cyan-400 border border-cyan-500/30 hover:bg-cyan-500/10 transition-all duration-200"
+                  className="flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-medium text-blue-400 border border-blue-500/30 hover:bg-blue-500/10 transition-all duration-200"
                 >
                   Download Resume
                   <svg
