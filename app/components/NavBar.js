@@ -83,7 +83,7 @@ export default function NavBar() {
               />
             </div>
             <span className="text-lg sm:text-xl font-bold tracking-tight">
-              <span className="text-blue-400">M.</span>
+              <span className="text-blue-400">M.A</span>
               <span className="bg-gradient-to-r from-white to-purple-300 bg-clip-text text-transparent">
                 Omer
               </span>
