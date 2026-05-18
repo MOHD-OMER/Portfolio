@@ -28,7 +28,7 @@ export default function Projects() {
       color: "from-violet-500 to-purple-600",
       details: "Agents are assigned distinct roles and collaborate through a shared task planning loop. Each agent uses tool-use to fetch live data, reason over it, and pass structured output to the next stage — resulting in a fully autonomous research-to-report pipeline.",
       github: "https://github.com/MOHD-OMER/multi-agent-researcher",
-      demo: null,
+      demo: "https://huggingface.co/spaces/mohdomer/nexus-research",
     },
     {
       title: "LLM Fine-tuning — Mistral-7B Medical QA",
@@ -158,10 +158,10 @@ export default function Projects() {
   };
 
   const stats = [
-    { value: projects.length,          label: "Projects",   gradient: "from-blue-400 to-cyan-400" },
-    { value: categories.length - 1,    label: "Categories", gradient: "from-purple-400 to-pink-400" },
-    { value: liveCount,                label: "Live Demos", gradient: "from-green-400 to-emerald-400" },
-    { value: 1,                        label: "Published Model", gradient: "from-orange-400 to-amber-400" },
+    { value: projects.length,       label: "Projects",        gradient: "from-blue-400 to-cyan-400" },
+    { value: categories.length - 1, label: "Categories",      gradient: "from-purple-400 to-pink-400" },
+    { value: liveCount,             label: "Live Demos",      gradient: "from-green-400 to-emerald-400" },
+    { value: 1,                     label: "Published Model", gradient: "from-orange-400 to-amber-400" },
   ];
 
   return (
@@ -262,11 +262,11 @@ export default function Projects() {
                 </div>
               )}
 
-              {!project.highlights && <div className="flex-grow" />}
-
-              {/* Details — revealed on hover */}
-              <div className="relative text-gray-400 text-xs italic mb-4 border-l-2 border-white/20 pl-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                {project.details}
+              {/* Details — takes zero height when hidden, expands on hover */}
+              <div className="relative overflow-hidden max-h-0 group-hover:max-h-40 mb-0 group-hover:mb-4 transition-all duration-500 ease-in-out">
+                <p className="text-gray-400 text-xs italic border-l-2 border-white/20 pl-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
+                  {project.details}
+                </p>
               </div>
 
               {/* Tech tags */}
