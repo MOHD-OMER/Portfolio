@@ -213,9 +213,9 @@ export default function Projects() {
             variants={itemVariants}
             layout
             whileHover={{ y: -8, transition: { duration: 0.3 } }}
-            className="relative group h-full"
+            className="relative group"
           >
-            <div className="relative h-full rounded-2xl p-6 bg-gradient-to-br from-white/[0.07] to-white/[0.03] backdrop-blur-xl border border-white/10 shadow-lg hover:shadow-2xl hover:border-white/20 transition-all duration-300 overflow-hidden flex flex-col">
+            <div className="relative rounded-2xl p-6 bg-gradient-to-br from-white/[0.07] to-white/[0.03] backdrop-blur-xl border border-white/10 shadow-lg hover:shadow-2xl hover:border-white/20 transition-all duration-300 overflow-hidden flex flex-col">
 
               {/* Hover glow */}
               <div
@@ -262,9 +262,9 @@ export default function Projects() {
                 </div>
               )}
 
-              {/* Details — takes zero height when hidden, expands on hover */}
-              <div className="relative overflow-hidden max-h-0 group-hover:max-h-40 mb-0 group-hover:mb-4 transition-all duration-500 ease-in-out">
-                <p className="text-gray-400 text-xs italic border-l-2 border-white/20 pl-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
+              {/* Details — display:none when not hovered (truly zero height, no layout gap) */}
+              <div className="hidden group-hover:block mb-4">
+                <p className="text-gray-400 text-xs italic border-l-2 border-white/20 pl-3 leading-relaxed">
                   {project.details}
                 </p>
               </div>
@@ -282,7 +282,7 @@ export default function Projects() {
               </div>
 
               {/* Action buttons */}
-              <div className="relative mt-auto flex items-center gap-4 flex-wrap">
+              <div className="relative mt-4 flex items-center gap-4 flex-wrap">
                 <motion.a
                   href={project.github}
                   target="_blank"
