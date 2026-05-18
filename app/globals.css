@@ -11,38 +11,41 @@
   --bg: #07090c;
   --dark-surface: #0f1720;
   --card: rgba(17, 24, 39, 0.85);
-  
+
   /* Accent palette */
   --accent: #00c2ff;
   --accent-light: #5dd9ff;
   --accent-dark: #0099cc;
   --accent-secondary: #60a5fa;
   --accent-rgb: 0, 194, 255;
-  
+
   /* Text hierarchy */
   --text: #e6eef6;
   --text-secondary: #b8c5d3;
   --text-dim: #8b95a1;
   --text-muted: #687280;
-  
+
   /* UI elements */
   --border: rgba(255, 255, 255, 0.04);
   --border-hover: rgba(0, 194, 255, 0.2);
   --glow: rgba(0, 194, 255, 0.15);
   --shadow: rgba(0, 0, 0, 0.5);
-  
+
   /* Gradients */
   --gradient-primary: linear-gradient(135deg, var(--accent), var(--accent-secondary));
   --gradient-glow: radial-gradient(circle, rgba(0, 194, 255, 0.1) 0%, transparent 70%);
   --gradient-mesh: radial-gradient(at 20% 30%, rgba(0, 194, 255, 0.08) 0%, transparent 50%),
                    radial-gradient(at 80% 70%, rgba(96, 165, 250, 0.06) 0%, transparent 50%),
                    radial-gradient(at 40% 80%, rgba(0, 194, 255, 0.04) 0%, transparent 50%);
+
+  /* Font — set by next/font in layout.js, fallback chain for safety */
+  --font-inter: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
 }
 
 /* ============================================
    Base Styles & Reset
    ============================================ */
-* {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -62,14 +65,20 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  /*
+    Uses the CSS variable injected by next/font/google in layout.js.
+    Falls back to the full stack if the variable isn't present (e.g. in tests).
+    Previously hardcoded 'Inter' string — caused a duplicate font load from
+    Google CDN alongside the next/font optimised version.
+  */
+  font-family: var(--font-inter);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
-/* Enhanced animated background with layered gradients */
+/* Animated mesh gradient — adds depth behind all sections */
 body::before {
   content: '';
   position: fixed;
@@ -85,7 +94,7 @@ body::before {
 
 @keyframes meshMove {
   0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(1.05); }
+  50%       { opacity: 0.8; transform: scale(1.05); }
 }
 
 /* Noise texture overlay for depth */
@@ -127,8 +136,8 @@ body::after {
    Glass Morphism Effects
    ============================================ */
 .glass {
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.05) 0%, 
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.05) 0%,
     rgba(255, 255, 255, 0.02) 100%);
   border: 1px solid var(--border);
   backdrop-filter: blur(16px) saturate(180%);
@@ -149,13 +158,11 @@ body::after {
   transition: left 0.6s ease;
 }
 
-.glass:hover::before {
-  left: 100%;
-}
+.glass:hover::before { left: 100%; }
 
 .glass:hover {
   border-color: var(--border-hover);
-  box-shadow: 
+  box-shadow:
     0 8px 32px rgba(0, 194, 255, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
   transform: translateY(-2px);
@@ -166,14 +173,14 @@ body::after {
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(96, 165, 250, 0.2);
-  box-shadow: 
+  box-shadow:
     0 10px 40px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .glass-accent {
-  background: linear-gradient(135deg, 
-    rgba(0, 194, 255, 0.08) 0%, 
+  background: linear-gradient(135deg,
+    rgba(0, 194, 255, 0.08) 0%,
     rgba(96, 165, 250, 0.05) 100%);
   border: 1px solid rgba(0, 194, 255, 0.2);
   backdrop-filter: blur(16px);
@@ -193,7 +200,7 @@ body::after {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
-  box-shadow: 
+  box-shadow:
     0 4px 15px rgba(0, 194, 255, 0.25),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
   text-decoration: none;
@@ -213,13 +220,11 @@ body::after {
   transition: left 0.6s ease;
 }
 
-.btn-accent:hover::before {
-  left: 100%;
-}
+.btn-accent:hover::before { left: 100%; }
 
 .btn-accent:hover {
   transform: translateY(-3px);
-  box-shadow: 
+  box-shadow:
     0 8px 25px rgba(0, 194, 255, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
@@ -259,16 +264,13 @@ body::after {
   transition: width 0.5s ease, height 0.5s ease;
 }
 
-.btn-outline:hover::before {
-  width: 400px;
-  height: 400px;
-}
+.btn-outline:hover::before { width: 400px; height: 400px; }
 
 .btn-outline:hover {
   border-color: var(--accent);
   color: var(--text);
   background: rgba(0, 194, 255, 0.08);
-  box-shadow: 
+  box-shadow:
     0 0 25px rgba(0, 194, 255, 0.3),
     inset 0 0 20px rgba(0, 194, 255, 0.1);
   transform: translateY(-2px);
@@ -329,26 +331,16 @@ body::after {
   border-radius: 2px;
 }
 
-.nav-link:hover::before {
-  opacity: 1;
-}
-
-.nav-link:hover {
-  color: var(--accent);
-}
-
-.nav-link:hover::after {
-  width: 70%;
-}
+.nav-link:hover::before { opacity: 1; }
+.nav-link:hover         { color: var(--accent); }
+.nav-link:hover::after  { width: 70%; }
 
 .nav-link.active {
   color: var(--accent);
   background: rgba(0, 194, 255, 0.08);
 }
 
-.nav-link.active::after {
-  width: 70%;
-}
+.nav-link.active::after { width: 70%; }
 
 /* ============================================
    Section Components
@@ -426,14 +418,12 @@ body::after {
   transition: opacity 0.3s ease;
 }
 
-.card:hover::before {
-  opacity: 1;
-}
+.card:hover::before { opacity: 1; }
 
 .card:hover {
   transform: translateY(-6px) scale(1.01);
   border-color: rgba(0, 194, 255, 0.3);
-  box-shadow: 
+  box-shadow:
     0 20px 60px rgba(0, 194, 255, 0.15),
     0 0 0 1px rgba(0, 194, 255, 0.1) inset;
 }
@@ -448,114 +438,54 @@ body::after {
 }
 
 /* ============================================
-   Advanced Animations
+   Animations
    ============================================ */
 @keyframes expandWidth {
-  from {
-    width: 0;
-    opacity: 0;
-  }
-  to {
-    width: 80px;
-    opacity: 1;
-  }
+  from { width: 0; opacity: 0; }
+  to   { width: 80px; opacity: 1; }
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
 @keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(0, 194, 255, 0.2);
-  }
-  50% {
-    box-shadow: 0 0 35px rgba(0, 194, 255, 0.4);
-  }
+  0%, 100% { box-shadow: 0 0 20px rgba(0, 194, 255, 0.2); }
+  50%       { box-shadow: 0 0 35px rgba(0, 194, 255, 0.4); }
 }
 
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
 }
 
 @keyframes shimmer {
-  0% {
-    background-position: -1000px 0;
-  }
-  100% {
-    background-position: 1000px 0;
-  }
+  0%   { background-position: -1000px 0; }
+  100% { background-position:  1000px 0; }
 }
 
-/* Animation utility classes */
-.animate-fade-in {
-  animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.animate-slide-in-left {
-  animation: slideInLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.animate-slide-in-right {
-  animation: slideInRight 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.animate-scale-in {
-  animation: scaleIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
-}
+.animate-fade-in       { animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+.animate-slide-in-left { animation: slideInLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+.animate-slide-in-right{ animation: slideInRight 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+.animate-scale-in      { animation: scaleIn 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+.animate-float         { animation: float 3s ease-in-out infinite; }
+.animate-pulse-glow    { animation: pulse-glow 2s ease-in-out infinite; }
 
 /* ============================================
    Text Styles
@@ -567,31 +497,16 @@ body::after {
   background-clip: text;
 }
 
-.text-glow {
-  text-shadow: 0 0 20px rgba(0, 194, 255, 0.5);
-}
+.text-glow { text-shadow: 0 0 20px rgba(0, 194, 255, 0.5); }
 
 /* ============================================
    Selection & Scrollbar
    ============================================ */
-::selection {
-  background: var(--accent);
-  color: #031025;
-}
+::selection      { background: var(--accent); color: #031025; }
+::-moz-selection { background: var(--accent); color: #031025; }
 
-::-moz-selection {
-  background: var(--accent);
-  color: #031025;
-}
-
-::-webkit-scrollbar {
-  width: 12px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--dark-surface);
-  border-left: 1px solid var(--border);
-}
+::-webkit-scrollbar       { width: 12px; }
+::-webkit-scrollbar-track { background: var(--dark-surface); border-left: 1px solid var(--border); }
 
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, var(--accent), var(--accent-secondary));
@@ -613,9 +528,7 @@ body::after {
 }
 
 button:focus-visible,
-a:focus-visible {
-  outline-offset: 4px;
-}
+a:focus-visible { outline-offset: 4px; }
 
 /* ============================================
    Interactive Elements
@@ -624,92 +537,43 @@ button, a, input, textarea, select {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
+a { text-decoration: none; color: inherit; }
 
 /* ============================================
    Utility Classes
    ============================================ */
-.backdrop-blur {
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-.backdrop-blur-lg {
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-}
-
-.text-balance {
-  text-wrap: balance;
-}
+.backdrop-blur    { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.backdrop-blur-lg { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+.text-balance     { text-wrap: balance; }
 
 /* ============================================
    Responsive Design
    ============================================ */
 @media (max-width: 1024px) {
-  .main-container, .container-wide {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-  
-  .section {
-    padding: 80px 0;
-  }
-  
-  .section-title {
-    font-size: 2rem;
-  }
+  .main-container, .container-wide { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .section       { padding: 80px 0; }
+  .section-title { font-size: 2rem; }
 }
 
 @media (max-width: 768px) {
-  .main-container, .container-wide {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-  
-  .section {
-    padding: 60px 0;
-  }
-  
-  .section-title {
-    font-size: 1.75rem;
-  }
-  
-  .section-subtitle {
-    font-size: 1rem;
-  }
-  
-  .btn-accent, .btn-outline {
-    padding: 0.6rem 1.25rem;
-    font-size: 0.9rem;
-  }
+  .main-container, .container-wide { padding-left: 1rem; padding-right: 1rem; }
+  .section         { padding: 60px 0; }
+  .section-title   { font-size: 1.75rem; }
+  .section-subtitle{ font-size: 1rem; }
+  .btn-accent, .btn-outline { padding: 0.6rem 1.25rem; font-size: 0.9rem; }
 }
 
 @media (max-width: 480px) {
-  .section {
-    padding: 40px 0;
-  }
-  
-  .section-title {
-    font-size: 1.5rem;
-  }
-  
-  .btn-accent, .btn-outline {
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
-  }
+  .section       { padding: 40px 0; }
+  .section-title { font-size: 1.5rem; }
+  .btn-accent, .btn-outline { padding: 0.5rem 1rem; font-size: 0.875rem; }
 }
 
 /* ============================================
    Reduced Motion (Accessibility)
    ============================================ */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
