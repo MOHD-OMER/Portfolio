@@ -13,11 +13,11 @@ const navItems = [
 ];
 
 export default function NavBar() {
-  const [activeSection, setActiveSection] = useState("home");
-  const [scrolled, setScrolled]           = useState(false);
+  const [activeSection, setActiveSection]   = useState("home");
+  const [scrolled, setScrolled]             = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // FIX 1: Smooth scroll — prevents URL hash jump and page snap
+  // Smooth scroll — prevents URL hash jump and page snap
   const scrollToSection = useCallback((e, id) => {
     e.preventDefault();
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -29,9 +29,22 @@ export default function NavBar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
 
-      // FIX 2: Use window.innerHeight/3 so active state updates mid-viewport,
-      // not only when the section's very top pixel crosses the header
       const scrollPosition = window.scrollY + window.innerHeight / 3;
+
+      /*
+       * Bottom-of-page guard: if the user has scrolled to the very bottom,
+       * force the last nav item active. Without this, Contact (the last
+       * section) can never satisfy the offsetTop threshold on tall screens
+       * because there isn't enough scroll distance remaining.
+       */
+      const atBottom =
+        window.innerHeight + window.scrollY >= document.body.scrollHeight - 10;
+
+      if (atBottom) {
+        setActiveSection(navItems[navItems.length - 1].id);
+        return;
+      }
+
       navItems.forEach((item) => {
         const section = document.getElementById(item.id);
         if (section && scrollPosition >= section.offsetTop) {
@@ -54,7 +67,7 @@ export default function NavBar() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // FIX 3: Lock body scroll while mobile menu is open
+  // Lock body scroll while mobile menu is open
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -71,7 +84,7 @@ export default function NavBar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between py-4 sm:py-5">
 
-          {/* Logo */}
+          {/* Logo — "M.A." in blue + "Omer" in white-to-purple */}
           <motion.a
             href="#home"
             onClick={(e) => scrollToSection(e, "home")}
@@ -99,8 +112,9 @@ export default function NavBar() {
                 transition={{ duration: 2, repeat: Infinity }}
               />
             </div>
+            {/* Fixed: was "M.A " (trailing space, missing period) → "M.A." */}
             <span className="text-lg sm:text-xl font-bold tracking-tight">
-              <span className="text-blue-400">M.A </span>
+              <span className="text-blue-400">M.A.</span>
               <span className="bg-gradient-to-r from-white to-purple-300 bg-clip-text text-transparent">
                 Omer
               </span>
@@ -110,8 +124,6 @@ export default function NavBar() {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1 lg:gap-2">
             {navItems.map((item) => (
-              // FIX 4: `relative` on the anchor so the absolute layoutId pill
-              // positions against this link, not a distant ancestor
               <motion.a
                 key={item.id}
                 href={`#${item.id}`}
@@ -120,12 +132,7 @@ export default function NavBar() {
                 whileHover={{ y: -2 }}
                 transition={{ duration: 0.2 }}
               >
-                {/*
-                 * FIX 5: Active item carries NO bg class of its own.
-                 * The layoutId overlay below provides all bg + border,
-                 * so nothing doubles when both render at the same time.
-                 * The blue glow shadow stays here as it isn't part of the overlay.
-                 */}
+                {/* Active item has no bg class — layoutId overlay provides it */}
                 <div
                   className={`relative z-10 px-3 lg:px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                     activeSection === item.id
@@ -157,13 +164,11 @@ export default function NavBar() {
             aria-expanded={mobileMenuOpen}
           >
             {/*
-             * FIX 6: Hamburger X geometry corrected.
-             * Container: w-5 h-5 = 20px tall. Bars: h-0.5 = 2px. Gap: space-y-1.5 = 6px.
-             * Stack = 3×2 + 2×6 = 18px. Offset from top = (20-18)/2 = 1px.
-             * Bar 1 center = 1+1 = 2px. Container center = 10px. Delta = +8px → y:8
-             * Bar 3 center = 1+2+6+2+6+1 = 18px.               Delta = -8px → y:-8
-             * (Original used ±6 which left the X ~2px misaligned.)
-             */}
+              Hamburger ↔ X math:
+              Container h-5=20px. Bars h-0.5=2px. Gap space-y-1.5=6px.
+              Bar centers: top=2px, mid=10px, bot=18px.
+              y to reach center: top needs +8, bot needs -8.
+            */}
             <div className="space-y-1.5 w-5 h-5 flex flex-col justify-center">
               <motion.span
                 animate={mobileMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
@@ -181,11 +186,7 @@ export default function NavBar() {
           </motion.button>
         </div>
 
-        {/*
-         * FIX 7: AnimatePresence replaces height:0→"auto" + initial={false}.
-         * The menu fully unmounts on close, so child items always start from
-         * `initial` with no stale-opacity flicker on re-open.
-         */}
+        {/* Mobile Menu — AnimatePresence fully unmounts on close, no stale flicker */}
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
@@ -202,7 +203,6 @@ export default function NavBar() {
                     key={item.id}
                     href={`#${item.id}`}
                     onClick={(e) => scrollToSection(e, item.id)}
-                    // Items mount fresh every open — no toggled animate needed
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.05 }}
