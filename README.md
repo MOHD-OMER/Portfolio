@@ -1,127 +1,123 @@
-🌐 Mohammed Abdul Omer — AI/ML Portfolio
+# 🌐 Mohammed Abdul Omer — AI/ML Engineer Portfolio
 
-A modern, animated, and fully responsive developer portfolio built using Next.js, Tailwind CSS, and Framer Motion.
-This website showcases my expertise in Machine Learning, Generative AI, Deep Learning, and full-stack AI application development.
+<div align="center">
 
-🔗 Live Portfolio:
-👉 https://mohdomer.vercel.app
+[![Live Portfolio](https://img.shields.io/badge/🌐_Live_Portfolio-mohdomer.vercel.app-blue?style=for-the-badge)](https://mohdomer.vercel.app)
+[![Next.js](https://img.shields.io/badge/Next.js_14-black?style=for-the-badge&logo=next.js)](https://nextjs.org)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-EF0076?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion)
+[![Vercel](https://img.shields.io/badge/Deployed_on_Vercel-000000?style=for-the-badge&logo=vercel)](https://vercel.com)
 
-🚀 Tech Stack
+A modern, animated, and fully responsive AI/ML engineer portfolio — built with Next.js App Router, Tailwind CSS, and Framer Motion.
 
-Frontend Framework:
+</div>
 
-⚛️ Next.js 13 (App Router)
+---
 
-🎨 Tailwind CSS
+## 🔗 Live
 
-🎞️ Framer Motion
+👉 **[https://mohdomer.vercel.app](https://mohdomer.vercel.app)**
 
-Other Tools:
+---
 
-🖼️ Next/Image Optimization
+## 🚀 Tech Stack
 
-☁️ Deployed on Vercel
+| Layer | Tools |
+|---|---|
+| Framework | Next.js 14 (App Router) |
+| Styling | Tailwind CSS + custom CSS design system |
+| Animations | Framer Motion |
+| Font | Inter via `next/font/google` |
+| Deployment | Vercel (auto-deploy on push to `main`) |
 
-📁 Git & GitHub for version control
+---
 
-✨ Features
+## ✨ Features
 
-⚡ Smooth and modern animations
+- ⚡ Smooth scroll-based animations with Framer Motion
+- 🎨 Glassmorphism + gradient UI design system
+- 📱 Fully responsive — mobile, tablet, and desktop
+- 🎯 Active navbar highlight — updates on scroll and on click
+- 🤖 Hero section with name reveal, rotating titles, floating particles, and mouse-follower effects
+- 🧠 Skills section with 6 grouped categories covering full AI/ML stack
+- 🛠️ Projects section with category filter, 10 projects, and hover-reveal details
+- 💼 Experience section with timeline layout and metrics
+- 🏅 Certifications section
+- 📬 Contact section with availability badge, copy-to-clipboard, and mailto form
+- 📄 Resume download button
+- 🔗 Social links: GitHub · LinkedIn · HuggingFace · Email · WhatsApp
 
-🎨 Glassmorphism & gradient UI
+---
 
-📱 Fully responsive design
+## 📁 Folder Structure
 
-🎯 Scroll-based active navbar
+```
+Portfolio/
+├── app/
+│   ├── components/
+│   │   ├── Hero.js           # Animated hero with particles & typing effect
+│   │   ├── NavBar.js         # Fixed navbar with active section tracking
+│   │   ├── SectionHeader.js  # Shared animated section header component
+│   │   ├── Skills.js         # 6 skill groups + stats bar
+│   │   ├── Projects.js       # 10 projects with filter tabs
+│   │   ├── Experience.js     # Timeline with metrics
+│   │   ├── Certifications.js # 3 verified certificates
+│   │   └── Contact.js        # Contact cards + mailto form
+│   ├── globals.css           # Design tokens, animations, utility classes
+│   ├── layout.js             # Root layout with metadata + Inter font
+│   └── page.js               # Main page — assembles all sections
+├── public/
+│   ├── profile.png
+│   └── resume.pdf
+├── tailwind.config.js
+├── postcss.config.js
+└── jsconfig.json
+```
 
-🤖 Animated Hero section with typing & particle effects
+---
 
-🧠 Sections for Skills, Projects, Experience, Certifications
+## 🛠️ Local Setup
 
-📄 Resume download button
+```bash
+# Clone the repo
+git clone https://github.com/MOHD-OMER/Portfolio.git
+cd Portfolio
 
-🔗 Social links (LinkedIn, GitHub)
-
-📬 Functional contact section
-
-🏠 Home Section
-
-🧠 Skills Section
-
-🛠 Projects Section
-
-📁 Folder Structure
-app/
- ├── components/
- │   ├── Hero.js
- │   ├── NavBar.js
- │   ├── Skills.js
- │   ├── Projects.js
- │   ├── Experience.js
- │   ├── Certifications.js
- │   ├── Contact.js
- │
- ├── layout.js
- ├── page.js
-
-public/
- ├── profile.png
- ├── resume.pdf
-
-styles/
- ├── globals.css
-
-config/
- ├── tailwind.config.js
-
-🛠️ Installation & Setup
-
-Clone the repository:
-
-git clone https://github.com/MOHD-OMER/next-portfolio.git
-
-
-Go into the project folder:
-
-cd next-portfolio
-
-
-Install dependencies:
-
+# Install dependencies
 npm install
 
-
-Run development server:
-
+# Start dev server
 npm run dev
 
-
-Build for production:
-
+# Build for production
 npm run build
+```
 
-🚀 Deployment
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-This project is deployed using Vercel.
-Every push to the main branch automatically triggers a new deployment.
+---
 
-You can also deploy manually:
+## 🚀 Deployment
 
-vercel
+Deployed on **Vercel**. Every push to `main` triggers an automatic redeployment.
 
-📬 Contact
+---
 
-👤 Mohammed Abdul Omer
-📧 Email: mohammedabdulomer99@gmail.com
+## 📬 Contact
 
-🔗 Portfolio: https://mohdomer.vercel.app
+| | |
+|---|---|
+| 👤 Name | Mohammed Abdul Omer |
+| 📧 Email | mohammedabdulomer99@gmail.com |
+| 🌐 Portfolio | [mohdomer.vercel.app](https://mohdomer.vercel.app) |
+| 💼 LinkedIn | [mohammad-abdul-omer](https://www.linkedin.com/in/mohammad-abdul-omer) |
+| 💻 GitHub | [MOHD-OMER](https://github.com/MOHD-OMER) |
+| 🤗 HuggingFace | [mohdomer](https://huggingface.co/mohdomer) |
 
-💼 LinkedIn: https://www.linkedin.com/in/mohammad-abdul-omer
+---
 
-💻 GitHub: https://github.com/MOHD-OMER
+<div align="center">
 
-⭐ Support
+If you found this useful, consider giving the repo a ⭐ — it helps!
 
-If you like this project, consider giving the repo a star ⭐ on GitHub — it motivates me to build more!
-
-If you want, I can also create a banner image, badges, or add project GIF previews to make the README even more premium.
+</div>
