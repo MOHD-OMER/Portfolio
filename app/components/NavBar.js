@@ -17,9 +17,11 @@ export default function NavBar() {
   const [scrolled, setScrolled]             = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Smooth scroll — prevents URL hash jump and page snap
+  // Smooth scroll — sets activeSection immediately on click so the
+  // highlight doesn't lag behind waiting for the scroll listener to catch up
   const scrollToSection = useCallback((e, id) => {
     e.preventDefault();
+    setActiveSection(id);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     setMobileMenuOpen(false);
   }, []);
