@@ -144,7 +144,7 @@ export default function Contact() {
                 transition={{ duration: 2, repeat: Infinity }}
               />
               <span className="text-green-400 text-sm font-medium">
-                Open to opportunities — Available from 2025
+                Open to opportunities
               </span>
             </div>
           </motion.div>
