@@ -159,7 +159,7 @@ function About() {
 
             <p>
               Final year B.E. Computer Science (AI &amp; ML) at Lords Institute
-              of Engineering &amp; Technology, Hyderabad — graduating 2025. I
+              of Engineering &amp; Technology, Hyderabad — graduating 2026. I
               stay current with emerging research in LLMs, agentic systems, and
               MLOps — and I build things to understand them, not just read about
               them.
