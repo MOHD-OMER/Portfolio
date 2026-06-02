@@ -174,7 +174,7 @@ export default function Hero() {
         // Fixed: was a bar-chart path before. This is a proper document/file icon.
         icon: "M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z",
         label: "Resume",
-        href: "/resume.pdf",
+        href: "/resume_2026.pdf",
       },
     ],
     []
