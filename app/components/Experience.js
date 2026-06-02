@@ -245,7 +245,7 @@ export default function Experience() {
         </p>
         <div className="flex flex-wrap gap-4 justify-center">
           <motion.a
-            href="/resume.pdf"
+            href="/resume_2026.pdf"
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(59,130,246,0.3)" }}
