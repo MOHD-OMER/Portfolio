@@ -106,7 +106,7 @@ export default function Certifications() {
 
               {/* Hover glow */}
               <div
-                className={`absolute inset-0 bg-gradient-to-br ${cert.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}
+                className={`absolute inset-0 bg-gradient-to-br ${cert.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300 pointer-events-none`}
               />
 
               {/* Icon + Year */}
