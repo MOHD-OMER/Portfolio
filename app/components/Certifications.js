@@ -43,7 +43,7 @@ export default function Certifications() {
       icon: "🎯",
       color: "from-yellow-500 to-orange-500",
       skills: ["Introduction to AI", "AI Productivity Tools", "Prompt Engineering", "Responsible AI"],
-      verify: "https://coursera.org/verify/specialization/V7MDESTSWHA",
+      verify: "https://coursera.org/share/afcb6ce8d64494bbea9e34539f073b13",
     },
     {
       title: "AI/ML with Generative AI — Internship",
