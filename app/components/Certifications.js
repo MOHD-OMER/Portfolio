@@ -45,6 +45,26 @@ export default function Certifications() {
       skills: ["Introduction to AI", "AI Productivity Tools", "Prompt Engineering", "Responsible AI"],
       verify: "https://coursera.org/verify/specialization/V7MDESTSWHA",
     },
+    {
+      title: "AI/ML with Generative AI — Internship",
+      issuer: "TechZone Software Academy",
+      instructor: "TechZone",
+      year: "2025",
+      icon: "🏢",
+      color: "from-blue-500 to-indigo-500",
+      skills: ["LLM Applications", "RAG Systems", "FastAPI", "Production AI Deployment"],
+      verify: "/AIML%20WITH%20GEN%20AI%20INTERNSHIP.pdf",
+    },
+    {
+      title: "AI/ML with Generative AI — Course",
+      issuer: "TechZone Software Academy",
+      instructor: "TechZone",
+      year: "2025",
+      icon: "📜",
+      color: "from-teal-500 to-cyan-500",
+      skills: ["Generative AI", "Machine Learning", "Deep Learning", "AI Tools"],
+      verify: "/AIML%20WITH%20GENAI%20COURSE.pdf",
+    },
   ];
 
   const containerVariants = {
@@ -73,7 +93,7 @@ export default function Certifications() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 max-w-6xl mx-auto"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"
       >
         {certs.map((cert, idx) => (
           <motion.div
