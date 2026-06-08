@@ -169,9 +169,9 @@ export default function Certifications() {
                 </a>
               </div>
 
-              {/* Decorative corner */}
+              {/* Decorative corner — pointer-events-none so it never blocks the button */}
               <div
-                className={`absolute -bottom-4 -right-4 w-24 h-24 bg-gradient-to-br ${cert.color} opacity-5 rounded-full blur-2xl group-hover:opacity-10 transition-opacity`}
+                className={`absolute -bottom-4 -right-4 w-24 h-24 bg-gradient-to-br ${cert.color} opacity-5 rounded-full blur-2xl group-hover:opacity-10 transition-opacity pointer-events-none`}
               />
             </div>
           </motion.div>
