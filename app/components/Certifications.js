@@ -35,6 +35,16 @@ export default function Certifications() {
       skills: ["Python Basics", "Data Structures", "Web Scraping", "Databases & SQL"],
       verify: "https://www.coursera.org/specializations/python",
     },
+    {
+      title: "Google AI Essentials",
+      issuer: "Google / Coursera",
+      instructor: "Google Career Certificates",
+      year: "2026",
+      icon: "🎯",
+      color: "from-yellow-500 to-orange-500",
+      skills: ["Introduction to AI", "AI Productivity Tools", "Prompt Engineering", "Responsible AI"],
+      verify: "https://coursera.org/verify/specialization/V7MDESTSWHA",
+    },
   ];
 
   const containerVariants = {
@@ -63,7 +73,7 @@ export default function Certifications() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto"
+        className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 max-w-6xl mx-auto"
       >
         {certs.map((cert, idx) => (
           <motion.div
