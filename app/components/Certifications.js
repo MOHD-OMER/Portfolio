@@ -9,11 +9,16 @@ export default function Certifications() {
       title: "Machine Learning Specialization",
       issuer: "DeepLearning.AI / Coursera",
       instructor: "Andrew Ng",
-      year: "2024",
+      year: "2026",
       icon: "🤖",
       color: "from-blue-500 to-cyan-500",
-      skills: ["Supervised Learning", "Neural Networks", "Decision Trees", "Recommender Systems"],
-      verify: "https://www.coursera.org/specializations/machine-learning-introduction",
+      skills: [
+        "Supervised Learning",
+        "Neural Networks",
+        "Decision Trees",
+        "Recommender Systems"
+      ],
+      verify: "https://www.coursera.org/account/accomplishments/specialization/DLU6Q0KIJ73E",
     },
     {
       title: "Generative AI with Large Language Models",
