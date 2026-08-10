@@ -159,7 +159,7 @@ function About() {
 
             <p>
               Final year B.E. Computer Science (AI &amp; ML) at Lords Institute
-              of Engineering &amp; Technology, Hyderabad — graduating 2026. I
+              of Engineering &amp; Technology, Hyderabad — graduating 2025. I
               stay current with emerging research in LLMs, agentic systems, and
               MLOps — and I build things to understand them, not just read about
               them.
@@ -167,7 +167,7 @@ function About() {
 
             {/* Availability callout */}
             <p className="text-gray-300 italic border-l-4 border-blue-400/50 pl-6 py-2 bg-blue-500/5 rounded-r-lg">
-              Open to AI Engineer, ML Engineer, and MLOps Engineer roles where I
+              Open to CSE-AIML Engineer, AI Engineer, and MLOps Engineer roles where I
               can work on production systems that solve real problems.
             </p>
           </motion.div>
