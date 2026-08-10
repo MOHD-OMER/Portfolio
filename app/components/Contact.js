@@ -126,7 +126,7 @@ export default function Contact() {
           {/* Header — reuses SectionHeader for consistency */}
           <SectionHeader
             title="Get In Touch"
-            subtitle="Open to AI Engineer and ML Engineer roles. Reach out for collaborations, internship opportunities, or project discussions."
+            subtitle="Open to CSE-AIML Engineer, AI Engineer, and ML Engineer roles. Reach out for collaborations, internship opportunities, or project discussions."
           />
 
           {/* Availability badge */}
