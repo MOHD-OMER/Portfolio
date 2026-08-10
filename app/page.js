@@ -158,8 +158,9 @@ function About() {
             </div>
 
             <p>
-              Final year B.E. Computer Science (AI &amp; ML) at Lords Institute
-              of Engineering &amp; Technology, Hyderabad — graduating 2025. I
+              B.E. Computer Science Engineering (AI &amp; ML specialisation) graduate
+              from Lords Institute of Engineering &amp; Technology, Hyderabad — CGPA
+              8.30. I
               stay current with emerging research in LLMs, agentic systems, and
               MLOps — and I build things to understand them, not just read about
               them.
