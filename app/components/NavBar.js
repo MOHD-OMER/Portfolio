@@ -4,12 +4,13 @@ import { motion, AnimatePresence } from "framer-motion";
 
 // Static — defined outside component to avoid stale closure in useEffect
 const navItems = [
-  { id: "home",       label: "Home",       number: "00_" },
-  { id: "about",      label: "About",      number: "01_" },
-  { id: "skills",     label: "Skills",     number: "02_" },
-  { id: "projects",   label: "Projects",   number: "03_" },
-  { id: "experience", label: "Experience", number: "04_" },
-  { id: "contact",    label: "Contact",    number: "05_" },
+  { id: "home",            label: "Home",           number: "00_" },
+  { id: "about",           label: "About",          number: "01_" },
+  { id: "skills",          label: "Skills",         number: "02_" },
+  { id: "projects",        label: "Projects",       number: "03_" },
+  { id: "experience",      label: "Experience",     number: "04_" },
+  { id: "certifications",  label: "Certifications", number: "05_" },
+  { id: "contact",         label: "Contact",        number: "06_" },
 ];
 
 export default function NavBar() {
