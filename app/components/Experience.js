@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import SectionHeader from "./SectionHeader";
+import { Bot, GraduationCap } from "lucide-react";
 
 export default function Experience() {
   const experiences = [
@@ -13,7 +14,7 @@ export default function Experience() {
       duration: "4 months",
       type: "Internship",
       typeBadgeClass: "text-blue-400 bg-blue-500/10 border-blue-500/30",
-      icon: "🤖",
+      icon: Bot,
       color: "from-blue-500 to-cyan-500",
       achievements: [
         "Architected and deployed 4 production-grade AI systems for a live ed-tech platform serving students and educators across Hyderabad",
@@ -40,7 +41,7 @@ export default function Experience() {
       duration: "1 month",
       type: "College Training Program",
       typeBadgeClass: "text-purple-400 bg-purple-500/10 border-purple-500/30",
-      icon: "🎓",
+      icon: GraduationCap,
       color: "from-purple-500 to-pink-500",
       achievements: [
         "Completed an intensive AI/ML training program organised in collaboration with Lords Institute CSE-AIML department",
@@ -112,14 +113,12 @@ export default function Experience() {
                 {/* Header */}
                 <div className="relative flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
                   <div className="flex items-start gap-4">
-                    <div
-                      className={`text-4xl p-3 rounded-xl bg-gradient-to-br ${exp.color} bg-opacity-10 flex-shrink-0`}
-                    >
-                      {exp.icon}
+                    <div className={`p-3 rounded-xl bg-gradient-to-br ${exp.color} flex-shrink-0`}>
+                      <exp.icon className="w-6 h-6 text-white" strokeWidth={1.75} aria-hidden="true" />
                     </div>
                     <div>
                       <h3
-                        className={`text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${exp.color} mb-1`}
+                        className="text-2xl font-bold text-white mb-1"
                       >
                         {exp.role}
                       </h3>

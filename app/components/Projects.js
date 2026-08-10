@@ -1,6 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
+import {
+  Target, Users, Dna, FolderSearch, Settings2, Activity, Bot, GraduationCap,
+  ScanSearch, Flame, BrainCircuit, BarChart3, Plug, ShieldCheck, Database, TrendingUp,
+} from "lucide-react";
 import { useState } from "react";
 import SectionHeader from "./SectionHeader";
 
@@ -13,7 +17,7 @@ export default function Projects() {
       desc: "Smart AI router that auto-selects the optimal model across Groq, Gemini, OpenRouter, and Ollama. Classifies tasks across 10 categories and routes to the best model based on speed, quality, cost, and privacy — with automatic fallback, benchmark mode, and a full CLI.",
       category: "AI Tools",
       tags: ["FastAPI", "Groq", "Gemini", "OpenRouter", "Ollama", "Task Classification", "Python"],
-      icon: "🎯",
+      icon: Target,
       color: "from-orange-500 to-amber-500",
       details: "17+ models across 4 providers. Benchmark mode fires the same prompt at all models simultaneously with live result cards, latency bars, and winner badges (⚡ Fastest · 💰 Cheapest · 📝 Most Detailed). Private mode routes sensitive data to local Ollama only — never leaves your machine. Reasoning chains from Qwen3 <think> blocks extracted and shown as collapsible toggles.",
       github: "https://github.com/MOHD-OMER/ai-orchestrator",
@@ -24,7 +28,7 @@ export default function Projects() {
       desc: "Autonomous multi-agent pipeline where specialised agents — researcher, analyst, writer — coordinate via CrewAI and Tavily to perform live web research, synthesise findings, and generate structured reports with zero human intervention.",
       category: "Agentic AI",
       tags: ["CrewAI", "Tavily", "LangChain", "Groq", "Python"],
-      icon: "🤝",
+      icon: Users,
       color: "from-violet-500 to-purple-600",
       details: "Agents are assigned distinct roles and collaborate through a shared task planning loop. Each agent uses tool-use to fetch live data, reason over it, and pass structured output to the next stage — resulting in a fully autonomous research-to-report pipeline.",
       github: "https://github.com/MOHD-OMER/multi-agent-researcher",
@@ -35,7 +39,7 @@ export default function Projects() {
       desc: "QLoRA fine-tuning of Mistral-7B-Instruct-v0.2 on a medical Q&A dataset using PEFT. Trained on Kaggle T4 GPU with full environment compatibility handling. Fine-tuned adapter and live Gradio demo deployed to HuggingFace Hub.",
       category: "LLM Engineering",
       tags: ["QLoRA", "PEFT", "Mistral-7B", "HuggingFace", "Gradio", "W&B", "PyTorch"],
-      icon: "🧬",
+      icon: Dna,
       color: "from-pink-500 to-rose-600",
       details: "Resolved real-world environment compatibility challenges across bitsandbytes, tokenizers, and transformers versioning. Training tracked with Weights & Biases. The fine-tuned adapter and base model are published to HuggingFace Hub with a live Gradio inference demo.",
       github: "https://github.com/MOHD-OMER/llm-finetuning",
@@ -47,7 +51,7 @@ export default function Projects() {
       desc: "Production-grade RAG chatbot using a LangGraph ReAct agent with hybrid retrieval — ChromaDB vector search, BM25, and FlashRank re-ranking. Streaming SSE responses via FastAPI async backend with dual Streamlit and Gradio frontends.",
       category: "Agentic AI",
       tags: ["LangGraph", "FastAPI", "ChromaDB", "BM25", "FlashRank", "Groq", "HuggingFace"],
-      icon: "🗂️",
+      icon: FolderSearch,
       color: "from-cyan-500 to-blue-600",
       details: "Solved key production challenges including async event loop conflicts in FastAPI, streaming SSE via LangGraph ReAct, and ChromaDB/BM25/FlashRank hybrid retrieval tuning. Powered by Groq's llama-3.1-8b-instant with HuggingFace embeddings.",
       github: "https://github.com/MOHD-OMER/rag-agent",
@@ -58,7 +62,7 @@ export default function Projects() {
       desc: "End-to-end MLOps pipeline integrating MLflow for experiment tracking and model registry, Weights & Biases for training visualisation, and Evidently AI for automatic data drift and model performance monitoring.",
       category: "MLOps",
       tags: ["MLflow", "W&B", "Evidently AI", "Scikit-Learn", "Docker", "Python"],
-      icon: "⚙️",
+      icon: Settings2,
       color: "from-emerald-500 to-teal-600",
       details: "Structured as a reproducible, production-mimicking workflow with modular stages for data ingestion, training, evaluation, and monitoring. Evidently AI generates drift reports automatically on new data batches, with all runs logged and versioned in MLflow.",
       github: "https://github.com/MOHD-OMER/mlops-pipeline",
@@ -69,7 +73,7 @@ export default function Projects() {
       desc: "Deep-learning diagnostic system for automated TB detection from chest X-rays, featuring real-time Grad-CAM heatmap visualisations and PDF report generation. Deployed on HuggingFace Spaces.",
       category: "Medical AI",
       tags: ["PyTorch", "FastAPI", "HuggingFace", "Computer Vision", "CNN", "Grad-CAM"],
-      icon: "🫁",
+      icon: Activity,
       color: "from-blue-500 to-cyan-500",
       details: "End-to-end diagnostic pipeline built for early TB screening. Custom-trained TBNet CNN architecture analyses chest X-rays, highlights infected regions via Grad-CAM heatmaps, and generates professional PDF diagnostic reports. FastAPI backend with optimised inference pipeline and an intuitive web interface.",
       github: "https://github.com/MOHD-OMER/PulmoScanAI",
@@ -80,7 +84,7 @@ export default function Projects() {
       desc: "Interactive AI-powered study assistant supporting multiple models with PDF, image, and document uploads — offering real-time doubt-solving with contextual memory and multi-modal reasoning.",
       category: "AI Applications",
       tags: ["Streamlit", "Groq API", "HuggingFace", "Qwen-VL", "LangChain", "Python"],
-      icon: "🤖",
+      icon: Bot,
       color: "from-indigo-500 to-violet-500",
       details: "AI tutor capable of analysing images, PDFs, and text files using Llama 3, Qwen-VL (vision), and Groq models. Includes chat history export, file previews, secure secret handling, and custom UI components.",
       github: "https://github.com/MOHD-OMER/doubt-tutor",
@@ -91,7 +95,7 @@ export default function Projects() {
       desc: "Full-scale PTE mock test platform with adaptive difficulty, real-time scoring, section timers, and professional exam-style UI — powered by Groq and Gemini models. Deployed on HuggingFace Spaces.",
       category: "AI Applications",
       tags: ["Gradio", "Groq API", "Google Gemini", "HuggingFace Spaces", "Python"],
-      icon: "🎓",
+      icon: GraduationCap,
       color: "from-blue-500 to-purple-600",
       details: "PTE Academic mock system with Aptitude, Listening, and Reading modules. Features automated question generation via Groq & Gemini, strict time tracking, dynamic content validation, analytics-driven scoring, and a premium custom UI. Secure API handling and modular code architecture.",
       github: "https://github.com/MOHD-OMER/PTEra",
@@ -102,16 +106,16 @@ export default function Projects() {
       desc: "Dual-AI system combining CNN-LSTM deep learning with Gemini API to detect fake news with 94.2% accuracy across 40,000+ articles. Features an analytics dashboard and REST prediction API.",
       category: "Machine Learning",
       tags: ["CNN-LSTM", "Flask", "Gemini AI", "SQLite", "REST API"],
-      icon: "🔍",
+      icon: ScanSearch,
       color: "from-yellow-400 to-red-500",
       details: "Trained on 40,000+ news articles. Features real-time predictions, analytics dashboard, prediction history, and dual-model verification using both a custom neural network and Gemini AI.",
       highlights: [
-        { icon: "🧠", label: "CNN-LSTM Hybrid",      sub: "Custom NLP architecture" },
-        { icon: "📊", label: "Analytics Dashboard",  sub: "Chart.js real-time stats" },
-        { icon: "🔌", label: "REST API",              sub: "POST /api/predict" },
-        { icon: "🔐", label: "Admin Auth",            sub: "Session-based login" },
-        { icon: "🗄️", label: "SQLite + ORM",         sub: "Persistent prediction logs" },
-        { icon: "📈", label: "94.2% Accuracy",        sub: "40,000+ article dataset" },
+        { icon: BrainCircuit, label: "CNN-LSTM Hybrid",      sub: "Custom NLP architecture" },
+        { icon: BarChart3, label: "Analytics Dashboard",  sub: "Chart.js real-time stats" },
+        { icon: Plug, label: "REST API",              sub: "POST /api/predict" },
+        { icon: ShieldCheck, label: "Admin Auth",            sub: "Session-based login" },
+        { icon: Database, label: "SQLite + ORM",         sub: "Persistent prediction logs" },
+        { icon: TrendingUp, label: "94.2% Accuracy",        sub: "40,000+ article dataset" },
       ],
       github: "https://github.com/MOHD-OMER/TruthLens",
       demo: "https://truthlens-uqo4.onrender.com",
@@ -121,7 +125,7 @@ export default function Projects() {
       desc: "Dual-module fire and smoke detection system combining 7 ML classifiers on 62,630 IoT sensor readings (AUC-ROC > 0.999) with MobileNetV2 CNN (96.98% accuracy) and YOLOv8 real-time detection. B.E. Major Project.",
       category: "Machine Learning",
       tags: ["Django", "TensorFlow", "YOLOv8", "Scikit-Learn", "MobileNetV2", "OpenCV", "Railway"],
-      icon: "🔥",
+      icon: Flame,
       color: "from-orange-500 to-red-600",
       details: "Trains 7 classifiers on real IoT sensor data. MobileNetV2 fine-tuned via transfer learning achieves 96.98% validation accuracy. YOLOv8 draws real-time bounding boxes on uploaded images. Full-stack Django app with role-based user management, live ML training, sensor prediction, and CNN+YOLO inference — deployed on Railway.",
       github: "https://github.com/MOHD-OMER/Building-Safety-Smoke-Detection",
@@ -226,8 +230,8 @@ export default function Projects() {
 
               {/* Icon + Category */}
               <div className="relative flex items-center justify-between mb-4">
-                <div className={`text-4xl p-3 rounded-xl bg-gradient-to-br ${project.color} bg-opacity-10`}>
-                  {project.icon}
+                <div className={`p-3 rounded-xl bg-gradient-to-br ${project.color}`}>
+                  <project.icon className="w-6 h-6 text-white" strokeWidth={1.75} aria-hidden="true" />
                 </div>
                 <span className="text-xs font-semibold px-3 py-1 rounded-full bg-white/5 text-gray-400 border border-white/10">
                   {project.category}
@@ -236,7 +240,7 @@ export default function Projects() {
 
               {/* Title */}
               <h3
-                className={`relative text-xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r ${project.color} group-hover:scale-[1.02] transition-transform`}
+                className="relative text-xl font-bold mb-3 text-white group-hover:scale-[1.02] transition-transform"
               >
                 {project.title}
               </h3>
@@ -254,7 +258,7 @@ export default function Projects() {
                       key={i}
                       className="flex items-start gap-2 rounded-lg px-3 py-2 bg-white/[0.04] border border-white/[0.07] hover:border-yellow-400/30 transition-colors duration-200"
                     >
-                      <span className="text-base mt-0.5 shrink-0">{h.icon}</span>
+                      <h.icon className="w-4 h-4 mt-0.5 shrink-0 text-gray-300" strokeWidth={1.75} aria-hidden="true" />
                       <div className="min-w-0">
                         <p className="text-xs font-semibold text-gray-200 truncate">{h.label}</p>
                         <p className="text-[10px] text-gray-500 truncate">{h.sub}</p>

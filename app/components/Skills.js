@@ -2,12 +2,15 @@
 
 import { motion } from "framer-motion";
 import SectionHeader from "./SectionHeader";
+import {
+  MessagesSquare, BrainCircuit, Cog, FlaskConical, Code2, Wrench, FileSpreadsheet,
+} from "lucide-react";
 
 export default function Skills() {
   const skillGroups = [
     {
       title: "NLP & Generative AI",
-      icon: "💬",
+      icon: MessagesSquare,
       color: "from-purple-500 to-pink-500",
       skills: [
         "Large Language Models",
@@ -20,7 +23,7 @@ export default function Skills() {
     },
     {
       title: "Computer Vision & DL",
-      icon: "🧠",
+      icon: BrainCircuit,
       color: "from-blue-500 to-cyan-500",
       skills: [
         "CNNs & Transfer Learning",
@@ -33,7 +36,7 @@ export default function Skills() {
     },
     {
       title: "ML Engineering",
-      icon: "⚙️",
+      icon: Cog,
       color: "from-green-500 to-emerald-500",
       skills: [
         "QLoRA & PEFT Fine-tuning",
@@ -47,7 +50,7 @@ export default function Skills() {
     {
       // New group — reflects the MLOps pipeline project and W&B usage across projects
       title: "MLOps & Experiment Tracking",
-      icon: "🔬",
+      icon: FlaskConical,
       color: "from-teal-500 to-blue-500",
       skills: [
         "MLflow",
@@ -60,7 +63,7 @@ export default function Skills() {
     },
     {
       title: "Programming",
-      icon: "💻",
+      icon: Code2,
       color: "from-orange-500 to-red-500",
       skills: [
         "Python",
@@ -74,7 +77,7 @@ export default function Skills() {
     },
     {
       title: "Tools & Deployment",
-      icon: "🛠️",
+      icon: Wrench,
       color: "from-indigo-500 to-violet-500",
       skills: [
         "Git & GitHub",
@@ -87,7 +90,7 @@ export default function Skills() {
     },
     {
       title: "Productivity & Documentation",
-      icon: "📊",
+      icon: FileSpreadsheet,
       color: "from-amber-500 to-yellow-500",
       skills: [
         "Microsoft Excel",
@@ -158,7 +161,7 @@ export default function Skills() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:[&>*:last-child:nth-child(3n+1)]:col-start-2"
       >
         {skillGroups.map((group, idx) => (
           <motion.div
@@ -175,13 +178,11 @@ export default function Skills() {
 
               {/* Header */}
               <div className="relative flex items-center gap-3 mb-6">
-                <div
-                  className={`text-3xl p-3 rounded-xl bg-gradient-to-br ${group.color} bg-opacity-10`}
-                >
-                  {group.icon}
+                <div className={`p-3 rounded-xl bg-gradient-to-br ${group.color}`}>
+                  <group.icon className="w-6 h-6 text-white" strokeWidth={1.75} aria-hidden="true" />
                 </div>
                 <h3
-                  className={`text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${group.color}`}
+                  className="text-xl font-bold text-white"
                 >
                   {group.title}
                 </h3>

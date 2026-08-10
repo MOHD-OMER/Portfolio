@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import SectionHeader from "./SectionHeader";
+import { Bot, BrainCircuit, Code2, Target, Building2, ScrollText } from "lucide-react";
 
 export default function Certifications() {
   const certs = [
@@ -10,7 +11,7 @@ export default function Certifications() {
       issuer: "DeepLearning.AI / Coursera",
       instructor: "Andrew Ng",
       year: "2026",
-      icon: "🤖",
+      icon: Bot,
       color: "from-blue-500 to-cyan-500",
       skills: [
         "Supervised Learning",
@@ -25,7 +26,7 @@ export default function Certifications() {
       issuer: "DeepLearning.AI / Coursera",
       instructor: "DeepLearning.AI",
       year: "2024",
-      icon: "🧠",
+      icon: BrainCircuit,
       color: "from-purple-500 to-pink-500",
       skills: ["LLM Pre-training", "Fine-tuning", "RLHF", "Deployment at Scale"],
       verify: "https://www.coursera.org/learn/generative-ai-with-llms",
@@ -35,7 +36,7 @@ export default function Certifications() {
       issuer: "University of Michigan / Coursera",
       instructor: "Dr. Charles Severance",
       year: "2023",
-      icon: "🐍",
+      icon: Code2,
       color: "from-green-500 to-emerald-500",
       skills: ["Python Basics", "Data Structures", "Web Scraping", "Databases & SQL"],
       verify: "https://www.coursera.org/specializations/python",
@@ -45,7 +46,7 @@ export default function Certifications() {
       issuer: "Google / Coursera",
       instructor: "Google Career Certificates",
       year: "2026",
-      icon: "🎯",
+      icon: Target,
       color: "from-yellow-500 to-orange-500",
       skills: ["Introduction to AI", "AI Productivity Tools", "Prompt Engineering", "Responsible AI"],
       verify: "https://coursera.org/share/afcb6ce8d64494bbea9e34539f073b13",
@@ -55,7 +56,7 @@ export default function Certifications() {
       issuer: "TechZone Software Academy",
       instructor: "TechZone",
       year: "2025",
-      icon: "🏢",
+      icon: Building2,
       color: "from-blue-500 to-indigo-500",
       skills: ["LLM Applications", "RAG Systems", "FastAPI", "Production AI Deployment"],
       verify: "/AIML%20WITH%20GEN%20AI%20INTERNSHIP.pdf",
@@ -65,7 +66,7 @@ export default function Certifications() {
       issuer: "TechZone Software Academy",
       instructor: "TechZone",
       year: "2025",
-      icon: "📜",
+      icon: ScrollText,
       color: "from-teal-500 to-cyan-500",
       skills: ["Generative AI", "Machine Learning", "Deep Learning", "AI Tools"],
       verify: "/AIML%20WITH%20GENAI%20COURSE.pdf",
@@ -119,10 +120,8 @@ export default function Certifications() {
 
               {/* Icon + Year */}
               <div className="relative flex items-center justify-between mb-5">
-                <div
-                  className={`text-3xl p-3 rounded-xl bg-gradient-to-br ${cert.color} bg-opacity-10`}
-                >
-                  {cert.icon}
+                <div className={`p-3 rounded-xl bg-gradient-to-br ${cert.color}`}>
+                  <cert.icon className="w-6 h-6 text-white" strokeWidth={1.75} aria-hidden="true" />
                 </div>
                 <span className="text-xs font-semibold px-3 py-1 rounded-full bg-white/5 text-gray-400 border border-white/10">
                   {cert.year}
@@ -131,7 +130,7 @@ export default function Certifications() {
 
               {/* Title */}
               <h3
-                className={`relative text-lg font-bold mb-1 text-transparent bg-clip-text bg-gradient-to-r ${cert.color} leading-snug`}
+                className="relative text-lg font-bold mb-1 text-white leading-snug"
               >
                 {cert.title}
               </h3>
@@ -158,7 +157,10 @@ export default function Certifications() {
                   href={cert.verify}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`inline-flex items-center gap-2 text-sm font-semibold text-transparent bg-clip-text bg-gradient-to-r ${cert.color} hover:opacity-80 transition-opacity`}
+                  /* Solid blue-400 (7.00:1) rather than the per-card gradient:
+                     the indigo-500 end of one card's gradient measured 3.98:1,
+                     under the 4.5:1 AA threshold for text this size. */
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors"
                 >
                   View Certificate
                   <svg

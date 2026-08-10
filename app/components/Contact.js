@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import SectionHeader from "./SectionHeader";
+import { Mail, Phone, Github, Linkedin } from "lucide-react";
 
 export default function Contact() {
   const [copied, setCopied]           = useState("");
@@ -16,7 +17,7 @@ export default function Contact() {
 
   const contactInfo = [
     {
-      icon: "📧",
+      icon: Mail,
       label: "Email",
       value: "mohammedabdulomer99@gmail.com",
       href: "mailto:mohammedabdulomer99@gmail.com",
@@ -24,7 +25,7 @@ export default function Contact() {
       gradient: "from-blue-400 to-cyan-400",
     },
     {
-      icon: "📱",
+      icon: Phone,
       label: "Phone",
       value: "+91 96521 59548",
       href: "tel:+919652159548",
@@ -32,7 +33,7 @@ export default function Contact() {
       gradient: "from-purple-400 to-pink-400",
     },
     {
-      icon: "💻",
+      icon: Github,
       label: "GitHub",
       value: "MOHD-OMER",
       href: "https://github.com/MOHD-OMER",
@@ -40,7 +41,7 @@ export default function Contact() {
       gradient: "from-cyan-400 to-blue-400",
     },
     {
-      icon: "💼",
+      icon: Linkedin,
       label: "LinkedIn",
       value: "Mohammad-Abdul-Omer",
       href: "https://www.linkedin.com/in/mohammad-abdul-omer",
@@ -181,7 +182,12 @@ export default function Contact() {
               >
                 <div className="flex items-start justify-between">
                   <div className="flex items-start gap-3 flex-1">
-                    <span className="text-2xl">{item.icon}</span>
+                    {typeof item.icon === "string" ? (
+                      /* HuggingFace keeps 🤗 — that emoji is their brand mark */
+                      <span className="text-2xl leading-none">{item.icon}</span>
+                    ) : (
+                      <item.icon className="w-5 h-5 mt-0.5 text-gray-300" strokeWidth={1.75} aria-hidden="true" />
+                    )}
                     <div className="flex-1 min-w-0">
                       <h3
                         className={`text-xs font-bold mb-1.5 text-transparent bg-clip-text bg-gradient-to-r ${item.gradient}`}
