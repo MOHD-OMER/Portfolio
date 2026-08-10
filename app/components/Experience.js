@@ -241,7 +241,7 @@ export default function Experience() {
         className="mt-16 text-center"
       >
         <p className="text-gray-400 text-sm mb-6">
-          Currently seeking full-time AI/ML Engineer roles — open to remote and Hyderabad-based opportunities.
+          Currently seeking full-time CSE-AIML Engineer / AI-ML Engineer roles — open to remote and Hyderabad-based opportunities.
         </p>
         <div className="flex flex-wrap gap-4 justify-center">
           <motion.a
