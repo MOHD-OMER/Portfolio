@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Live Portfolio](https://img.shields.io/badge/🌐_Live_Portfolio-mohdomer.vercel.app-blue?style=for-the-badge)](https://mohdomer.vercel.app)
-[![Next.js](https://img.shields.io/badge/Next.js_14-black?style=for-the-badge&logo=next.js)](https://nextjs.org)
+[![Next.js](https://img.shields.io/badge/Next.js_16-black?style=for-the-badge&logo=next.js)](https://nextjs.org)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-EF0076?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion)
 [![Vercel](https://img.shields.io/badge/Deployed_on_Vercel-000000?style=for-the-badge&logo=vercel)](https://vercel.com)
@@ -24,7 +24,7 @@ A modern, animated, and fully responsive AI/ML engineer portfolio — built with
 
 | Layer | Tools |
 |---|---|
-| Framework | Next.js 14 (App Router) |
+| Framework | Next.js 16 (App Router) |
 | Styling | Tailwind CSS + custom CSS design system |
 | Animations | Framer Motion |
 | Font | Inter via `next/font/google` |
@@ -39,13 +39,15 @@ A modern, animated, and fully responsive AI/ML engineer portfolio — built with
 - 📱 Fully responsive — mobile, tablet, and desktop
 - 🎯 Active navbar highlight — updates on scroll and on click
 - 🤖 Hero section with name reveal, rotating titles, floating particles, and mouse-follower effects
-- 🧠 Skills section with 6 grouped categories covering full AI/ML stack
+- 🧠 Skills section with 7 grouped categories covering the full AI/ML stack
 - 🛠️ Projects section with category filter, 10 projects, and hover-reveal details
 - 💼 Experience section with timeline layout and metrics
-- 🏅 Certifications section
+- 🏅 Certifications section with 6 verified credentials
 - 📬 Contact section with availability badge, copy-to-clipboard, and mailto form
-- 📄 Resume download button
+- 📄 Resume download button (served uncached so the latest PDF always wins)
 - 🔗 Social links: GitHub · LinkedIn · HuggingFace · Email · WhatsApp
+- 🔍 SEO: generated Open Graph card, favicon, `robots.txt`, and `sitemap.xml`
+- ♿ Honours `prefers-reduced-motion` across CSS and Framer Motion animations
 
 ---
 
@@ -58,17 +60,24 @@ Portfolio/
 │   │   ├── Hero.js           # Animated hero with particles & typing effect
 │   │   ├── NavBar.js         # Fixed navbar with active section tracking
 │   │   ├── SectionHeader.js  # Shared animated section header component
-│   │   ├── Skills.js         # 6 skill groups + stats bar
+│   │   ├── MotionProvider.js # Applies prefers-reduced-motion to Framer Motion
+│   │   ├── Skills.js         # 7 skill groups + stats bar
 │   │   ├── Projects.js       # 10 projects with filter tabs
 │   │   ├── Experience.js     # Timeline with metrics
-│   │   ├── Certifications.js # 3 verified certificates
+│   │   ├── Certifications.js # 6 verified certificates
 │   │   └── Contact.js        # Contact cards + mailto form
 │   ├── globals.css           # Design tokens, animations, utility classes
 │   ├── layout.js             # Root layout with metadata + Inter font
+│   ├── icon.js               # Generated favicon
+│   ├── opengraph-image.js    # Generated social share card
+│   ├── robots.js             # robots.txt
+│   ├── sitemap.js            # sitemap.xml
+│   ├── site.js               # Shared SITE_URL constant
 │   └── page.js               # Main page — assembles all sections
 ├── public/
 │   ├── profile.png
-│   └── resume.pdf
+│   └── resume_2026.pdf
+├── next.config.js
 ├── tailwind.config.js
 ├── postcss.config.js
 └── jsconfig.json

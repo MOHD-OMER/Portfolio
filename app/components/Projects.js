@@ -187,7 +187,9 @@ export default function Projects() {
         {categories.map((category) => (
           <button
             key={category}
+            type="button"
             onClick={() => setActiveFilter(category)}
+            aria-pressed={activeFilter === category}
             className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
               activeFilter === category
                 ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg shadow-blue-500/30"
@@ -262,8 +264,12 @@ export default function Projects() {
                 </div>
               )}
 
-              {/* Details — display:none when not hovered (truly zero height, no layout gap) */}
-              <div className="hidden group-hover:block mb-4">
+              {/*
+                Details — display:none when not hovered (truly zero height, no
+                layout gap). group-focus-within also reveals it when a keyboard
+                user tabs into the card, which hover alone never did.
+              */}
+              <div className="hidden group-hover:block group-focus-within:block mb-4">
                 <p className="text-gray-400 text-xs italic border-l-2 border-white/20 pl-3 leading-relaxed">
                   {project.details}
                 </p>

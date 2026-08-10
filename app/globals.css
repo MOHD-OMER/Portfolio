@@ -480,6 +480,36 @@ body::after {
   100% { background-position:  1000px 0; }
 }
 
+/* ============================================
+   Hero Particles
+   ============================================
+   These used to be ~85 Framer Motion animations driven from JS on every frame,
+   which pinned the main thread: a 50ms setInterval measured 4x slow on desktop
+   (and exactly on time on mobile, where the particles don't render). That lag
+   was visible — the hero name reveal crawled instead of typing.
+
+   transform/opacity keyframes run on the compositor, so the same effect now
+   costs the main thread nothing. Per-particle values come in as custom
+   properties from Hero.js, and the prefers-reduced-motion block below disables
+   them for free. */
+@keyframes heroFloat {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.3; }
+  50%      { transform: translate3d(var(--px), var(--py), 0) scale(1.6); opacity: 0.9; }
+}
+
+@keyframes heroPulse {
+  0%, 100% { transform: scale(1);   opacity: 0.5; }
+  50%      { transform: scale(1.4); opacity: 0.8; }
+}
+
+.hero-particle {
+  animation: heroFloat var(--dur) ease-in-out var(--delay) infinite;
+}
+
+.hero-pulse {
+  animation: heroPulse var(--dur) ease-in-out var(--delay) infinite;
+}
+
 .animate-fade-in       { animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
 .animate-slide-in-left { animation: slideInLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
 .animate-slide-in-right{ animation: slideInRight 0.8s cubic-bezier(0.4, 0, 0.2, 1); }

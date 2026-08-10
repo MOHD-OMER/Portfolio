@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import SectionHeader from "./SectionHeader";
 
 export default function Skills() {
   const skillGroups = [
@@ -63,6 +64,7 @@ export default function Skills() {
       color: "from-orange-500 to-red-500",
       skills: [
         "Python",
+        "Java",
         "SQL",
         "REST APIs",
         "Django",
@@ -83,11 +85,24 @@ export default function Skills() {
         "VS Code",
       ],
     },
+    {
+      title: "Productivity & Documentation",
+      icon: "📊",
+      color: "from-amber-500 to-yellow-500",
+      skills: [
+        "Microsoft Excel",
+        "Microsoft Word",
+        "Google Workspace",
+      ],
+    },
   ];
 
+  // Kept in sync with Projects.js (10 projects, 8 with live demos) and the
+  // site description in layout.js. These previously read 9 and 6, so the same
+  // page advertised three different project counts.
   const stats = [
     {
-      value: "9",
+      value: "10",
       label: "Projects Built",
       gradient: "from-blue-400 to-cyan-400",
     },
@@ -97,7 +112,7 @@ export default function Skills() {
       gradient: "from-purple-400 to-pink-400",
     },
     {
-      value: "6",
+      value: "8",
       label: "Live Deployments",
       gradient: "from-green-400 to-emerald-400",
     },
@@ -131,28 +146,11 @@ export default function Skills() {
       <div className="absolute -top-20 -left-20 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl" />
       <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl" />
 
-      {/* Section Header */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-        className="mb-12 text-center"
-      >
-        <h2 className="text-5xl md:text-6xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 inline-block">
-          Technical Skills
-        </h2>
-        <motion.div
-          className="h-1.5 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mx-auto"
-          initial={{ width: 0 }}
-          whileInView={{ width: "120px" }}
-          transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
-        />
-        <p className="mt-4 text-gray-400 text-lg max-w-2xl mx-auto">
-          My core stack — tools I use to build and ship real AI systems
-        </p>
-      </motion.div>
+      {/* Section Header — was a hand-rolled copy of SectionHeader; now shared */}
+      <SectionHeader
+        title="Technical Skills"
+        subtitle="My core stack — tools I use to build and ship real AI systems"
+      />
 
       {/* Skills Grid */}
       <motion.div

@@ -58,10 +58,29 @@ export default function Contact() {
     },
   ];
 
-  const handleCopy = (text, label) => {
-    navigator.clipboard.writeText(text);
-    setCopied(label);
-    setTimeout(() => setCopied(""), 2000);
+  // navigator.clipboard is undefined on insecure origins and older mobile
+  // browsers — an unguarded call threw and left the button doing nothing.
+  const handleCopy = async (text, label) => {
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        textarea.setAttribute("readonly", "");
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+      }
+      setCopied(label);
+      setTimeout(() => setCopied(""), 2000);
+    } catch {
+      // Clipboard blocked (permissions, insecure context) — leave the icon as-is
+      // rather than claiming a copy that never happened.
+    }
   };
 
   const handleInputChange = (e) => {
@@ -238,6 +257,8 @@ export default function Contact() {
             <AnimatePresence>
               {formSubmitted && (
                 <motion.div
+                  role="status"
+                  aria-live="polite"
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
@@ -249,16 +270,27 @@ export default function Contact() {
               )}
             </AnimatePresence>
 
-            {/* Proper <form> element — enables Enter-to-submit and native validation */}
-            <form onSubmit={handleSubmit} noValidate className="space-y-4">
+            {/*
+              `noValidate` used to be set here, which switched off the browser
+              validation the `required` attributes were asking for. Submitting an
+              empty form then hit the guard in handleSubmit and returned silently
+              — no error, no mail client, no feedback. Dropping it lets the
+              browser show its own "please fill in this field" prompts.
+            */}
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                  <label
+                    htmlFor="contact-name"
+                    className="block text-sm font-medium text-gray-300 mb-2"
+                  >
                     Name <span className="text-blue-400">*</span>
                   </label>
                   <input
+                    id="contact-name"
                     type="text"
                     name="name"
+                    autoComplete="name"
                     value={formData.name}
                     onChange={handleInputChange}
                     required
@@ -267,12 +299,17 @@ export default function Contact() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                  <label
+                    htmlFor="contact-email"
+                    className="block text-sm font-medium text-gray-300 mb-2"
+                  >
                     Email <span className="text-blue-400">*</span>
                   </label>
                   <input
+                    id="contact-email"
                     type="email"
                     name="email"
+                    autoComplete="email"
                     value={formData.email}
                     onChange={handleInputChange}
                     required
@@ -283,10 +320,14 @@ export default function Contact() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label
+                  htmlFor="contact-subject"
+                  className="block text-sm font-medium text-gray-300 mb-2"
+                >
                   Subject
                 </label>
                 <input
+                  id="contact-subject"
                   type="text"
                   name="subject"
                   value={formData.subject}
@@ -297,10 +338,14 @@ export default function Contact() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label
+                  htmlFor="contact-message"
+                  className="block text-sm font-medium text-gray-300 mb-2"
+                >
                   Message <span className="text-blue-400">*</span>
                 </label>
                 <textarea
+                  id="contact-message"
                   name="message"
                   value={formData.message}
                   onChange={handleInputChange}

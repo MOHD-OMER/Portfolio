@@ -1,37 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, LazyMotion, domAnimation } from "framer-motion";
+import { motion } from "framer-motion";
+import Hero from "./components/Hero";
 import Projects from "./components/Projects";
 import Skills from "./components/Skills";
 import Experience from "./components/Experience";
 import Contact from "./components/Contact";
 import Certifications from "./components/Certifications";
-import SectionHeader from "./components/SectionHeader";
-
-// ── Client-only Hero (dynamic import avoids SSR hydration mismatch) ──────────
-function ClientOnlyHero() {
-  const [Hero, setHero]       = useState(null);
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-    const timer = setTimeout(() => {
-      import("./components/Hero").then((mod) => setHero(() => mod.default));
-    }, 50);
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (!isClient || !Hero) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-900">
-        <div className="text-gray-400 animate-pulse">Loading...</div>
-      </div>
-    );
-  }
-
-  return <Hero />;
-}
 
 // ── About — inline because it shares the page's glassmorphism card pattern ───
 function About() {
@@ -185,39 +160,37 @@ function About() {
 // ── Page ─────────────────────────────────────────────────────────────────────
 export default function Page() {
   return (
-    <LazyMotion features={domAnimation}>
-      <div>
-        {/* 00 — Hero */}
-        <ClientOnlyHero />
+    <div>
+      {/* 00 — Hero */}
+      <Hero />
 
-        {/* 01 — About */}
-        <About />
+      {/* 01 — About */}
+      <About />
 
-        {/* 02 — Skills */}
-        <section id="skills" className="section main-container">
-          <Skills />
-        </section>
+      {/* 02 — Skills */}
+      <section id="skills" className="section main-container">
+        <Skills />
+      </section>
 
-        {/* 03 — Projects */}
-        <section id="projects" className="section main-container">
-          <Projects />
-        </section>
+      {/* 03 — Projects */}
+      <section id="projects" className="section main-container">
+        <Projects />
+      </section>
 
-        {/* 04 — Experience */}
-        <section id="experience" className="section main-container">
-          <Experience />
-        </section>
+      {/* 04 — Experience */}
+      <section id="experience" className="section main-container">
+        <Experience />
+      </section>
 
-        {/* Certifications — sits between Experience and Contact, no nav item needed */}
-        <section id="certifications" className="section main-container">
-          <Certifications />
-        </section>
+      {/* 05 — Certifications */}
+      <section id="certifications" className="section main-container">
+        <Certifications />
+      </section>
 
-        {/* 05 — Contact */}
-        <section id="contact" className="section main-container">
-          <Contact />
-        </section>
-      </div>
-    </LazyMotion>
+      {/* 06 — Contact */}
+      <section id="contact" className="section main-container">
+        <Contact />
+      </section>
+    </div>
   );
 }

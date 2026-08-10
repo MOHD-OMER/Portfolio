@@ -83,7 +83,10 @@ export default function Certifications() {
   };
 
   return (
-    <section id="certifications" className="relative">
+    /* No id here — page.js already wraps this in <section id="certifications">.
+       Two elements shared that id, which is invalid HTML and made the navbar's
+       anchor jump land on whichever one the browser found first. */
+    <div className="relative">
       {/* Background decorative elements */}
       <div className="absolute -top-20 left-0 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl" />
       <div className="absolute -bottom-20 right-0 w-72 h-72 bg-purple-500/5 rounded-full blur-3xl" />
@@ -182,6 +185,6 @@ export default function Certifications() {
           </motion.div>
         ))}
       </motion.div>
-    </section>
+    </div>
   );
 }

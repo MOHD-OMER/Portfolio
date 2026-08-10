@@ -1,9 +1,104 @@
 "use client";
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
-import { useEffect, useState, useRef, useMemo, useCallback } from "react";
+import { useEffect, useState, useRef, useMemo, useCallback, memo } from "react";
+
+/**
+ * One mouse-follower dot. Split into its own component so each dot can derive
+ * its offset from the shared motion values with useTransform — motion values
+ * update the DOM outside of React, so moving the mouse no longer re-renders
+ * the whole hero (85 animated nodes) on every pointer event.
+ */
+function MouseParticle({ particle, mouseX, mouseY }) {
+  const x = useTransform(
+    mouseX,
+    (v) => v * 0.5 * (particle.radius / 100) * Math.cos(particle.angle)
+  );
+  const y = useTransform(
+    mouseY,
+    (v) => v * 0.5 * (particle.radius / 100) * Math.sin(particle.angle)
+  );
+
+  // Outer node owns the mouse-driven x/y transform, inner node owns the CSS
+  // pulse — keeping them on separate elements means the two never fight over
+  // the same `transform` property.
+  return (
+    <motion.div
+      className="absolute"
+      style={{ left: "50%", top: "50%", x, y }}
+    >
+      <div
+        className="hero-pulse rounded-full"
+        style={{
+          width: "5px",
+          height: "5px",
+          background: particle.isEven
+            ? "rgba(59, 130, 246, 0.8)"
+            : "rgba(139, 92, 246, 0.7)",
+          boxShadow: `0 0 12px ${
+            particle.isEven ? "rgba(59, 130, 246, 1)" : "rgba(139, 92, 246, 0.9)"
+          }`,
+          "--dur": `${particle.duration}s`,
+          "--delay": `${particle.delay}s`,
+        }}
+      />
+    </motion.div>
+  );
+}
+
+/**
+ * The two particle layers are memoised so Hero's own state changes — the
+ * name-reveal tick every 50ms and the title rotation every 3s — no longer
+ * re-render 85 animated nodes each time. (The larger cost was the blurred
+ * background blobs; see the willChange note further down.)
+ */
+const MouseParticles = memo(function MouseParticles({ particles, mouseX, mouseY }) {
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      {particles.map((p, i) => (
+        <MouseParticle key={`mouse-${i}`} particle={p} mouseX={mouseX} mouseY={mouseY} />
+      ))}
+    </div>
+  );
+});
+
+const FloatingParticles = memo(function FloatingParticles({ particles }) {
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      {particles.map((p, i) => (
+        <div
+          key={i}
+          className="hero-particle absolute rounded-full"
+          style={{
+            width: `${p.size}px`,
+            height: `${p.size}px`,
+            background:
+              p.colorType === 0
+                ? "rgba(59, 130, 246, 0.7)"
+                : p.colorType === 1
+                ? "rgba(139, 92, 246, 0.6)"
+                : "rgba(236, 72, 153, 0.5)",
+            left: `${p.initialX}%`,
+            top: `${p.initialY}%`,
+            boxShadow: `0 0 ${p.size * 4}px ${
+              p.colorType === 0
+                ? "rgba(59, 130, 246, 0.9)"
+                : p.colorType === 1
+                ? "rgba(139, 92, 246, 0.8)"
+                : "rgba(236, 72, 153, 0.7)"
+            }`,
+            filter: "blur(1px)",
+            "--px": `${p.xMovement}px`,
+            "--py": `${p.yMovement}px`,
+            "--dur": `${p.duration}s`,
+            "--delay": `${p.delay}s`,
+          }}
+        />
+      ))}
+    </div>
+  );
+});
 
 export default function Hero() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
   const [typingComplete, setTypingComplete] = useState(false);
   const [scrambledName, setScrambledName] = useState("");
@@ -47,14 +142,13 @@ export default function Hero() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  // Writes to motion values only — no setState, so this never triggers a
+  // React render. Previously every mousemove set component state and re-rendered
+  // the entire hero, including all 60 floating particles.
   const handleMouseMove = useCallback(
     (e) => {
       if (isMobile) return;
       const { clientX, clientY } = e;
-      setMousePosition({
-        x: (clientX / window.innerWidth - 0.5) * 20,
-        y: (clientY / window.innerHeight - 0.5) * 20,
-      });
       mouseX.set((clientX / window.innerWidth - 0.5) * 40);
       mouseY.set((clientY / window.innerHeight - 0.5) * 40);
     },
@@ -221,13 +315,25 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen pt-20 sm:pt-24 md:pt-28 flex flex-col items-center justify-center text-center overflow-hidden px-4"
     >
-      {/* Layered Animated Background */}
+      {/*
+        Layered Animated Background.
+
+        `willChange: transform` is load-bearing, not a micro-optimisation. These
+        are 700px circles carrying a 160px blur filter, animated on x/y/scale.
+        Without the hint, Chrome re-rasterises that blurred surface every single
+        frame on the main thread — measured, it made a 50ms timer run 5x slow
+        and visibly crawled the hero name reveal. With it, the blur is
+        rasterised once into its own layer and only transformed after that:
+        identical output, main thread free. Only two elements get the hint, so
+        there's no layer explosion.
+      */}
       <div className="absolute inset-0 opacity-25 md:opacity-30 overflow-hidden">
         <motion.div
           className="absolute top-0 left-1/4 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[80px] sm:blur-[120px] md:blur-[160px]"
           style={{
             background:
               "radial-gradient(circle, rgba(59, 130, 246, 0.25) 0%, rgba(79, 70, 229, 0.15) 50%, transparent 70%)",
+            willChange: "transform",
           }}
           animate={
             isMobile
@@ -241,6 +347,7 @@ export default function Hero() {
           style={{
             background:
               "radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.15) 50%, transparent 70%)",
+            willChange: "transform",
           }}
           animate={
             isMobile
@@ -293,11 +400,6 @@ export default function Hero() {
           <motion.h1
             variants={itemVariants}
             className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold mb-2 sm:mb-3 md:mb-4 relative text-center tracking-tight max-w-[95%] sm:max-w-full mx-auto leading-tight px-4 sm:px-6 md:px-8 whitespace-normal sm:whitespace-nowrap"
-            style={{
-              transform: isMobile
-                ? "none"
-                : `translate(${mousePosition.x * 0.01}px, ${mousePosition.y * 0.01}px)`,
-            }}
           >
             <motion.span
               className="relative inline-block"
@@ -464,83 +566,17 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Floating Particles — Desktop Only, data memoized above */}
+        {/* Particle layers — desktop only; both memoised, see components above */}
+        {!isMobile && <FloatingParticles particles={floatingParticles} />}
+
         {!isMobile && (
-          <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            {floatingParticles.map((p, i) => (
-              <motion.div
-                key={i}
-                className="absolute rounded-full"
-                style={{
-                  width: `${p.size}px`,
-                  height: `${p.size}px`,
-                  background:
-                    p.colorType === 0
-                      ? "rgba(59, 130, 246, 0.7)"
-                      : p.colorType === 1
-                      ? "rgba(139, 92, 246, 0.6)"
-                      : "rgba(236, 72, 153, 0.5)",
-                  left: `${p.initialX}%`,
-                  top: `${p.initialY}%`,
-                  boxShadow: `0 0 ${p.size * 4}px ${
-                    p.colorType === 0
-                      ? "rgba(59, 130, 246, 0.9)"
-                      : p.colorType === 1
-                      ? "rgba(139, 92, 246, 0.8)"
-                      : "rgba(236, 72, 153, 0.7)"
-                  }`,
-                  filter: "blur(1px)",
-                }}
-                animate={{
-                  y: [0, p.yMovement, 0],
-                  x: [0, p.xMovement, 0],
-                  opacity: [0.3, 0.9, 0.3],
-                  scale: [1, 1.6, 1],
-                }}
-                transition={{
-                  duration: p.duration,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: p.delay,
-                }}
-              />
-            ))}
-          </div>
+          <MouseParticles
+            particles={mouseParticles}
+            mouseX={smoothMouseX}
+            mouseY={smoothMouseY}
+          />
         )}
 
-        {/* Mouse Follower Particles — Desktop Only, data memoized above */}
-        {!isMobile && (
-          <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            {mouseParticles.map((p, i) => (
-              <motion.div
-                key={`mouse-${i}`}
-                className="absolute rounded-full"
-                style={{
-                  width: "5px",
-                  height: "5px",
-                  background: p.isEven ? "rgba(59, 130, 246, 0.8)" : "rgba(139, 92, 246, 0.7)",
-                  boxShadow: `0 0 12px ${
-                    p.isEven ? "rgba(59, 130, 246, 1)" : "rgba(139, 92, 246, 0.9)"
-                  }`,
-                  left: "50%",
-                  top: "50%",
-                  x: mousePosition.x * (p.radius / 100) * Math.cos(p.angle),
-                  y: mousePosition.y * (p.radius / 100) * Math.sin(p.angle),
-                }}
-                animate={{
-                  scale: [1, 1.4, 1],
-                  opacity: [0.5, 0.8, 0.5],
-                }}
-                transition={{
-                  duration: p.duration,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: p.delay,
-                }}
-              />
-            ))}
-          </div>
-        )}
       </motion.div>
     </section>
   );
