@@ -1,273 +1,547 @@
 "use client";
+import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
+import { useEffect, useState, useRef, useMemo, useCallback } from "react";
 
-import { motion } from "framer-motion";
-import SectionHeader from "./SectionHeader";
+export default function Hero() {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
+  const [typingComplete, setTypingComplete] = useState(false);
+  const [scrambledName, setScrambledName] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const sectionRef = useRef(null);
+  const [sectionHeight, setSectionHeight] = useState(0);
 
-export default function Experience() {
-  const experiences = [
-    {
-      role: "Artificial Intelligence Intern",
-      company: "TechZone Software Academy for Training & Research",
-      location: "Hyderabad, India",
-      period: "March 2025 – June 2025",
-      duration: "4 months",
-      type: "Internship",
-      typeBadgeClass: "text-blue-400 bg-blue-500/10 border-blue-500/30",
-      icon: "🤖",
-      color: "from-blue-500 to-cyan-500",
-      achievements: [
-        "Architected and deployed 4 production-grade AI systems for a live ed-tech platform serving students and educators across Hyderabad",
-        "Engineered a RAG-powered AI tutoring system using LangChain and vector databases, delivering contextual real-time academic support",
-        "Designed and shipped an automated PTE mock-test engine with LLM-based scoring across reading, writing, and listening modules",
-        "Built an MCQ generation and attendance automation system, eliminating manual academic tracking across departments",
-        "Delivered all systems as production-ready FastAPI services with REST-based orchestration and continuous prompt optimization",
-      ],
-      technologies: [
-        "Python", "FastAPI", "LangChain", "OpenAI API",
-        "RAG", "Vector Databases", "Prompt Engineering",
-      ],
-      highlights: [
-        { metric: "4", label: "AI Systems Deployed" },
-        { metric: "3", label: "LLM Applications" },
-        { metric: "1", label: "RAG Pipeline Built" },
-      ],
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const smoothMouseX = useSpring(mouseX, { damping: 30, stiffness: 200 });
+  const smoothMouseY = useSpring(mouseY, { damping: 30, stiffness: 200 });
+
+  const { scrollY } = useScroll({ layoutEffect: false });
+
+  useEffect(() => {
+    const updateHeight = () => {
+      if (sectionRef.current) {
+        setSectionHeight(sectionRef.current.offsetHeight);
+      } else {
+        setSectionHeight(window.innerHeight);
+      }
+    };
+    updateHeight();
+    window.addEventListener("resize", updateHeight);
+    return () => window.removeEventListener("resize", updateHeight);
+  }, []);
+
+  const progress = useTransform(scrollY, [0, sectionHeight], [0, 1]);
+  const opacity = useTransform(progress, [0, 1], [1, 0]);
+  const y = useTransform(progress, [0, 1], [0, 100]);
+
+  const gridX = useTransform(smoothMouseX, (val) => val * 0.5);
+  const gridY = useTransform(smoothMouseY, (val) => val * 0.5);
+
+  useEffect(() => {
+    setMounted(true);
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  const handleMouseMove = useCallback(
+    (e) => {
+      if (isMobile) return;
+      const { clientX, clientY } = e;
+      setMousePosition({
+        x: (clientX / window.innerWidth - 0.5) * 20,
+        y: (clientY / window.innerHeight - 0.5) * 20,
+      });
+      mouseX.set((clientX / window.innerWidth - 0.5) * 40);
+      mouseY.set((clientY / window.innerHeight - 0.5) * 40);
     },
-    {
-      role: "AI/ML Intern",
-      company: "RAM Innovative Infotech",
-      location: "Hyderabad, India",
-      period: "November 2024",
-      duration: "1 month",
-      type: "College Training Program",
-      typeBadgeClass: "text-purple-400 bg-purple-500/10 border-purple-500/30",
-      icon: "🎓",
-      color: "from-purple-500 to-pink-500",
-      achievements: [
-        "Completed an intensive AI/ML training program organised in collaboration with Lords Institute CSE-AIML department",
-        "Developed a disease prediction ML model using Python and Scikit-learn, applying supervised learning classification on medical datasets",
-        "Gained hands-on exposure to Django for web-based AI integration and data preprocessing pipeline design",
-      ],
-      technologies: [
-        "Python", "Scikit-learn", "Django",
-        "Machine Learning", "Data Preprocessing",
-      ],
-      highlights: [
-        { metric: "1", label: "ML Model Built" },
-        { metric: "5", label: "Algorithms Explored" },
-        { metric: "1", label: "Web App Integrated" },
-      ],
-    },
-  ];
+    [mouseX, mouseY, isMobile]
+  );
+
+  useEffect(() => {
+    const fullName = "Mohammed Abdul Omer";
+    let frame = 0;
+    const interval = setInterval(() => {
+      frame++;
+      const revealedChars = Math.floor(frame / 2);
+      if (revealedChars <= fullName.length) {
+        setScrambledName(fullName.substring(0, revealedChars));
+      } else {
+        setScrambledName(fullName);
+        clearInterval(interval);
+      }
+    }, 50);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (!isMobile && mounted) {
+      window.addEventListener("mousemove", handleMouseMove);
+      return () => window.removeEventListener("mousemove", handleMouseMove);
+    }
+  }, [handleMouseMove, isMobile, mounted]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setTypingComplete(true), 2800);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const titles = useMemo(
+    () => [
+      "CSE-AIML Engineer",
+      "Machine Learning Engineer",
+      "Generative AI Engineer",
+      "LLM Engineer",
+      "MLOps Engineer",
+      "Deep Learning Engineer",
+    ],
+    []
+  );
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTitleIndex((prev) => (prev + 1) % titles.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [titles.length]);
+
+  // ── Memoized particle data ─────────────────────────────────────────────────
+  // Previously these used Math.random() inline in JSX, which regenerated on
+  // every render and caused hydration mismatches. Memoized once here instead.
+  const floatingParticles = useMemo(
+    () =>
+      Array.from({ length: 60 }, (_, i) => ({
+        size: Math.random() * 4 + 1,
+        initialX: Math.random() * 100,
+        initialY: Math.random() * 100,
+        duration: Math.random() * 12 + 18,
+        delay: Math.random() * 5,
+        xMovement: (Math.random() - 0.5) * 80,
+        yMovement: -120 - Math.random() * 40,
+        colorType: i % 3,
+      })),
+    []
+  );
+
+  const mouseParticles = useMemo(
+    () =>
+      Array.from({ length: 25 }, (_, i) => ({
+        angle: (i / 25) * Math.PI * 2,
+        radius: 120 + i * 12,
+        isEven: i % 2 === 0,
+        duration: 2 + i * 0.1,
+        delay: i * 0.05,
+      })),
+    []
+  );
+  // ──────────────────────────────────────────────────────────────────────────
+
+  // ── Social links ──────────────────────────────────────────────────────────
+  // Each entry supports either `icon` (SVG path string) or `emoji` (string).
+  // HuggingFace uses emoji because their logo isn't a clean 24×24 path.
+  const socialLinks = useMemo(
+    () => [
+      {
+        icon: "M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z",
+        label: "GitHub",
+        href: "https://github.com/MOHD-OMER",
+      },
+      {
+        icon: "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z",
+        label: "LinkedIn",
+        href: "https://www.linkedin.com/in/mohammad-abdul-omer/",
+      },
+      {
+        // HuggingFace — emoji icon since their logo has no clean 24×24 SVG path
+        emoji: "🤗",
+        label: "HuggingFace",
+        href: "https://huggingface.co/mohdomer",
+      },
+      {
+        icon: "M0 4a2 2 0 012-2h20a2 2 0 012 2v16a2 2 0 01-2 2H2a2 2 0 01-2-2V4zm2-1a1 1 0 00-1 1v.217l10 5.455 10-5.455V4a1 1 0 00-1-1H2zm0 2.434V20a1 1 0 001 1h18a1 1 0 001-1V5.434l-9.668 5.275a.5.5 0 01-.464 0L2 5.434z",
+        label: "Email",
+        href: "mailto:mohammedabdulomer99@gmail.com",
+      },
+      {
+        icon: "M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z",
+        label: "WhatsApp",
+        href: "https://wa.me/919652159548",
+      },
+      {
+        // Fixed: was a bar-chart path before. This is a proper document/file icon.
+        icon: "M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z",
+        label: "Resume",
+        href: "/resume_2026.pdf",
+      },
+    ],
+    []
+  );
+  // ──────────────────────────────────────────────────────────────────────────
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.12, delayChildren: 0.3 },
+    },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    hidden: { opacity: 0, y: 40, filter: "blur(12px)" },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: { duration: 0.9, ease: [0.19, 1, 0.22, 1] },
+    },
   };
 
-  return (
-    <div className="relative">
-      {/* Background decorative elements */}
-      <div className="absolute -top-20 -left-20 w-72 h-72 bg-cyan-500/5 rounded-full blur-3xl" />
-      <div className="absolute -bottom-20 right-0 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl" />
+  if (!mounted) {
+    return (
+      <section
+        id="home"
+        className="relative min-h-screen pt-20 sm:pt-24 md:pt-28 flex flex-col items-center justify-center text-center overflow-hidden px-4"
+      >
+        <div className="relative z-10 w-full flex flex-col items-center">
+          <div className="animate-pulse flex flex-col items-center gap-6">
+            <div className="h-12 w-96 max-w-full bg-gray-800 rounded" />
+            <div className="h-8 w-64 max-w-full bg-gray-800 rounded" />
+          </div>
+        </div>
+      </section>
+    );
+  }
 
-      {/* Section Header — reuses shared component */}
-      <SectionHeader
-        title="Experience"
-        subtitle="Building and shipping production AI systems"
+  return (
+    <section
+      ref={sectionRef}
+      id="home"
+      className="relative min-h-screen pt-20 sm:pt-24 md:pt-28 flex flex-col items-center justify-center text-center overflow-hidden px-4"
+    >
+      {/* Layered Animated Background */}
+      <div className="absolute inset-0 opacity-25 md:opacity-30 overflow-hidden">
+        <motion.div
+          className="absolute top-0 left-1/4 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[80px] sm:blur-[120px] md:blur-[160px]"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(59, 130, 246, 0.25) 0%, rgba(79, 70, 229, 0.15) 50%, transparent 70%)",
+          }}
+          animate={
+            isMobile
+              ? { x: [0, 50, 0], y: [0, -30, 0], scale: [1, 1.1, 1] }
+              : { x: [0, 75, -50, 0], y: [0, -40, 30, 0], scale: [1, 1.2, 1.1, 1] }
+          }
+          transition={{ duration: isMobile ? 20 : 25, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-0 right-1/4 w-[280px] h-[280px] sm:w-[450px] sm:h-[450px] md:w-[650px] md:h-[650px] rounded-full blur-[70px] sm:blur-[110px] md:blur-[140px]"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.15) 50%, transparent 70%)",
+          }}
+          animate={
+            isMobile
+              ? { x: [0, -40, 0], y: [0, 40, 0], scale: [1, 1.1, 1] }
+              : { x: [0, -60, 40, 0], y: [0, 50, -30, 0], scale: [1, 1.15, 1.1, 1] }
+          }
+          transition={{
+            duration: isMobile ? 22 : 28,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1.5,
+          }}
+        />
+      </div>
+
+      {/* Dynamic Grid Pattern - Desktop Only */}
+      {!isMobile && (
+        <motion.div
+          className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage: `linear-gradient(rgba(100,150,255,0.2) 1px, transparent 1px),
+                             linear-gradient(90deg, rgba(100,150,255,0.2) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+            x: gridX,
+            y: gridY,
+          }}
+        />
+      )}
+
+      {/* Radial Spotlight */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(circle 600px at 50% 40%, rgba(59, 130, 246, 0.08), transparent 70%)",
+        }}
+        animate={{ opacity: [0.3, 0.5, 0.3] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Timeline */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="relative max-w-4xl mx-auto"
-      >
-        {/* Vertical timeline line */}
-        <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-pink-500 opacity-20 hidden md:block" />
-
-        {experiences.map((exp, idx) => (
-          <motion.div key={idx} variants={itemVariants} className="relative mb-12 last:mb-0">
-
-            {/* Timeline dot */}
-            <div className="absolute left-8 w-4 h-4 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full border-4 border-gray-900 hidden md:block -translate-x-[7px] mt-8" />
-
-            {/* Card */}
-            <div className="md:ml-20 relative group">
-              <motion.div
-                whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                className="relative rounded-2xl p-8 bg-gradient-to-br from-white/[0.07] to-white/[0.03] backdrop-blur-xl border border-white/10 shadow-lg hover:shadow-2xl hover:border-white/20 transition-all duration-300 overflow-hidden"
+      <motion.div style={{ opacity, y }} className="relative z-10 w-full flex flex-col items-center">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          viewport={{ once: true }}
+          className="w-full flex flex-col items-center max-w-7xl mx-auto"
+        >
+          {/* Name */}
+          <motion.h1
+            variants={itemVariants}
+            className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold mb-2 sm:mb-3 md:mb-4 relative text-center tracking-tight max-w-[95%] sm:max-w-full mx-auto leading-tight px-4 sm:px-6 md:px-8 whitespace-normal sm:whitespace-nowrap"
+            style={{
+              transform: isMobile
+                ? "none"
+                : `translate(${mousePosition.x * 0.01}px, ${mousePosition.y * 0.01}px)`,
+            }}
+          >
+            <motion.span
+              className="relative inline-block"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+              whileHover={!isMobile ? { scale: 1.01, transition: { duration: 0.3, ease: "easeOut" } } : {}}
+            >
+              <motion.span
+                className="relative inline-block font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-blue-400 to-purple-400"
+                style={{
+                  backgroundSize: "200% auto",
+                  WebkitTextStroke: "0.5px rgba(59, 130, 246, 0.3)",
+                  textShadow:
+                    "0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(139, 92, 246, 0.3)",
+                }}
+                animate={{ backgroundPosition: ["0% center", "100% center", "0% center"] }}
+                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
               >
-                {/* Hover glow */}
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${exp.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}
-                />
+                {scrambledName}
+              </motion.span>
 
-                {/* Header */}
-                <div className="relative flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
-                  <div className="flex items-start gap-4">
-                    <div
-                      className={`text-4xl p-3 rounded-xl bg-gradient-to-br ${exp.color} bg-opacity-10 flex-shrink-0`}
-                    >
-                      {exp.icon}
-                    </div>
-                    <div>
-                      <h3
-                        className={`text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${exp.color} mb-1`}
-                      >
-                        {exp.role}
-                      </h3>
-                      <p className="text-lg text-gray-300 font-semibold mb-1">
-                        {exp.company}
-                      </p>
-                      <p className="text-sm text-gray-400 flex items-center gap-2">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                        {exp.location}
-                      </p>
-                    </div>
-                  </div>
+              <motion.span
+                animate={{ opacity: typingComplete ? [1, 0, 1] : 1 }}
+                transition={{ duration: 0.6, repeat: typingComplete ? Infinity : 0 }}
+                className="inline-block ml-0.5 sm:ml-1 md:ml-1.5 text-blue-400 font-normal text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
+              >
+                |
+              </motion.span>
+            </motion.span>
 
-                  {/* Period + badges */}
-                  <div className="flex flex-col items-start md:items-end gap-2 flex-shrink-0">
-                    <div className="flex items-center gap-2 text-sm text-gray-400">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                      </svg>
-                      {exp.period}
-                    </div>
-                    <span className="text-xs px-3 py-1 rounded-full bg-white/5 text-gray-400 border border-white/10">
-                      {exp.duration}
-                    </span>
-                    {/*
-                      Fixed: previously used bg-gradient + text-transparent bg-clip-text on the
-                      same element — the text became invisible (clipping a gradient onto a gradient
-                      background cancels out). Now uses solid color classes via typeBadgeClass.
-                    */}
-                    <span
-                      className={`text-xs px-3 py-1 rounded-full font-semibold border ${exp.typeBadgeClass}`}
-                    >
-                      {exp.type}
-                    </span>
-                  </div>
-                </div>
+            <motion.span
+              className="absolute inset-0 bg-gradient-to-r from-blue-400 via-blue-300 to-purple-400 bg-clip-text text-transparent blur-xl pointer-events-none opacity-40"
+              animate={{ opacity: [0.20, 0.50, 0.20] }}
+              transition={{ duration: 3, repeat: Infinity }}
+            >
+              Mohammed Abdul Omer
+            </motion.span>
+          </motion.h1>
 
-                {/* Achievements */}
-                <div className="relative mb-6">
-                  <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">
-                    Key Achievements
-                  </h4>
-                  <ul className="space-y-3">
-                    {exp.achievements.map((achievement, achIdx) => (
-                      <motion.li
-                        key={achIdx}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.1 * achIdx, duration: 0.4 }}
-                        viewport={{ once: true }}
-                        className="flex items-start gap-3 group/item"
-                      >
-                        <div
-                          className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${exp.color} mt-2 flex-shrink-0 group-hover/item:scale-150 transition-transform`}
-                        />
-                        <span className="text-gray-300 text-sm leading-relaxed group-hover/item:text-white transition-colors">
-                          {achievement}
-                        </span>
-                      </motion.li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Technologies */}
-                <div className="relative mb-6">
-                  <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">
-                    Technologies Used
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {exp.technologies.map((tech, techIdx) => (
-                      <span
-                        key={techIdx}
-                        className="text-xs px-3 py-1.5 rounded-md text-gray-300 bg-white/5 border border-white/10 hover:border-white/30 transition-colors"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Metrics */}
-                <div className="relative pt-6 border-t border-white/10">
-                  <div className="grid grid-cols-3 gap-4">
-                    {exp.highlights.map((highlight, hIdx) => (
-                      <div key={hIdx} className="text-center">
-                        <div
-                          className={`text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${exp.color}`}
-                        >
-                          {highlight.metric}
-                        </div>
-                        <div className="text-xs text-gray-400 mt-1">{highlight.label}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Decorative corner */}
-                <div
-                  className={`absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br ${exp.color} opacity-5 rounded-full blur-2xl group-hover:opacity-10 transition-opacity`}
-                />
-              </motion.div>
-            </div>
+          {/* Rotating Title */}
+          <motion.div
+            variants={itemVariants}
+            className="mt-1 sm:mt-2 md:mt-3 relative h-8 sm:h-10 md:h-12 flex items-center justify-center w-full"
+          >
+            <motion.div
+              key={currentTitleIndex}
+              initial={{ opacity: 0, y: 25, filter: "blur(12px)", scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
+              exit={{ opacity: 0, y: -25, filter: "blur(12px)", scale: 0.95 }}
+              transition={{ duration: 0.7, ease: [0.19, 1, 0.22, 1] }}
+              className="absolute text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-center px-4"
+            >
+              <motion.span
+                className="relative inline-block bg-gradient-to-r from-blue-400 via-purple-400 to-pink-300 bg-clip-text text-transparent"
+                style={{ backgroundSize: "200% auto" }}
+                animate={{ backgroundPosition: ["0% center", "200% center"] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              >
+                {titles[currentTitleIndex]}
+                <motion.span
+                  className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-300 bg-clip-text text-transparent blur-xl pointer-events-none opacity-40"
+                  animate={{ opacity: [0.25, 0.5, 0.25] }}
+                  transition={{ duration: 2.5, repeat: Infinity }}
+                >
+                  {titles[currentTitleIndex]}
+                </motion.span>
+              </motion.span>
+            </motion.div>
           </motion.div>
-        ))}
-      </motion.div>
 
-      {/* Bottom CTA — was an empty <motion.div> before */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5, duration: 0.6 }}
-        viewport={{ once: true }}
-        className="mt-16 text-center"
-      >
-        <p className="text-gray-400 text-sm mb-6">
-          Currently seeking full-time CSE-AIML Engineer / AI-ML Engineer roles — open to remote and Hyderabad-based opportunities.
-        </p>
-        <div className="flex flex-wrap gap-4 justify-center">
-          <motion.a
-            href="/resume_2026.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(59,130,246,0.3)" }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold text-sm shadow-[0_0_20px_rgba(59,130,246,0.3)] transition-all duration-300"
+          {/* Tagline — updated to reflect current specialisations */}
+          <motion.p
+            variants={itemVariants}
+            className="mt-6 sm:mt-8 md:mt-10 text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 max-w-2xl px-4 font-light tracking-wide"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-            </svg>
-            Download Resume
-          </motion.a>
-          <motion.a
-            href="#contact"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-blue-500/50 text-blue-400 font-semibold text-sm hover:bg-blue-500/10 transition-all duration-300"
+            I design and deploy production-grade AI systems — fine-tuned models, agentic
+            pipelines, and end-to-end ML workflows — engineered to solve real problems at every
+            layer of the stack.
+          </motion.p>
+
+          {/* Social Links */}
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-wrap gap-4 sm:gap-5 md:gap-6 mt-12 sm:mt-16 md:mt-20 justify-center"
           >
-            Get in Touch
-          </motion.a>
-        </div>
+            {socialLinks.map((social, index) => (
+              <motion.a
+                key={index}
+                href={social.href}
+                target={social.label === "Email" ? undefined : "_blank"}
+                rel="noopener noreferrer"
+                className="group flex flex-col items-center gap-2 p-4 rounded-xl bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 hover:border-blue-500/50 transition-all duration-300"
+                whileHover={
+                  !isMobile
+                    ? { scale: 1.05, y: -5, boxShadow: "0 10px 30px rgba(59, 130, 246, 0.3)" }
+                    : {}
+                }
+                whileTap={{ scale: 0.95 }}
+              >
+                {social.emoji ? (
+                  /* Emoji icon (e.g. HuggingFace 🤗) */
+                  <span className="text-2xl sm:text-3xl md:text-3xl leading-none select-none">
+                    {social.emoji}
+                  </span>
+                ) : (
+                  /* SVG path icon */
+                  <svg
+                    className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 fill-gray-400 group-hover:fill-blue-400 transition-colors duration-300"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d={social.icon} />
+                  </svg>
+                )}
+                <span className="text-xs sm:text-sm text-gray-400 group-hover:text-blue-400 transition-colors duration-300 font-medium">
+                  {social.label}
+                </span>
+              </motion.a>
+            ))}
+          </motion.div>
+
+          {/* Get in Touch Button */}
+          <motion.div variants={itemVariants} className="mt-8 sm:mt-10 md:mt-12">
+            <motion.a
+              href="#contact"
+              className="group relative px-8 sm:px-10 md:px-12 py-3 sm:py-3.5 md:py-4 border border-blue-500/50 text-blue-400 rounded-full font-medium overflow-hidden backdrop-blur-xl bg-blue-500/5 hover:bg-blue-500/10 transition-all duration-300 inline-block"
+              whileHover={
+                !isMobile
+                  ? { scale: 1.05, borderColor: "#60a5fa", boxShadow: "0 10px 30px rgba(59, 130, 246, 0.3)" }
+                  : {}
+              }
+              whileTap={{ scale: 0.95 }}
+            >
+              <span className="relative z-10 text-sm sm:text-base md:text-lg">Get in Touch</span>
+            </motion.a>
+          </motion.div>
+
+          {/* Scroll Indicator */}
+          <motion.div
+            variants={itemVariants}
+            className="mt-12 sm:mt-16 md:mt-20 flex flex-col items-center gap-2 sm:gap-3 md:gap-5 pb-8"
+          >
+            <motion.span
+              className="text-gray-400 text-[10px] xs:text-xs md:text-sm font-semibold tracking-[0.15em] sm:tracking-[0.2em] md:tracking-[0.25em] uppercase"
+              animate={{ opacity: [0.3, 1, 0.3] }}
+              transition={{ duration: 3, repeat: Infinity }}
+            >
+              Scroll to explore
+            </motion.span>
+            <motion.div
+              className="relative w-6 h-10 sm:w-7 sm:h-12 md:w-8 md:h-14 border-2 border-blue-400/50 rounded-full flex items-start justify-center p-1.5 sm:p-2 md:p-3 backdrop-blur-md bg-blue-500/10 shadow-[0_0_15px_rgba(100,150,255,0.15)] md:shadow-[0_0_30px_rgba(100,150,255,0.2)]"
+              whileHover={
+                !isMobile
+                  ? { borderColor: "#60a5fa", scale: 1.15, boxShadow: "0 0 40px rgba(100,150,255,0.4)" }
+                  : {}
+              }
+            >
+              <motion.div
+                className="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-2.5 md:h-2.5 bg-gradient-to-br from-blue-400 to-purple-400 rounded-full shadow-lg shadow-blue-400/60"
+                animate={{ y: [0, 16, 0] }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+              />
+            </motion.div>
+          </motion.div>
+        </motion.div>
+
+        {/* Floating Particles — Desktop Only, data memoized above */}
+        {!isMobile && (
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            {floatingParticles.map((p, i) => (
+              <motion.div
+                key={i}
+                className="absolute rounded-full"
+                style={{
+                  width: `${p.size}px`,
+                  height: `${p.size}px`,
+                  background:
+                    p.colorType === 0
+                      ? "rgba(59, 130, 246, 0.7)"
+                      : p.colorType === 1
+                      ? "rgba(139, 92, 246, 0.6)"
+                      : "rgba(236, 72, 153, 0.5)",
+                  left: `${p.initialX}%`,
+                  top: `${p.initialY}%`,
+                  boxShadow: `0 0 ${p.size * 4}px ${
+                    p.colorType === 0
+                      ? "rgba(59, 130, 246, 0.9)"
+                      : p.colorType === 1
+                      ? "rgba(139, 92, 246, 0.8)"
+                      : "rgba(236, 72, 153, 0.7)"
+                  }`,
+                  filter: "blur(1px)",
+                }}
+                animate={{
+                  y: [0, p.yMovement, 0],
+                  x: [0, p.xMovement, 0],
+                  opacity: [0.3, 0.9, 0.3],
+                  scale: [1, 1.6, 1],
+                }}
+                transition={{
+                  duration: p.duration,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: p.delay,
+                }}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* Mouse Follower Particles — Desktop Only, data memoized above */}
+        {!isMobile && (
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            {mouseParticles.map((p, i) => (
+              <motion.div
+                key={`mouse-${i}`}
+                className="absolute rounded-full"
+                style={{
+                  width: "5px",
+                  height: "5px",
+                  background: p.isEven ? "rgba(59, 130, 246, 0.8)" : "rgba(139, 92, 246, 0.7)",
+                  boxShadow: `0 0 12px ${
+                    p.isEven ? "rgba(59, 130, 246, 1)" : "rgba(139, 92, 246, 0.9)"
+                  }`,
+                  left: "50%",
+                  top: "50%",
+                  x: mousePosition.x * (p.radius / 100) * Math.cos(p.angle),
+                  y: mousePosition.y * (p.radius / 100) * Math.sin(p.angle),
+                }}
+                animate={{
+                  scale: [1, 1.4, 1],
+                  opacity: [0.5, 0.8, 0.5],
+                }}
+                transition={{
+                  duration: p.duration,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: p.delay,
+                }}
+              />
+            ))}
+          </div>
+        )}
       </motion.div>
-    </div>
+    </section>
   );
 }
