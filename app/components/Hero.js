@@ -264,12 +264,12 @@ export default function Hero() {
         label: "WhatsApp",
         href: "https://wa.me/919652159548",
       },
-      {
-        // Fixed: was a bar-chart path before. This is a proper document/file icon.
-        icon: "M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z",
-        label: "Resume",
-        href: "/resume_2026.pdf",
-      },
+      /*
+        Résumé deliberately no longer lives here. As the sixth of six identical
+        tiles it was invisible to anyone skimming for it, which is the single
+        most common thing a recruiter is looking for. It is now a primary
+        button above this row.
+      */
     ],
     []
   );
@@ -474,17 +474,75 @@ export default function Hero() {
           {/* Tagline — updated to reflect current specialisations */}
           <motion.p
             variants={itemVariants}
-            className="mt-6 sm:mt-8 md:mt-10 text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 max-w-2xl px-4 font-light tracking-wide"
+            className="mt-5 sm:mt-6 md:mt-8 text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 max-w-2xl px-4 font-light tracking-wide"
           >
             I design and deploy production-grade AI systems — fine-tuned models, agentic
             pipelines, and end-to-end ML workflows — engineered to solve real problems at every
             layer of the stack.
           </motion.p>
 
+          {/*
+            Status line — the two facts a recruiter screens on (role sought and
+            location) stated plainly, instead of being buried in the About and
+            Contact sections further down the page.
+          */}
+          <motion.div
+            variants={itemVariants}
+            className="mt-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 px-4 text-xs sm:text-sm text-gray-400"
+          >
+            <span className="inline-flex items-center gap-2">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-60" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400" />
+              </span>
+              Open to AI/ML Engineer roles
+            </span>
+            <span aria-hidden="true" className="text-gray-600">·</span>
+            <span>Hyderabad, India</span>
+          </motion.div>
+
+          {/*
+            Primary actions, placed above the social row on purpose. Résumé is
+            the thing recruiters come for, so it gets the filled button and the
+            higher position.
+          */}
+          <motion.div
+            variants={itemVariants}
+            className="mt-7 sm:mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4 px-4"
+          >
+            <motion.a
+              href="/resume_2026.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 px-7 sm:px-9 py-3 sm:py-3.5 text-sm sm:text-base font-semibold text-white shadow-[0_0_25px_rgba(59,130,246,0.35)]"
+              whileHover={!isMobile ? { scale: 1.05, boxShadow: "0 10px 34px rgba(59,130,246,0.45)" } : {}}
+              whileTap={{ scale: 0.95 }}
+            >
+              <svg className="h-4 w-4 sm:h-5 sm:w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                  d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+              </svg>
+              Download Résumé
+            </motion.a>
+
+            <motion.a
+              href="#contact"
+              className="group relative inline-block overflow-hidden rounded-full border border-blue-500/50 bg-blue-500/5 px-7 sm:px-9 py-3 sm:py-3.5 font-medium text-blue-400 backdrop-blur-xl transition-all duration-300 hover:bg-blue-500/10"
+              whileHover={
+                !isMobile
+                  ? { scale: 1.05, borderColor: "#60a5fa", boxShadow: "0 10px 30px rgba(59, 130, 246, 0.3)" }
+                  : {}
+              }
+              whileTap={{ scale: 0.95 }}
+            >
+              <span className="relative z-10 text-sm sm:text-base">Get in Touch</span>
+            </motion.a>
+          </motion.div>
+
           {/* Social Links */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap gap-4 sm:gap-5 md:gap-6 mt-12 sm:mt-16 md:mt-20 justify-center"
+            className="flex flex-wrap gap-3 sm:gap-4 md:gap-5 mt-8 sm:mt-10 justify-center"
           >
             {socialLinks.map((social, index) => (
               <motion.a
@@ -492,7 +550,7 @@ export default function Hero() {
                 href={social.href}
                 target={social.label === "Email" ? undefined : "_blank"}
                 rel="noopener noreferrer"
-                className="group flex flex-col items-center gap-2 p-4 rounded-xl bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 hover:border-blue-500/50 transition-all duration-300"
+                className="group flex flex-col items-center gap-2 p-3 sm:p-4 rounded-xl bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 hover:border-blue-500/50 transition-all duration-300"
                 whileHover={
                   !isMobile
                     ? { scale: 1.05, y: -5, boxShadow: "0 10px 30px rgba(59, 130, 246, 0.3)" }
@@ -502,13 +560,13 @@ export default function Hero() {
               >
                 {social.emoji ? (
                   /* Emoji icon (e.g. HuggingFace 🤗) */
-                  <span className="text-2xl sm:text-3xl md:text-3xl leading-none select-none">
+                  <span className="text-2xl sm:text-3xl leading-none select-none">
                     {social.emoji}
                   </span>
                 ) : (
                   /* SVG path icon */
                   <svg
-                    className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 fill-gray-400 group-hover:fill-blue-400 transition-colors duration-300"
+                    className="w-6 h-6 sm:w-7 sm:h-7 fill-gray-400 group-hover:fill-blue-400 transition-colors duration-300"
                     viewBox="0 0 24 24"
                   >
                     <path d={social.icon} />
@@ -521,26 +579,10 @@ export default function Hero() {
             ))}
           </motion.div>
 
-          {/* Get in Touch Button */}
-          <motion.div variants={itemVariants} className="mt-8 sm:mt-10 md:mt-12">
-            <motion.a
-              href="#contact"
-              className="group relative px-8 sm:px-10 md:px-12 py-3 sm:py-3.5 md:py-4 border border-blue-500/50 text-blue-400 rounded-full font-medium overflow-hidden backdrop-blur-xl bg-blue-500/5 hover:bg-blue-500/10 transition-all duration-300 inline-block"
-              whileHover={
-                !isMobile
-                  ? { scale: 1.05, borderColor: "#60a5fa", boxShadow: "0 10px 30px rgba(59, 130, 246, 0.3)" }
-                  : {}
-              }
-              whileTap={{ scale: 0.95 }}
-            >
-              <span className="relative z-10 text-sm sm:text-base md:text-lg">Get in Touch</span>
-            </motion.a>
-          </motion.div>
-
           {/* Scroll Indicator */}
           <motion.div
             variants={itemVariants}
-            className="mt-12 sm:mt-16 md:mt-20 flex flex-col items-center gap-2 sm:gap-3 md:gap-5 pb-8"
+            className="mt-8 sm:mt-10 md:mt-12 flex flex-col items-center gap-2 sm:gap-3 pb-8"
           >
             <motion.span
               className="text-gray-400 text-[10px] xs:text-xs md:text-sm font-semibold tracking-[0.15em] sm:tracking-[0.2em] md:tracking-[0.25em] uppercase"

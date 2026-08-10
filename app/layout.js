@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 import MotionProvider from "./components/MotionProvider";
 import { SITE_URL } from "./site";
 
@@ -72,6 +73,39 @@ export const viewport = {
   initialScale: 1,
 };
 
+// Person structured data. Every value here already appears on the page — this
+// just states it in a form search engines can attach to an entity rather than
+// having to infer from prose.
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Mohammed Abdul Omer",
+  jobTitle: "CSE-AIML Engineer",
+  url: SITE_URL,
+  email: "mailto:mohammedabdulomer99@gmail.com",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Hyderabad",
+    addressCountry: "IN",
+  },
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: "Lords Institute of Engineering & Technology",
+  },
+  knowsAbout: [
+    "Large Language Models",
+    "Retrieval-Augmented Generation",
+    "Multi-Agent Systems",
+    "MLOps",
+    "Computer Vision",
+  ],
+  sameAs: [
+    "https://github.com/MOHD-OMER",
+    "https://www.linkedin.com/in/mohammad-abdul-omer/",
+    "https://huggingface.co/mohdomer",
+  ],
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={inter.variable}>
@@ -81,6 +115,19 @@ export default function RootLayout({ children }) {
         connections that were never used.
       */}
       <body className="min-h-screen bg-dark text-text font-sans antialiased">
+        {/* Keyboard users can jump the navbar instead of tabbing through it */}
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-blue-500 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
+        >
+          Skip to content
+        </a>
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
+
         {/* Honours prefers-reduced-motion for every Framer Motion animation */}
         <MotionProvider>
           {/* Fixed Navbar */}
@@ -88,7 +135,11 @@ export default function RootLayout({ children }) {
 
           {/* Page Content */}
           {/* pt-16 mobile / pt-24 desktop — hero never clipped by navbar */}
-          <main className="pt-16 md:pt-24">{children}</main>
+          <main id="main" className="pt-16 md:pt-24">
+            {children}
+          </main>
+
+          <Footer />
         </MotionProvider>
       </body>
     </html>
