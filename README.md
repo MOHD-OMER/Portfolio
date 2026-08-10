@@ -27,6 +27,7 @@ A modern, animated, and fully responsive AI/ML engineer portfolio — built with
 | Framework | Next.js 16 (App Router) |
 | Styling | Tailwind CSS + custom CSS design system |
 | Animations | Framer Motion |
+| Icons | lucide-react |
 | Font | Inter via `next/font/google` |
 | Deployment | Vercel (auto-deploy on push to `main`) |
 
@@ -38,16 +39,17 @@ A modern, animated, and fully responsive AI/ML engineer portfolio — built with
 - 🎨 Glassmorphism + gradient UI design system
 - 📱 Fully responsive — mobile, tablet, and desktop
 - 🎯 Active navbar highlight — updates on scroll and on click
-- 🤖 Hero section with name reveal, rotating titles, floating particles, and mouse-follower effects
+- 🤖 Hero with name reveal, rotating titles, floating particles, and mouse-follower effects — all fitting above the fold
+- 📄 Résumé as the primary call to action, served uncached so the latest PDF always wins
 - 🧠 Skills section with 7 grouped categories covering the full AI/ML stack
 - 🛠️ Projects section with category filter, 10 projects, and hover-reveal details
 - 💼 Experience section with timeline layout and metrics
 - 🏅 Certifications section with 6 verified credentials
-- 📬 Contact section with availability badge, copy-to-clipboard, and mailto form
-- 📄 Resume download button (served uncached so the latest PDF always wins)
+- 📬 Contact section with availability badge, copy-to-clipboard, and a validated mailto form
+- 🦶 Footer and a branded 404 page
 - 🔗 Social links: GitHub · LinkedIn · HuggingFace · Email · WhatsApp
-- 🔍 SEO: generated Open Graph card, favicon, `robots.txt`, and `sitemap.xml`
-- ♿ Honours `prefers-reduced-motion` across CSS and Framer Motion animations
+- 🔍 SEO: generated Open Graph card, favicon, `Person` JSON-LD, `robots.txt`, and `sitemap.xml`
+- ♿ Skip-to-content link, WCAG AA contrast, and `prefers-reduced-motion` honoured across both CSS and Framer Motion
 
 ---
 
@@ -61,6 +63,7 @@ Portfolio/
 │   │   ├── NavBar.js         # Fixed navbar with active section tracking
 │   │   ├── SectionHeader.js  # Shared animated section header component
 │   │   ├── MotionProvider.js # Applies prefers-reduced-motion to Framer Motion
+│   │   ├── Footer.js         # Static footer (server component, no client JS)
 │   │   ├── Skills.js         # 7 skill groups + stats bar
 │   │   ├── Projects.js       # 10 projects with filter tabs
 │   │   ├── Experience.js     # Timeline with metrics
@@ -73,7 +76,10 @@ Portfolio/
 │   ├── robots.js             # robots.txt
 │   ├── sitemap.js            # sitemap.xml
 │   ├── site.js               # Shared SITE_URL constant
+│   ├── not-found.js          # Branded 404
 │   └── page.js               # Main page — assembles all sections
+├── docs/
+│   └── superpowers/specs/    # Design specs for larger changes
 ├── public/
 │   ├── profile.png
 │   └── resume_2026.pdf
