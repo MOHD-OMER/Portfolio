@@ -9,10 +9,11 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "Mohammed Abdul Omer | AI & ML Engineer",
+  title: "Mohammed Abdul Omer | CSE-AIML Engineer",
   description:
-    "Portfolio of Mohammed Abdul Omer — AI Engineer specialising in LLM fine-tuning, multi-agent systems, RAG pipelines, and MLOps. 10 production projects, 8 live deployments.",
+    "Portfolio of Mohammed Abdul Omer — CSE-AIML Engineer specialising in LLM fine-tuning, multi-agent systems, RAG pipelines, and MLOps. 10 production projects, 8 live deployments.",
   keywords: [
+    "CSE-AIML Engineer",
     "AI Engineer",
     "ML Engineer",
     "LLM Fine-tuning",
@@ -29,9 +30,9 @@ export const metadata = {
 
   // Open Graph — controls how the link looks when shared on LinkedIn, WhatsApp, etc.
   openGraph: {
-    title: "Mohammed Abdul Omer | AI & ML Engineer",
+    title: "Mohammed Abdul Omer | CSE-AIML Engineer",
     description:
-      "AI Engineer building production-grade LLMs, RAG systems, multi-agent pipelines, and MLOps workflows — end-to-end and deployed.",
+      "CSE-AIML Engineer building production-grade LLMs, RAG systems, multi-agent pipelines, and MLOps workflows — end-to-end and deployed.",
     url: "https://mohdomer.vercel.app",
     siteName: "Mohammed Abdul Omer Portfolio",
     locale: "en_US",
@@ -41,9 +42,9 @@ export const metadata = {
   // Twitter / X card
   twitter: {
     card: "summary_large_image",
-    title: "Mohammed Abdul Omer | AI & ML Engineer",
+    title: "Mohammed Abdul Omer | CSE-AIML Engineer",
     description:
-      "AI Engineer building production-grade LLMs, RAG systems, multi-agent pipelines, and MLOps workflows.",
+      "CSE-AIML Engineer building production-grade LLMs, RAG systems, multi-agent pipelines, and MLOps workflows.",
     creator: "@mohdomer",
   },
 
