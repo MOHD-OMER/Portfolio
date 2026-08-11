@@ -173,7 +173,7 @@ export default function Skills() {
             <div className="relative h-full rounded-2xl p-6 bg-gradient-to-br from-white/[0.07] to-white/[0.03] backdrop-blur-xl border border-white/10 shadow-lg hover:shadow-2xl hover:border-white/20 transition-all duration-300 overflow-hidden">
               {/* Animated background gradient on hover */}
               <div
-                className={`absolute inset-0 bg-gradient-to-br ${group.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}
+                className={`absolute inset-0 bg-gradient-to-br ${group.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300 pointer-events-none`}
               />
 
               {/* Header */}
@@ -214,7 +214,7 @@ export default function Skills() {
 
               {/* Decorative corner */}
               <div
-                className={`absolute -bottom-4 -right-4 w-24 h-24 bg-gradient-to-br ${group.color} opacity-5 rounded-full blur-2xl group-hover:opacity-10 transition-opacity`}
+                className={`absolute -bottom-4 -right-4 w-24 h-24 bg-gradient-to-br ${group.color} opacity-5 rounded-full blur-2xl group-hover:opacity-10 transition-opacity pointer-events-none`}
               />
             </div>
           </motion.div>
