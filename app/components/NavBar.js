@@ -64,7 +64,7 @@ export default function NavBar() {
   // Close mobile menu when viewport widens past md breakpoint
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 768) setMobileMenuOpen(false);
+      if (window.innerWidth >= 1024) setMobileMenuOpen(false);
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -125,7 +125,7 @@ export default function NavBar() {
           </motion.a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1 lg:gap-2">
+          <nav className="hidden lg:flex items-center gap-1 lg:gap-2">
             {navItems.map((item) => (
               <motion.a
                 key={item.id}
@@ -161,7 +161,7 @@ export default function NavBar() {
           {/* Mobile Menu Toggle */}
           <motion.button
             onClick={() => setMobileMenuOpen((prev) => !prev)}
-            className="md:hidden p-2 rounded-lg bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 hover:bg-gray-700/50 hover:border-blue-500/50 transition-all duration-300"
+            className="lg:hidden p-2 rounded-lg bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 hover:bg-gray-700/50 hover:border-blue-500/50 transition-all duration-300"
             whileTap={{ scale: 0.95 }}
             aria-label="Toggle navigation menu"
             aria-expanded={mobileMenuOpen}
@@ -198,7 +198,7 @@ export default function NavBar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
-              className="md:hidden overflow-hidden"
+              className="lg:hidden overflow-hidden"
             >
               <nav className="flex flex-col gap-2 bg-gray-900/95 backdrop-blur-xl rounded-xl p-4 mb-4 border border-gray-800/50 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
                 {navItems.map((item, index) => (
