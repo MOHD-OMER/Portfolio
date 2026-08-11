@@ -107,7 +107,7 @@ export default function Experience() {
               >
                 {/* Hover glow */}
                 <div
-                  className={`absolute inset-0 bg-gradient-to-br ${exp.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}
+                  className={`absolute inset-0 bg-gradient-to-br ${exp.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300 pointer-events-none`}
                 />
 
                 {/* Header */}
@@ -223,7 +223,7 @@ export default function Experience() {
 
                 {/* Decorative corner */}
                 <div
-                  className={`absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br ${exp.color} opacity-5 rounded-full blur-2xl group-hover:opacity-10 transition-opacity`}
+                  className={`absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br ${exp.color} opacity-5 rounded-full blur-2xl group-hover:opacity-10 transition-opacity pointer-events-none`}
                 />
               </motion.div>
             </div>
