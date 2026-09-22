@@ -206,18 +206,20 @@ export default function Projects() {
       </motion.div>
 
       {/* Projects Grid */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-      >
+      {/*
+        Fixed: cards used to inherit "visible" from this container's
+        whileInView (viewport once:true) — that trigger only fires the
+        FIRST time the section scrolls into view. Cards mounted later via
+        a filter click never got told to become visible and stayed stuck
+        at opacity:0. Each card now animates itself on mount instead.
+      */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredProjects.map((project, idx) => (
           <motion.div
             key={`${activeFilter}-${idx}`}
-            variants={itemVariants}
-            layout
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: idx * 0.06 }}
             whileHover={{ y: -8, transition: { duration: 0.3 } }}
             className="relative group h-full"
           >
