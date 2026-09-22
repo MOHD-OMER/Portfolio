@@ -347,7 +347,7 @@ export default function Projects() {
             </div>
           </motion.div>
         ))}
-      </motion.div>
+      </div>
 
       {/* Stats Bar — responsive, consistent with Skills.js */}
       <motion.div
