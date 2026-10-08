@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import {
   Target, Users, Dna, FolderSearch, Settings2, Activity, Bot, GraduationCap,
   ScanSearch, Flame, BrainCircuit, BarChart3, Plug, ShieldCheck, Database, TrendingUp,
+  Layers,
 } from "lucide-react";
 import { useState } from "react";
 import SectionHeader from "./SectionHeader";
@@ -12,6 +13,17 @@ export default function Projects() {
   const [activeFilter, setActiveFilter] = useState("All");
 
   const projects = [
+    {
+      title: "TechForge — Free Interactive CS Learning Platform",
+      desc: "A fully static, zero-dependency computer science learning platform with interactive Canvas visualizers, 200+ curated interview problems, and eight complete learning tracks — DSA, Programming, System Design, Databases, DevOps, AI/ML, Interview Prep, and OS & Networks.",
+      category: "EdTech",
+      tags: ["HTML5", "Vanilla JS", "CSS", "Service Worker", "PWA", "Canvas 2D"],
+      icon: Layers,
+      color: "from-emerald-500 to-green-600",
+      details: "29 DSA topics with 28 interactive Canvas visualizers, a full Python track (8 modules, 137 programs), 26 system design deep-dives, 14 database engine guides, 23 DevOps guides, and 200+ interview problems across 7 question banks. Installable PWA with offline support via Service Worker, strict CSP security headers, and 100% HTML validation across 126 files. Zero npm dependencies, zero build step — pure HTML, CSS, and vanilla JavaScript. 26 GitHub stars.",
+      github: "https://github.com/MOHD-OMER/TechForge",
+      demo: "https://techforge-dev.vercel.app",
+    },
     {
       title: "AI Orchestrator — Smart Multi-Provider Router",
       desc: "Smart AI router that auto-selects the optimal model across Groq, Gemini, OpenRouter, and Ollama. Classifies tasks across 10 categories and routes to the best model based on speed, quality, cost, and privacy — with automatic fallback, benchmark mode, and a full CLI.",
@@ -135,6 +147,7 @@ export default function Projects() {
 
   const categories = [
     "All",
+    "EdTech",
     "AI Tools",
     "Agentic AI",
     "LLM Engineering",
