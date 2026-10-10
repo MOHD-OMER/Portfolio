@@ -52,23 +52,23 @@ export default function Certifications() {
       verify: "https://coursera.org/share/afcb6ce8d64494bbea9e34539f073b13",
     },
     {
-      title: "AI/ML with Generative AI — Internship",
-      issuer: "TechZone Software Academy",
-      instructor: "TechZone",
+      title: "AI/ML with Generative AI — Internship Letter",
+      issuer: "TechZone Academy for Training & Research",
+      note: "3 Mar – 3 Jul 2025",
       year: "2025",
       icon: Building2,
       color: "from-blue-500 to-indigo-500",
-      skills: ["LLM Applications", "RAG Systems", "FastAPI", "Production AI Deployment"],
+      skills: ["PTEra", "Doubt Tutor AI", "MCQ Generator"],
       verify: "/AIML%20WITH%20GEN%20AI%20INTERNSHIP.pdf",
     },
     {
-      title: "AI/ML with Generative AI — Course",
-      issuer: "TechZone Software Academy",
-      instructor: "TechZone",
-      year: "2025",
+      title: "AIML Engineering with Gen AI",
+      issuer: "TechZone Academy",
+      note: "Oct 2023 – Feb 2024",
+      year: "2024",
       icon: ScrollText,
       color: "from-teal-500 to-cyan-500",
-      skills: ["Generative AI", "Machine Learning", "Deep Learning", "AI Tools"],
+      skills: ["SQL", "Python", "Machine Learning", "Deep Learning", "NLP & GenAI"],
       verify: "/AIML%20WITH%20GENAI%20COURSE.pdf",
     },
   ];
@@ -137,7 +137,7 @@ export default function Certifications() {
 
               {/* Issuer */}
               <p className="text-gray-400 text-sm mb-1">{cert.issuer}</p>
-              <p className="text-gray-500 text-xs mb-4">by {cert.instructor}</p>
+              <p className="text-gray-500 text-xs mb-4">{cert.note ?? `by ${cert.instructor}`}</p>
 
               {/* Skills covered */}
               <div className="flex flex-wrap gap-2 mb-5">
