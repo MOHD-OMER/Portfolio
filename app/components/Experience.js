@@ -2,15 +2,15 @@
 
 import { motion } from "framer-motion";
 import SectionHeader from "./SectionHeader";
-import { Bot, GraduationCap } from "lucide-react";
+import { Bot, GraduationCap, Rocket, Users } from "lucide-react";
 
 export default function Experience() {
   const experiences = [
     {
       role: "Artificial Intelligence Intern",
-      company: "TechZone Software Academy for Training & Research",
+      company: "TechZone Academy for Training & Research",
       location: "Hyderabad, India",
-      period: "March 2025 – June 2025",
+      period: "March 2025 – July 2025",
       duration: "4 months",
       type: "Internship",
       typeBadgeClass: "text-blue-400 bg-blue-500/10 border-blue-500/30",
@@ -57,6 +57,38 @@ export default function Experience() {
         { metric: "5", label: "Algorithms Explored" },
         { metric: "1", label: "Web App Integrated" },
       ],
+    },
+  ];
+
+
+  // Leadership & community work. Kept separate from `experiences` so it renders
+  // as compact cards instead of full timeline entries.
+  const leadership = [
+    {
+      role: "Founding Team Member & Instructor",
+      org: "NexTrack",
+      location: "Hyderabad, Telangana",
+      period: "July 2026 – August 2026",
+      icon: Rocket,
+      color: "from-orange-500 to-amber-500",
+      points: [
+        "Founding team member of an edtech startup: helped build the curriculum and ran orientation sessions for engineering student cohorts.",
+        "Mentored students one-on-one in coding and AI/ML, and organised hands-on workshops, including a three-day Python data analysis workshop.",
+      ],
+      tags: ["Curriculum Design", "Mentoring", "Python", "Workshops"],
+    },
+    {
+      role: "Co-Leader, Team BugBusterZ",
+      org: "Datanyx Hackathon",
+      location: "Hyderabad, Telangana",
+      period: "April 2025",
+      icon: Users,
+      color: "from-teal-500 to-cyan-500",
+      points: [
+        "Co-led the team that built PulmoScan AI, a deep learning web app that detects tuberculosis from chest X-rays and explains results with Grad-CAM heatmaps.",
+        "Worked with teammates on the technical build and contributed to the design and the hackathon presentation.",
+      ],
+      tags: ["Team Leadership", "Deep Learning", "Grad-CAM", "PulmoScan AI"],
     },
   ];
 
@@ -229,6 +261,66 @@ export default function Experience() {
             </div>
           </motion.div>
         ))}
+      </motion.div>
+
+      {/* Leadership & Community */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true, margin: "-80px" }}
+        className="mt-20 max-w-4xl mx-auto"
+      >
+        <h3 className="text-3xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 inline-block">
+          Leadership Experience
+        </h3>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {leadership.map((item) => (
+            <div key={item.org} className="relative group h-full">
+              <div className="relative h-full rounded-2xl p-6 bg-gradient-to-br from-white/[0.07] to-white/[0.03] backdrop-blur-xl border border-white/10 shadow-lg hover:shadow-2xl hover:border-white/20 transition-all duration-300 overflow-hidden flex flex-col">
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300 pointer-events-none`}
+                />
+
+                <div className="relative flex items-start gap-4 mb-4">
+                  <div className={`p-3 rounded-xl bg-gradient-to-br ${item.color} flex-shrink-0`}>
+                    <item.icon className="w-6 h-6 text-white" strokeWidth={1.75} aria-hidden="true" />
+                  </div>
+                  <div className="min-w-0">
+                    <h4 className="text-lg font-bold text-white leading-snug">{item.role}</h4>
+                    <p className="text-gray-300 font-semibold">{item.org}</p>
+                    <p className="text-xs text-gray-400 mt-1">
+                      {item.location} · {item.period}
+                    </p>
+                  </div>
+                </div>
+
+                <ul className="relative space-y-3 mb-5">
+                  {item.points.map((point, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <div
+                        className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${item.color} mt-2 flex-shrink-0`}
+                      />
+                      <span className="text-gray-300 text-sm leading-relaxed">{point}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="relative mt-auto flex flex-wrap gap-2">
+                  {item.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-xs px-2.5 py-1 rounded-md bg-white/5 text-gray-400 border border-white/10"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </motion.div>
 
       {/* Bottom CTA — was an empty <motion.div> before */}
