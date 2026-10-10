@@ -87,7 +87,7 @@ export default function Projects() {
       tags: ["PyTorch", "FastAPI", "HuggingFace", "Computer Vision", "CNN", "Grad-CAM"],
       icon: Activity,
       color: "from-blue-500 to-cyan-500",
-      details: "End-to-end diagnostic pipeline built for early TB screening. Custom-trained TBNet CNN architecture analyses chest X-rays, highlights infected regions via Grad-CAM heatmaps, and generates professional PDF diagnostic reports. FastAPI backend with optimised inference pipeline and an intuitive web interface.",
+      details: "Developed with Team BugBusterZ at the Datanyx Hackathon (April 2025). End-to-end diagnostic pipeline built for early TB screening. Custom-trained TBNet CNN architecture analyses chest X-rays, highlights infected regions via Grad-CAM heatmaps, and generates professional PDF diagnostic reports. FastAPI backend with optimised inference pipeline and an intuitive web interface.",
       github: "https://github.com/MOHD-OMER/PulmoScanAI",
       demo: "https://pulmoscanai-app.hf.space",
     },
